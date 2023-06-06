@@ -7,6 +7,7 @@ const logInRouter = require('./router/logIn');
 
 const pool = require('./Util/connection');
 const postJobRouter = require('./router/postJob');
+const manageProfileRouter = require('./router/manageProfile');
 const app = express();
 // load the cookie-parsing middleware
 app.use(cookieParser());
@@ -41,6 +42,7 @@ app.use('/', homeRouter);
 app.use('/signUp', signUpRouter);
 app.use('/logIn', logInRouter);
 app.use('/postJob', postJobRouter);
+app.use('/manageProfile', manageProfileRouter);
 
 app.listen(port, () => {
 	console.log(`App running at port : ${port}`);

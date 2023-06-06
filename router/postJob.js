@@ -6,8 +6,8 @@ const postJobRouter = express.Router();
 
 postJobRouter.post(
 	'',
-	validateJobsData.validateJobPostingData,
-	validateJobsData.validate,
+	//validateJobsData.validateJobPostingData,
+	//validateJobsData.validate,
 	postJob
 );
 

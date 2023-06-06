@@ -7,9 +7,9 @@ const postJob = async (req, res, next) => {
 	try {
 		if (user[0].email === 'io4kasa@gmail.com' && user[0].is_admin == true) {
 			const addedJob = await addJob(req.body);
-			res.send(addedJob);
+			return res.status(201).json(addedJob);
 		}
-		send.status(400).send('Unauthorized');
+		return res.status(400).json('Unauthorized');
 	} catch (error) {
 		console.log(error);
 	}

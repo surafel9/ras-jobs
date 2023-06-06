@@ -1,7 +1,7 @@
 const pool = require('../Util/connection');
 const emailQuery = `SELECT * FROM users WHERE email = $1`;
 const cache = {};
-const getUserByEmail = async (email, emailQuery = emailQuery) => {
+const getUserByEmail = async (email, query = emailQuery) => {
 	const values = [email];
 	try {
 		if (

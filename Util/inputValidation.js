@@ -30,7 +30,7 @@ const validateJobPostingData = [
 	body('title').notEmpty().isLength({ max: 20 }),
 	body('salary').notEmpty().isLength({ max: 20 }),
 	body('work_location').notEmpty().isLength({ max: 50 }),
-	body('org_state').notEmpty().isLength({ max: 5 }),
+	body('org_state').notEmpty().isLength({ max: 50 }),
 	body('org_city').notEmpty().isLength({ max: 50 }),
 	body('contact_email').isEmail().withMessage('Please provide contact email'),
 	body('job_description')
