@@ -1,13 +1,13 @@
 const pool = require('../Util/connection');
-const userProfileQuery = `INSERT INTO userprofile (
-  user_id, title, work_experiance, skills ,projects ,
-  social ,education ,certificates ,saved_job,applied_job )
-  RETURNING *;`;
-const addUserProfile = async (user) => {
+const userProfileQuery = `UPDATE userprofile
+SET  title = $1, work_experiance = $2, skills = $3, projects = $4,
+    social = $5, education = $6, certificates = $7, saved_job = $8, applied_job = $9
+WHERE user_id = $10
+RETURNING *;
+`;
+const updateUserProfile = async (user) => {
 	try {
-		
 		const {
-			user_id,
 			title = '',
 			work_experiance = '',
 			skills = '',
@@ -18,8 +18,8 @@ const addUserProfile = async (user) => {
 			saved_job = '',
 			applied_job = '',
 		} = user;
+		const user_id = user.user_id;
 		const values = [
-			user_id,
 			title,
 			work_experiance,
 			skills,
@@ -29,6 +29,7 @@ const addUserProfile = async (user) => {
 			certificates,
 			saved_job,
 			applied_job,
+			user_id,
 		];
 
 		const { rows } = pool.query(userProfileQuery, values);
@@ -37,4 +38,4 @@ const addUserProfile = async (user) => {
 		console.log(error);
 	}
 };
-module.exports = addUserProfile;
+module.exports = updateUserProfile;
