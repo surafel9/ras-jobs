@@ -1,7 +1,7 @@
 const pool = require('../Util/connection');
 const { genSalt, hash } = require('bcrypt');
 
-const insertUser = async (req) => {
+const addUser = async (req) => {
 	const saltRounds = 10;
 	try {
 		//Generate salt
@@ -18,8 +18,8 @@ const insertUser = async (req) => {
 
 		const saltInsertQuery = `INSERT INTO salt (user_id, salt) VALUES ($1,$2) RETURNING *;`;
 		const saltVals = [newUserId, salt];
-		insertSaltedPassword(saltInsertQuery, saltVals);
-		console.log('I am called');
+		await insertSaltedPassword(saltInsertQuery, saltVals);
+
 		return rows;
 	} catch (error) {
 		return error;
@@ -40,4 +40,4 @@ const checkSalt = async (rows) => {
 	//check bycript
 };
 
-module.exports = insertUser;
+module.exports = addUser;

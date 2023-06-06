@@ -1,6 +1,7 @@
-const getUserByEmail = require('../DB_Query/getUserByEmail');
-const getUserByPhone = require('../DB_Query/getUserByPhone');
-const insertUser = require('../DB_Query/insertUser');
+const getUserByEmail = require('../DB_Query_Handlers/getUserByEmail');
+const getUserByPhone = require('../DB_Query_Handlers/getUserByPhone');
+const addUser = require('../DB_Query_Handlers/addUser');
+const subscribeToSignUp = require('./manageProfile');
 
 const signUp = async (req, res, next) => {
 	const userByEmail = await getUserByEmail(req.body.email);
@@ -9,18 +10,19 @@ const signUp = async (req, res, next) => {
 	//register user to db or reject
 	try {
 		if (userByEmail.length > 0 || userByPhone.length > 0) {
-			console.log(userByEmail);
-			console.log(userByPhone);
 			res.status(303).send(
 				'There is already registred account with that information'
 			);
 		}
-		const result = await insertUser(req);
+		const result = await addUser(req);
+		subscribeToSignUp(result);
 		res.status(200).send(result);
-	} catch (error) {}
+	} catch (error) {
+		throw new Error();
+	}
 
 	//invite user to create profile
-	next();
+	//next();
 };
 
 module.exports = signUp;

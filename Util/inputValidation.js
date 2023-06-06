@@ -21,16 +21,18 @@ const validateUserData = [
 		),
 	body('phone_number').isNumeric().withMessage('Invalid phone number'),
 ];
-
+const validateLogInData = [
+	body('email').isEmail().withMessage('Please enter a valid email address'),
+	body('password').notEmpty().withMessage("Password can't be empty"),
+];
 const validateJobPostingData = [
-	body('catagory').notEmpty().isLength({ max: 20 }),
-	body('job_title').notEmpty().isLength({ max: 20 }),
+	body('job_category').notEmpty().isLength({ max: 20 }),
+	body('title').notEmpty().isLength({ max: 20 }),
+	body('salary').notEmpty().isLength({ max: 20 }),
 	body('work_location').notEmpty().isLength({ max: 50 }),
-	body('organization_location').notEmpty().isLength({ max: 50 }),
+	body('org_state').notEmpty().isLength({ max: 5 }),
+	body('org_city').notEmpty().isLength({ max: 50 }),
 	body('contact_email').isEmail().withMessage('Please provide contact email'),
-	body('contact_phone')
-		.notEmpty()
-		.withMessage('Please provide contact phone'),
 	body('job_description')
 		.notEmpty()
 		.withMessage('Please provide job description'),
@@ -47,4 +49,9 @@ const validate = (req, res, next) => {
 	next();
 };
 
-module.exports = { validateUserData, validateJobPostingData, validate };
+module.exports = {
+	validateUserData,
+	validateLogInData,
+	validateJobPostingData,
+	validate,
+};

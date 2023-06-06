@@ -1,4 +1,4 @@
-const getAllJobs = require('../DB_Query/getAllJobs');
+const getAllJobs = require('../DB_Query_Handlers/getAllJobs');
 const homeController = async (req, res) => {
 	const result = await getAllJobs();
 	if (result.length !== 0) {
