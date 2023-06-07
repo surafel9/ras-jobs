@@ -4,40 +4,107 @@
 	min-height: 100vh;
 	display: flex;
 	flex-flow: column nowrap;
-	overflow-x: hidden;
-	&.light-mode {
-		@import 'light';
-		background-color: $background-color;
-		color: $text-color;
-	}
-	&.dark-mode {
-		@import 'dark';
-		background-color: $background-color;
-		color: $text-color;
-	}
+
 	.navigation {
-		border: 2px solid $background-color-variant;
-		min-height: 14vh;
-	}
-	.details {
 		display: flex;
-		flex-flow: row nowrap;
+		align-items: center;
+		position: sticky;
+		top: 0;
+		background-color: beige;
+		z-index: 100;
+		margin-bottom: 32px;
+		height: 70px;
+		button {
+			order: 3;
+		}
+		.logo {
+			order: 1;
+			flex-basis: 29%;
+			margin-left: 8px;
+		}
+		.nav {
+			order: 2;
+			flex-basis: 29%;
+			margin-right: 55px;
+
+			ul {
+				padding-left: 0;
+				list-style-type: none;
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-between;
+			}
+		}
+	}
+
+	.home {
+		display: flex;
 		justify-content: space-between;
 
 		.profile {
-			flex-basis: 23%;
-			border: 3px solid gold;
-			min-height: 70vh;
+			flex-basis: 25%;
+			min-height: 66vh;
+			max-height: 70vh;
+			border: 1px solid;
+			position: sticky;
+			top: 102px;
+			border-radius: 8px;
+			margin-left: 8px;
+			background-color: $background-color-variant;
 		}
 		.main {
-			flex-basis: 75%;
-			border: 2px solid green;
+			flex-basis: 71%;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-between;
+			margin-left: 8px;
+			.search {
+				background-color: red;
+				width: 66%;
+				height: 70px;
+				margin-bottom: 32px;
+			}
+			.job-list {
+				display: flex;
+				justify-content: space-between;
+
+				.job-card {
+					flex-basis: 66%;
+					position: relative;
+
+					.card {
+						background-color: $background-color;
+						color: $text-color;
+						border-radius: 8px;
+						box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+						padding: 16px;
+						margin-bottom: 32px;
+						p {
+							margin-bottom: 8px;
+						}
+						button {
+							background-color: $background-color-variant;
+							color: $text-color;
+							border: none;
+							border-radius: 4px;
+							padding: 8px 16px;
+							margin: 8px;
+							font-size: 14px;
+							cursor: pointer;
+							transition: background-color 0.3s ease;
+							&:hover {
+								background-color: #0056b3;
+							}
+						}
+					}
+				}
+				.stat-card {
+					flex-basis: 25%;
+				}
+			}
 		}
 	}
+
 	.footer {
-		display: flex;
-		min-width: 100vw;
-		min-height: 14vh;
-		background-color: $background-color;
 	}
 }

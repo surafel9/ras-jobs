@@ -1,29 +1,41 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import Navigation from './navigation';
-import Main from './main';
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
-import Profile from './profile';
 import '../style/style.scss';
+import { fetchJobs } from '../data/fetchData';
 
-export default function Root() {
-	const [isDarkMode, setIsDarkMode] = useState(false);
-	const toggleMode = () => {
-		console.log(isDarkMode);
-
-		setIsDarkMode((prevMode) => !prevMode);
-	};
-
+export async function loader() {
+	const jobs = await fetchJobs();
+	return jobs;
+}
+export default function Root(props) {
 	return (
-		<div className={`root ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-			<Navigation className={'navigation'} toggleMode={toggleMode} />
+		<div className='root'>
+			<div className='navigation'>
+				<button onClick={() => props.toggleMode()}>toggle</button>
+				<div className='logo'>Logo</div>
+				<div className='nav'>
+					<ul>
+						<li>
+							<NavLink to='/'>jobs</NavLink>
+						</li>
+						<li>
+							<NavLink to='/login'>sign in</NavLink>
+						</li>
 
-			<div className='details'>
-				<Profile className={'profile'} />
-				<Main className={'main'} />
+						<li>
+							<NavLink to='/createProfile'>
+								create profile
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='postJob'>Post jobs</NavLink>
+						</li>
+					</ul>
+				</div>
 			</div>
-
-			<Footer className={'footer'} />
+			<Outlet id='details' />
+			<Footer className='footer' />
 		</div>
 	);
 }
