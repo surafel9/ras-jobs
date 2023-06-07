@@ -1,0 +1,43 @@
+@import 'light';
+@import 'dark';
+.root {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+	overflow-x: hidden;
+	&.light-mode {
+		@import 'light';
+		background-color: $background-color;
+		color: $text-color;
+	}
+	&.dark-mode {
+		@import 'dark';
+		background-color: $background-color;
+		color: $text-color;
+	}
+	.navigation {
+		border: 2px solid $background-color-variant;
+		min-height: 14vh;
+	}
+	.details {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+
+		.profile {
+			flex-basis: 23%;
+			border: 3px solid gold;
+			min-height: 70vh;
+		}
+		.main {
+			flex-basis: 75%;
+			border: 2px solid green;
+		}
+	}
+	.footer {
+		display: flex;
+		min-width: 100vw;
+		min-height: 14vh;
+		background-color: $background-color;
+	}
+}
