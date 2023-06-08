@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import '../style/style.scss';
 import Profile from './profile';
@@ -11,7 +11,6 @@ import { useLoaderData } from 'react-router-dom';
 export default function Home(props) {
 	const data = useLoaderData();
 
-	console.log(data);
 	return (
 		<div className='home'>
 			<Profile className='profile' />

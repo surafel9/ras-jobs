@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 
 export default function JobCard({ className, data }) {
+	const [activeCard, setActiveCard] = useState(null);
+
+	const handleCardClick = (id) => {
+		setActiveCard(id);
+	};
 	return (
 		<div className={className}>
 			{data.map((item) => (
-				<JobItem key={item.id} item={item} />
+				<JobItem
+					key={item.id}
+					item={item}
+					handleCardClick={handleCardClick}
+					active={item.id === activeCard}
+				/>
 			))}
 		</div>
 	);
 }
 
-function JobItem({ item }) {
+function JobItem({ item, handleCardClick }) {
 	const [showFullDescription, setShowFullDescription] = useState(false);
 	const [showFullRequirements, setShowFullRequirements] = useState(false);
 
@@ -20,8 +30,14 @@ function JobItem({ item }) {
 	const toggleRequirements = () => {
 		setShowFullRequirements(!showFullRequirements);
 	};
+
+	const handleClick = () => {
+		handleCardClick(item.id);
+		console.log(item.id);
+	};
+
 	return (
-		<div className='card'>
+		<div className='card' onFocus={handleClick}>
 			<h3>Title: {item.title}</h3>
 			<p>Expected Salary: {item.salary}</p>
 			<p>

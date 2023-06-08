@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/style.scss';
@@ -9,10 +9,15 @@ export async function loader() {
 	return jobs;
 }
 export default function Root(props) {
+	const [theme, setTheme] = useState('light');
+
+	const toggleTheme = () => {
+		setTheme(theme === 'light' ? 'dark' : 'light');
+	};
 	return (
-		<div className='root'>
+		<div className={`root ${theme}`}>
 			<div className='navigation'>
-				<button onClick={() => props.toggleMode()}>toggle</button>
+				<button onClick={toggleTheme}>toggle</button>
 				<div className='logo'>Logo</div>
 				<div className='nav'>
 					<ul>
