@@ -1,5 +1,10 @@
+//todos - job-applications table to be updated per each application made. we need stats to show on the stats cards
+
 @import 'light';
 @import 'dark';
+$slate: #8892b0;
+$slate-dark-variant: #1c1c1c;
+$slate-lightest-variant: #eff1f3;
 .root {
 	min-height: 100vh;
 	display: flex;
@@ -8,12 +13,12 @@
 	&.light {
 		@import 'light';
 		background-color: $background-color;
-		color: $text-color;
+		color: $text-primary;
 	}
 	&.dark {
 		@import 'dark';
 		background-color: $background-color;
-		color: $text-color;
+		color: $text-primary;
 	}
 	.navigation {
 		display: flex;
@@ -22,10 +27,31 @@
 		top: 0;
 		z-index: 100;
 		margin-bottom: 32px;
+		clear: both;
 		height: 70px;
-
+		border-bottom: 0.1px solid $border-color;
+		&.light {
+			@import 'light';
+			background-color: $slate-lightest-variant;
+			color: $text-primary;
+		}
+		&.dark {
+			@import 'dark';
+			background-color: $background-color;
+			color: $text-primary;
+		}
 		button {
 			order: 3;
+			&.light {
+				@import 'light';
+				background-color: $slate-lightest-variant;
+				color: $text-primary;
+			}
+			&.dark {
+				@import 'dark';
+				background-color: $background-color;
+				color: $text-primary;
+			}
 		}
 		.logo {
 			order: 1;
@@ -59,11 +85,14 @@
 			flex-basis: 25%;
 			min-height: 66vh;
 			max-height: 70vh;
-			border: 1px solid;
+			border: none;
 			position: sticky;
 			top: 102px;
 			border-radius: 8px;
 			margin-left: 8px;
+			padding: 16px;
+			background-color: $slate-lightest-variant;
+			box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
 		}
 		.main {
 			flex-basis: 71%;
@@ -71,6 +100,7 @@
 			flex-flow: column nowrap;
 			justify-content: space-between;
 			margin-left: 8px;
+
 			.search {
 				width: 66%;
 				height: 70px;
@@ -85,15 +115,27 @@
 					position: relative;
 
 					.card {
+						border: 1px solid;
 						border-radius: 8px;
 						box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
 						padding: 16px;
 						margin-bottom: 32px;
+						&.light {
+							@import 'light';
+
+							border: $slate;
+						}
+						&.dark {
+							@import 'dark';
+							border: $slate-dark-variant;
+						}
+
 						p {
 							margin-bottom: 8px;
 						}
 						button {
 							border: none;
+							width: 33%;
 							border-radius: 4px;
 							padding: 8px 16px;
 							margin: 8px;
@@ -101,7 +143,7 @@
 							cursor: pointer;
 							transition: background-color 0.3s ease;
 							&:hover {
-								background-color: #0056b3;
+								background-color: $primary-color;
 							}
 						}
 					}
@@ -114,5 +156,10 @@
 	}
 
 	.footer {
+		background-color: inherit;
+		color: inherit;
+		margin: 0 auto;
+		text-align: center;
+		margin-bottom: 10px;
 	}
 }

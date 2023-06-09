@@ -1,0 +1,215 @@
+.root {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.root.light {
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.root.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.root .navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 32px;
+  clear: both;
+  height: 70px;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.12);
+}
+
+.root .navigation.light {
+  background-color: #eff1f3;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.root .navigation.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.root .navigation button {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.root .navigation button.light {
+  background-color: #eff1f3;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.root .navigation button.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.root .navigation .logo {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  -ms-flex-preferred-size: 29%;
+      flex-basis: 29%;
+  margin-left: 8px;
+}
+
+.root .navigation .nav {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  -ms-flex-preferred-size: 29%;
+      flex-basis: 29%;
+  margin-right: 55px;
+}
+
+.root .navigation .nav ul {
+  padding-left: 0;
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.root .navigation .nav ul a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.root .home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.root .home .profile {
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+  min-height: 66vh;
+  max-height: 70vh;
+  border: none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 102px;
+  border-radius: 8px;
+  margin-left: 8px;
+  padding: 16px;
+  background-color: #eff1f3;
+  -webkit-box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
+          box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
+}
+
+.root .home .main {
+  -ms-flex-preferred-size: 71%;
+      flex-basis: 71%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-left: 8px;
+}
+
+.root .home .main .search {
+  width: 66%;
+  height: 70px;
+  margin-bottom: 32px;
+}
+
+.root .home .main .job-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.root .home .main .job-list .job-card {
+  -ms-flex-preferred-size: 66%;
+      flex-basis: 66%;
+  position: relative;
+}
+
+.root .home .main .job-list .job-card .card {
+  border: 1px solid;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+          box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+  padding: 16px;
+  margin-bottom: 32px;
+}
+
+.root .home .main .job-list .job-card .card.light {
+  border: #8892b0;
+}
+
+.root .home .main .job-list .job-card .card.dark {
+  border: #1c1c1c;
+}
+
+.root .home .main .job-list .job-card .card p {
+  margin-bottom: 8px;
+}
+
+.root .home .main .job-list .job-card .card button {
+  border: none;
+  width: 33%;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.root .home .main .job-list .job-card .card button:hover {
+  background-color: #9c27b0;
+}
+
+.root .home .main .job-list .stat-card {
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+}
+
+.root .footer {
+  background-color: inherit;
+  color: inherit;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=style.css.map */

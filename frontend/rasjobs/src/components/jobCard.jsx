@@ -2,13 +2,58 @@ import React, { useState } from 'react';
 
 export default function JobCard({ className, data }) {
 	const [activeCard, setActiveCard] = useState(null);
+	const [currentPage, setCurrentPage] = useState(1);
+	const cardsPerPage = 10;
+	const maxPageNumbers = 5;
 
 	const handleCardClick = (id) => {
 		setActiveCard(id);
 	};
+
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+	};
+
+	const handlePrevPage = () => {
+		setCurrentPage(currentPage - 1);
+	};
+
+	const handleNextPage = () => {
+		setCurrentPage(currentPage + 1);
+	};
+
+	const indexOfLastCard = currentPage * cardsPerPage;
+	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+	const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
+	const totalPages = Math.ceil(data.length / cardsPerPage);
+
+	const getPageNumbers = () => {
+		const middlePage = Math.floor(maxPageNumbers / 2);
+		let startPage = currentPage - middlePage;
+		let endPage = currentPage + middlePage;
+
+		if (startPage <= 0) {
+			endPage += Math.abs(startPage) + 1;
+			startPage = 1;
+		}
+
+		if (endPage > totalPages) {
+			startPage -= endPage - totalPages;
+			endPage = totalPages;
+		}
+
+		startPage = Math.max(startPage, 1);
+		endPage = Math.min(endPage, totalPages);
+
+		return Array.from(
+			{ length: endPage - startPage + 1 },
+			(_, index) => startPage + index
+		);
+	};
+
 	return (
 		<div className={className}>
-			{data.map((item) => (
+			{currentCards.map((item) => (
 				<JobItem
 					key={item.id}
 					item={item}
@@ -16,6 +61,29 @@ export default function JobCard({ className, data }) {
 					active={item.id === activeCard}
 				/>
 			))}
+
+			<div className='pagination'>
+				<button onClick={handlePrevPage} disabled={currentPage === 1}>
+					&lt;
+				</button>
+
+				{getPageNumbers().map((pageNumber) => (
+					<button
+						key={pageNumber}
+						onClick={() => handlePageChange(pageNumber)}
+						className={currentPage === pageNumber ? 'active' : ''}
+					>
+						{pageNumber}
+					</button>
+				))}
+
+				<button
+					onClick={handleNextPage}
+					disabled={currentPage === totalPages}
+				>
+					&gt;
+				</button>
+			</div>
 		</div>
 	);
 }

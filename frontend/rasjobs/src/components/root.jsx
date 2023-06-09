@@ -16,9 +16,10 @@ export default function Root(props) {
 	};
 	return (
 		<div className={`root ${theme}`}>
-			<div className='navigation'>
+			<div className={`navigation ${theme}`}>
 				<button onClick={toggleTheme}>toggle</button>
-				<div className='logo'>Logo</div>
+				<div className='logo'>Ras - Jobs</div>
+
 				<div className='nav'>
 					<ul>
 						<li>
