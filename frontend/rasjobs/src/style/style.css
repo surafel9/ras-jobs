@@ -7,16 +7,9 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-}
-
-.root.light {
-  background-color: #ffffff;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-.root.dark {
-  background-color: #333;
-  color: #fff;
+  background-color: #f5f5f5;
+  font-family: Montserrat, sans-serif, Arial, Helvetica, sans-serif;
+  font-weight: 400 Regular;
 }
 
 .root .navigation {
@@ -31,35 +24,13 @@
   top: 0;
   z-index: 100;
   margin-bottom: 32px;
+  padding: 0 16px;
   clear: both;
   height: 70px;
-  border-bottom: 0.1px solid rgba(255, 255, 255, 0.12);
-}
-
-.root .navigation.light {
-  background-color: #eff1f3;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-.root .navigation.dark {
-  background-color: #333;
+  background-color: #2c6bed;
   color: #fff;
-}
-
-.root .navigation button {
-  -webkit-box-ordinal-group: 4;
-      -ms-flex-order: 3;
-          order: 3;
-}
-
-.root .navigation button.light {
-  background-color: #eff1f3;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-.root .navigation button.dark {
-  background-color: #333;
-  color: #fff;
+  font-weight: 600 Semi-Bold;
+  font-size: 18px;
 }
 
 .root .navigation .logo {
@@ -114,6 +85,14 @@
       flex-basis: 25%;
   min-height: 66vh;
   max-height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  gap: 10px;
   border: none;
   position: -webkit-sticky;
   position: sticky;
@@ -121,9 +100,25 @@
   border-radius: 8px;
   margin-left: 8px;
   padding: 16px;
-  background-color: #eff1f3;
   -webkit-box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
           box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
+}
+
+.root .home .profile .avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #ff8c00;
+}
+
+.root .home .profile .contact {
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+}
+
+.root .home .profile .stats {
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
 }
 
 .root .home .main {
@@ -146,6 +141,7 @@
   width: 66%;
   height: 70px;
   margin-bottom: 32px;
+  padding: 0 16px;
 }
 
 .root .home .main .job-list {
@@ -164,20 +160,12 @@
 }
 
 .root .home .main .job-list .job-card .card {
-  border: 1px solid;
+  border: 1px solid #7fa8ff;
   border-radius: 8px;
   -webkit-box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
           box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
   padding: 16px;
   margin-bottom: 32px;
-}
-
-.root .home .main .job-list .job-card .card.light {
-  border: #8892b0;
-}
-
-.root .home .main .job-list .job-card .card.dark {
-  border: #1c1c1c;
 }
 
 .root .home .main .job-list .job-card .card p {
@@ -186,18 +174,21 @@
 
 .root .home .main .job-list .job-card .card button {
   border: none;
+  background-color: #0049b7;
+  color: #fff;
   width: 33%;
   border-radius: 4px;
   padding: 8px 16px;
   margin: 8px;
   font-size: 14px;
+  font-weight: 500 Medium;
   cursor: pointer;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 
 .root .home .main .job-list .job-card .card button:hover {
-  background-color: #9c27b0;
+  background-color: #7fa8ff;
 }
 
 .root .home .main .job-list .stat-card {

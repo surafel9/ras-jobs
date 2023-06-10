@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/style.scss';
@@ -9,33 +8,29 @@ export async function loader() {
 	return jobs;
 }
 export default function Root(props) {
-	const [theme, setTheme] = useState('light');
-
-	const toggleTheme = () => {
-		setTheme(theme === 'light' ? 'dark' : 'light');
-	};
 	return (
-		<div className={`root ${theme}`}>
-			<div className={`navigation ${theme}`}>
-				<button onClick={toggleTheme}>toggle</button>
-				<div className='logo'>Ras - Jobs</div>
+		<div className='root'>
+			<div className='navigation'>
+				<div className='logo'>
+					<NavLink to='/'>Ras - Jobs</NavLink>
+				</div>
 
 				<div className='nav'>
 					<ul>
 						<li>
-							<NavLink to='/'>jobs</NavLink>
+							<NavLink to='/'>Jobs</NavLink>
 						</li>
 						<li>
-							<NavLink to='/login'>sign in</NavLink>
+							<NavLink to='/login'>Sign In</NavLink>
 						</li>
 
 						<li>
 							<NavLink to='/createProfile'>
-								create profile
+								Create Profile
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='postJob'>Post jobs</NavLink>
+							<NavLink to='postJob'>Post Jobs</NavLink>
 						</li>
 					</ul>
 				</div>
