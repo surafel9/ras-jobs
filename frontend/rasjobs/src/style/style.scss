@@ -44,11 +44,13 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		cursor: pointer;
 	}
 	button {
+		background-color: $primary-color-light;
 		color: $text-color-white;
 		padding: 8px 16px;
 		margin: 8px;
 		font-size: 14px;
 		font-weight: 500 (Medium);
+		border: none;
 	}
 	a {
 		text-decoration: none;
@@ -133,49 +135,50 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			margin-left: 8px;
 
 			.search {
-				width: 66%;
 				height: 170px;
 				margin-bottom: 32px;
+				display: flex;
+				flex-flow: row-reverse nowrap;
+				gap: 1%;
 
-				.main-search {
-					padding: 0;
-					margin: 0;
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-
-					input {
-						font-size: 16px;
-						width: 510px;
-						line-height: 1.5rem;
-						outline: none;
-					}
-					input,
-					button {
-						padding: 8px 16px;
-						border: 1px solid $primary-color-light;
-					}
-					button {
-						background-color: $secondary-color-dark;
-
-						border: none;
-						flex-basis: 20%;
-						line-height: 1.6rem;
-					}
+				.search-layout-adjust {
+					flex-basis: 33%;
 				}
-				.search-filters {
+				.search-layout {
+					flex-basis: 66%;
 					display: flex;
 					flex-flow: column nowrap;
-					justify-content: space-between;
-					gap: 10px;
+					flex-direction: flex-start;
 
+					.main-search {
+						display: flex;
+						flex-flow: row;
+						justify-content: space-between;
+						align-items: center;
+
+						.main-search-input {
+							flex-basis: 80%;
+
+							input {
+								width: 100%;
+								line-height: 1.6rem;
+								padding-left: 16px;
+								border: 1px solid $primary-color-light;
+							}
+						}
+						button {
+							flex-basis: 20%;
+						}
+					}
 					.filter-inputs {
 						display: flex;
 						flex-flow: row nowrap;
 						justify-content: space-between;
+						padding-left: 16px;
 					}
 				}
 			}
+
 			.job-list {
 				display: flex;
 				justify-content: space-between;
@@ -194,15 +197,14 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						flex-flow: row nowrap;
 						button {
 							border: none;
-							background-color: $secondary-color-dark;
-							color: $text-color-white;
+
 							border-radius: 4px;
 
 							margin: 8px;
 
 							transition: background-color 0.3s ease;
 							&:hover {
-								background-color: $primary-color-light;
+								background-color: $primary-color-dark;
 							}
 						}
 
@@ -227,7 +229,8 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					}
 					.pagination {
 						button {
-							color: $text-color-dark;
+							color: $text-color-white;
+							background-color: #a3a3a3;
 						}
 					}
 				}
