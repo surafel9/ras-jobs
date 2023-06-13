@@ -44,13 +44,14 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		cursor: pointer;
 	}
 	button {
-		background-color: $primary-color-light;
+		background-color: $primary-color-dark;
 		color: $text-color-white;
 		padding: 8px 16px;
 		margin: 8px;
 		font-size: 14px;
 		font-weight: 500 (Medium);
 		border: none;
+		border-radius: 4px;
 	}
 	a {
 		text-decoration: none;
@@ -108,8 +109,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			top: 102px;
 			border-radius: 8px;
 			margin-left: 8px;
-			padding: 16px;
-
+			padding: 0 16px;
 			box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
 
 			.avatar {
@@ -125,6 +125,80 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 
 			.stats {
 				flex-basis: 33%;
+			}
+		}
+
+		.create-profile {
+			min-height: auto;
+			padding-left: 0;
+
+			&.active {
+				border: 1px solid $primary-color-light;
+			}
+			.profile-header {
+				font-size: 14px;
+				padding-left: 16px;
+			}
+			.about-me-display {
+				display: flex;
+				flex-flow: rows nowrap;
+
+				border: 1px solid $primary-color-light;
+				border-radius: 8px;
+				padding: 16px;
+
+				.about-me-person-photo {
+					position: relative;
+
+					.about-me-addProfile-button {
+						position: absolute;
+						right: 0;
+						bottom: 8px;
+					}
+				}
+
+				.about-me-personalInfo {
+					margin-left: 16px;
+				}
+			}
+			.about-me {
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-between;
+				gap: 16px;
+				padding: 16px;
+				border: 1px solid $primary-color-light;
+				border-radius: 8px;
+				flex-basis: 25%;
+
+				input {
+					width: 100%;
+					line-height: 1.8rem;
+					border: 1px solid $primary-color-light;
+				}
+				button {
+					margin-left: 0;
+				}
+			}
+			.work-history {
+				display: flex;
+				flex-flow: column;
+				margin: 32px 0;
+				justify-content: space-around;
+				padding: 16px;
+				border: 1px solid $primary-color-light;
+				border-radius: 8px;
+			}
+			.work-experience-form {
+				input {
+					line-height: 1.5rem;
+					margin: 0 10px 10px 0;
+					width: 45%;
+				}
+				textarea {
+					max-width: 200px;
+					border: 1px solid $primary-color-light;
+				}
 			}
 		}
 		.main {
@@ -148,7 +222,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					flex-basis: 66%;
 					display: flex;
 					flex-flow: column nowrap;
-					flex-direction: flex-start;
 
 					.main-search {
 						display: flex;
@@ -197,8 +270,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						flex-flow: row nowrap;
 						button {
 							border: none;
-
-							border-radius: 4px;
 
 							margin: 8px;
 
