@@ -131,6 +131,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		.create-profile {
 			min-height: auto;
 			padding-left: 0;
+			position: relative;
 
 			&.active {
 				border: 1px solid $primary-color-light;
@@ -306,8 +307,57 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					}
 				}
 				.stat-card {
-					flex-basis: 25%;
+					flex-basis: 32%;
+					border: 1px solid red;
 				}
+			}
+		}
+	}
+	.login {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.form-header {
+			margin-bottom: 20px;
+		}
+
+		.form-fields {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 20px;
+			min-width: 300px;
+
+			label {
+				margin-bottom: 10px;
+			}
+
+			input[type='text'],
+			input[type='password'] {
+				padding: 8px;
+				border: 1px solid $primary-color-light;
+				border-radius: 4px;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+
+			button[type='submit'] {
+				padding: 8px 12px;
+				border-radius: 4px;
+				color: $text-color-white;
+				border: none;
+				cursor: pointer;
+			}
+		}
+
+		.social-auth {
+			button[type='button'] {
+				padding: 8px 12px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background-color: #fff;
+				color: #007bff;
+				cursor: pointer;
 			}
 		}
 	}

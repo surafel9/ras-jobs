@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/style.scss';
@@ -5,8 +6,11 @@ import { fetchJobs } from '../data/fetchData';
 
 export async function loader() {
 	const jobs = await fetchJobs();
+
 	return jobs;
 }
+
+console.log(await loader());
 export default function Root(props) {
 	return (
 		<div className='root'>

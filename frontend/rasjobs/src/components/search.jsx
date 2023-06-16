@@ -1,16 +1,47 @@
 import React, { useState } from 'react';
 
 export default function Search(props) {
+	const [filters, setFilters] = useState({
+		location: '',
+		state: '',
+		jobCategory: '',
+	});
+
+	const [searchTerm, setSearchterm] = useState('');
+
+	const searchTermHandler = (e) => {
+		setSearchterm(e.target.value);
+	};
+	const handleFilterChange = (event) => {
+		const { name, value } = event.target;
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			[name]: value,
+		}));
+	};
+
+	const getSearchKey = (e) => {
+		e.preventDefault();
+		props.handleSearchKey(searchTerm);
+		setSearchterm('');
+	};
+
 	return (
 		<div className={props.className}>
 			<div className='search-layout-adjust' />
 			<div className='search-layout'>
-				<form role='search' className='main-search'>
+				<form
+					role='search'
+					className='main-search'
+					onSubmit={(e) => getSearchKey(e)}
+				>
 					<label htmlFor='search' className='main-search-input'>
 						<input
 							type='text'
 							placeholder='Search a job'
 							aria-label='search'
+							value={searchTerm}
+							onChange={searchTermHandler}
 						/>
 					</label>
 					<button
@@ -22,27 +53,16 @@ export default function Search(props) {
 					</button>
 				</form>
 
-				<SearchFilters />
+				<SearchFilters
+					handleFilterChange={handleFilterChange}
+					filters={filters}
+				/>
 			</div>
 		</div>
 	);
 }
 
-function SearchFilters() {
-	const [filters, setFilters] = useState({
-		location: '',
-		state: '',
-		jobCategory: '',
-	});
-
-	const handleFilterChange = (event) => {
-		const { name, value } = event.target;
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			[name]: value,
-		}));
-	};
-
+function SearchFilters({ filters, handleFilterChange }) {
 	return (
 		<div className='filter-inputs'>
 			<div className='filter-group'>

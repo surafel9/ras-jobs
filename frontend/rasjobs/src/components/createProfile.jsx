@@ -1,27 +1,36 @@
-/* CREATE TABLE userprofile (
-  id BIGSERIAL PRIMARY KEY,
-  user_id bigint REFERENCES users(id),
-  title text,
-  work_experiance text,
-  skills text,
-  projects text,
-  social text,
-  education text,
-  certificates text,
-  saved_job bigint REFERENCES jobs(id),
-  applied_job bigint REFERENCES jobs(id)
-);
-*/
+import React, { useState, useEffect } from 'react';
+import { Pie, PieChart, Cell, Legend, Tooltip, Text } from 'recharts';
 
-import React, { useState } from 'react';
-
-export default function CreateProfile({ className }) {
+export default function CreateProfile({ className, data }) {
 	const [isAboutMeActive, setIsAboutMeActive] = useState(false);
 	const [isAddWorkActive, setIsAddWorkActive] = useState(false);
+	const [category, setCategory] = useState({});
+	const [pieChartValues, setPieChartValues] = useState([]);
 
-	const [formData, setFormData] = useState({
-		title: '',
-	});
+	useEffect(() => {
+		(function () {
+			const updatedCategory = {};
+			for (let i of data) {
+				if (!updatedCategory[i.job_category]) {
+					updatedCategory[i.job_category] = 1;
+				} else {
+					updatedCategory[i.job_category] += 1;
+				}
+			}
+			setCategory(updatedCategory);
+		})();
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		const updatedPieChartValues = [];
+		for (let i in category) {
+			updatedPieChartValues.push({ name: i, value: category[i] });
+		}
+		setPieChartValues(updatedPieChartValues);
+	}, [category]);
+
 	const viewportWidth =
 		window.innerWidth || document.documentElement.clientWidth;
 	const twentyFivePercent = viewportWidth * 0.25;
@@ -31,14 +40,59 @@ export default function CreateProfile({ className }) {
 	};
 	const handleWorkExperience = () => {
 		setIsAddWorkActive(!isAddWorkActive);
-		console.log(isAddWorkActive);
 	};
+
+	/*
+	const [formData, setFormData] = useState({
+		title: '',
+	});
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		setFormData({ ...formData, [name]: value });
-	};
+	}; */
 
 	//handleSubmit
+
+	const COLORS = [
+		'#e91e63',
+		'#ff8c00',
+		'#0049b7',
+		'#7fa8ff',
+		'#2c6bed',
+		'#c75c00',
+		'#ffb74d',
+		'#666666',
+		'#cccccc',
+		'#333',
+	];
+
+	const RADIAN = Math.PI / 180;
+	const renderCustomizedLabel = ({
+		cx,
+		cy,
+		midAngle,
+		innerRadius,
+		outerRadius,
+		value,
+		index,
+	}) => {
+		const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+		const x = cx + radius * Math.cos(-midAngle * RADIAN);
+		const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+		return (
+			<text
+				x={x}
+				y={y}
+				fill='white'
+				textAnchor={x > cx ? 'start' : 'end'}
+				dominantBaseline='central'
+			>
+				{value}
+			</text>
+		);
+	};
+
 	return (
 		<div className={`${className} profile`}>
 			<div className='profile-header'>
@@ -80,10 +134,51 @@ export default function CreateProfile({ className }) {
 				</div>
 			</div>
 			{isAboutMeActive && <AboutMe />}
-			<AddWorkExperience handleWorkExperience={handleWorkExperience} />
+			<AddMenu
+				config={{
+					action: handleWorkExperience,
+					h3: 'Add Work Experience',
+				}}
+			/>
 			{isAddWorkActive && (
 				<WorkExperienceForm twentyFivePercent={twentyFivePercent} />
 			)}
+
+			<PieChart width={twentyFivePercent} height={450}>
+				<Pie
+					data={pieChartValues}
+					dataKey='value'
+					nameKey='name'
+					cx='50%'
+					cy='50%'
+					outerRadius={150}
+					fill='#c75c00'
+					label={renderCustomizedLabel}
+					labelLine={false}
+				>
+					{data.map((entry, index) => (
+						<Cell
+							key={`cell-${index}`}
+							fill={COLORS[index % COLORS.length]}
+						/>
+					))}
+				</Pie>
+				<Tooltip />
+				<text
+					x={500 / 2}
+					y={350}
+					fill='black'
+					textAnchor='end'
+					dominantBaseline='central'
+				>
+					<tspan fontSize='15'>72 hr Job-Posting Data</tspan>
+				</text>
+				<Legend
+					layout='horizontal'
+					verticalAlign='bottom'
+					align='center'
+				/>
+			</PieChart>
 		</div>
 	);
 }
@@ -120,11 +215,11 @@ function AboutMe() {
 	);
 }
 
-function AddWorkExperience({ handleWorkExperience }) {
+function AddMenu({ config }) {
 	return (
 		<div className='work-history'>
 			<div className='header'>
-				<h3> Add Work Experience</h3>
+				<h3> {config.h3}</h3>
 			</div>
 			<div className='add-work-histroy-button'>
 				<svg
@@ -135,7 +230,7 @@ function AddWorkExperience({ handleWorkExperience }) {
 					className='work-history-button'
 					viewBox='0 0 16 16'
 					role='button'
-					onClick={handleWorkExperience}
+					onClick={config.action}
 				>
 					<path d='M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0H2.5zm2.292 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zm1.833 0h-.916v1h.916V0zm1.834 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0zm2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1V2.5zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 5.708v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 7.542v.916h1v-.916H0zm15 .916h1v-.916h-1v.916zM0 9.375v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .916v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458H0zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487zM.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029l-.194.981zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1h.458zm-9.625 0h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zm1.834-1v1h.916v-1h-.916zm1.833 1h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z' />
 				</svg>
