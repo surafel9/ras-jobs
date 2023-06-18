@@ -10,6 +10,7 @@ const postJobRouter = require('./router/postJob');
 const manageProfileRouter = require('./router/manageProfile');
 const app = express();
 const cors = require('cors');
+const usaJobsRouter = require('./router/usaJobs');
 
 // load the cookie-parsing middleware
 app.use(cookieParser());
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 
 //mount routers
 app.use('/', homeRouter);
+app.use('/usaJobs', usaJobsRouter);
 app.use('/signUp', signUpRouter);
 app.use('/logIn', logInRouter);
 app.use('/postJob', postJobRouter);

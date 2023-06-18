@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Root, { loader as rootLoader } from '../src/components/root';
 import ErrorPage from './components/erro';
 import Login from './components/login';
 import CreateProfile from './components/createProfile';
 import PostJob from './components/postJob';
 import Home from './components/home';
+import Main from './components/main';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Root />,
+		element: <Main />,
 		errorElement: <ErrorPage />,
+
 		children: [
-			{ path: '/', element: <Home />, loader: rootLoader },
+			{ path: '/', element: <Home className='home' /> },
 			{
 				path: '/login',
 				element: <Login className='login' />,

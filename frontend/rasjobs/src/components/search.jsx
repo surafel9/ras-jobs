@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 
 export default function Search(props) {
-	const [filters, setFilters] = useState({
-		location: '',
-		state: '',
-		jobCategory: '',
-	});
-
 	const [searchTerm, setSearchterm] = useState('');
 
 	const searchTermHandler = (e) => {
 		setSearchterm(e.target.value);
-	};
-	const handleFilterChange = (event) => {
-		const { name, value } = event.target;
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			[name]: value,
-		}));
 	};
 
 	const getSearchKey = (e) => {
@@ -54,8 +41,8 @@ export default function Search(props) {
 				</form>
 
 				<SearchFilters
-					handleFilterChange={handleFilterChange}
-					filters={filters}
+					handleFilterChange={props.filterDataHandler}
+					filters={props.formData}
 				/>
 			</div>
 		</div>
@@ -70,19 +57,20 @@ function SearchFilters({ filters, handleFilterChange }) {
 				<label>
 					<input
 						type='checkbox'
-						name='location'
+						name='work_location'
 						value='remote'
-						checked={filters.location === 'remote'}
+						checked={filters.work_location == 'remote'}
 						onChange={(event) => handleFilterChange(event)}
 					/>
 					Remote
 				</label>
+
 				<label>
 					<input
 						type='checkbox'
-						name='location'
-						value='on-site'
-						checked={filters.location === 'on-site'}
+						name='work_location'
+						value='onsite'
+						checked={filters.work_location == 'onsite'}
 						onChange={(event) => handleFilterChange(event)}
 					/>
 					On-site
@@ -90,9 +78,9 @@ function SearchFilters({ filters, handleFilterChange }) {
 				<label>
 					<input
 						type='checkbox'
-						name='location'
+						name='work_location'
 						value='hybrid'
-						checked={filters.location === 'hybrid'}
+						checked={filters.work_location === 'hybrid'}
 						onChange={(event) => handleFilterChange(event)}
 					/>
 					Hybrid
@@ -102,23 +90,21 @@ function SearchFilters({ filters, handleFilterChange }) {
 			<div className='filter-group'>
 				<h3>State:</h3>
 				<select
-					name='state'
-					value={filters.state}
+					name='org_state'
+					value={filters.org_state}
 					onChange={(event) => handleFilterChange(event)}
 				>
 					<option value=''>All</option>
 					<option value='NY'>New York</option>
 					<option value='CA'>California</option>
 					<option value='TX'>Texas</option>
-					{/* Add more options as needed */}
 				</select>
 			</div>
-
 			<div className='filter-group'>
 				<h3>Job Category:</h3>
 				<select
-					name='jobCategory'
-					value={filters.jobCategory}
+					name='job_category'
+					value={filters.job_category}
 					onChange={(event) => handleFilterChange(event)}
 				>
 					<option value=''>All</option>

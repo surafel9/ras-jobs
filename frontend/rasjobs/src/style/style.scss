@@ -52,6 +52,9 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		font-weight: 500 (Medium);
 		border: none;
 		border-radius: 4px;
+		&:hover {
+			background-color: $primary-color;
+		}
 	}
 	a {
 		text-decoration: none;
@@ -60,12 +63,12 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 	.navigation {
 		display: flex;
 		align-items: center;
+		gap: 3%;
 		position: sticky;
 		top: 0;
 		z-index: 100;
 		margin-bottom: 32px;
-		padding: 0 16px;
-		clear: both;
+		padding: 0 36px;
 		height: 70px;
 		background-color: $primary-color;
 		color: $text-color-white;
@@ -75,12 +78,13 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 
 		.logo {
 			order: 1;
-			flex-basis: 29%;
+			flex-basis: 25%;
 			margin-left: 8px;
 		}
 		.nav {
 			order: 2;
 			flex-basis: 29%;
+			padding-left: 16px;
 			margin-right: 55px;
 
 			ul {
@@ -96,6 +100,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 	.home {
 		display: flex;
 		justify-content: space-between;
+		margin: 10px 20px;
 
 		.profile {
 			flex-basis: 25%;
@@ -111,6 +116,8 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			margin-left: 8px;
 			padding: 0 16px;
 			box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
+			position: sticky;
+			top: 102px;
 
 			.avatar {
 				height: 70px;
@@ -131,7 +138,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		.create-profile {
 			min-height: auto;
 			padding-left: 0;
-			position: relative;
 
 			&.active {
 				border: 1px solid $primary-color-light;
@@ -144,7 +150,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				display: flex;
 				flex-flow: rows nowrap;
 
-				border: 1px solid $primary-color-light;
+				border: 1px dotted $primary-color-light;
 				border-radius: 8px;
 				padding: 16px;
 
@@ -168,7 +174,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				justify-content: space-between;
 				gap: 16px;
 				padding: 16px;
-				border: 1px solid $primary-color-light;
+				border: 1px dotted $primary-color-light;
 				border-radius: 8px;
 				flex-basis: 25%;
 
@@ -187,7 +193,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				margin: 32px 0;
 				justify-content: space-around;
 				padding: 16px;
-				border: 1px solid $primary-color-light;
+				border: 1px dotted $primary-color-light;
 				border-radius: 8px;
 			}
 			.work-experience-form {
@@ -207,20 +213,20 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			display: flex;
 			flex-flow: column nowrap;
 			justify-content: space-between;
-			margin-left: 8px;
+			margin-left: 16px;
 
 			.search {
 				height: 170px;
 				margin-bottom: 32px;
 				display: flex;
 				flex-flow: row-reverse nowrap;
-				gap: 1%;
+				gap: 2%;
 
 				.search-layout-adjust {
-					flex-basis: 33%;
+					flex-basis: 42%;
 				}
 				.search-layout {
-					flex-basis: 66%;
+					flex-basis: 56%;
 					display: flex;
 					flex-flow: column nowrap;
 
@@ -258,7 +264,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				justify-content: space-between;
 
 				.job-card {
-					flex-basis: 66%;
+					flex-basis: 56%;
 					position: relative;
 
 					.card {
@@ -306,9 +312,49 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						}
 					}
 				}
-				.stat-card {
-					flex-basis: 32%;
-					border: 1px solid red;
+				.gov-jobsCard {
+					flex-basis: 42%;
+
+					margin: 0;
+
+					.decimilar {
+						display: flex;
+						flex-flow: column;
+						align-items: center;
+						h3 {
+							padding: 0;
+							margin: 0;
+							color: $accent-color;
+						}
+						p {
+							font-style: italic;
+						}
+					}
+					.gov-jobs {
+						text-align: center;
+					}
+					.gov-card {
+						border: 1px dotted $primary-color-light;
+						margin-bottom: 32px;
+						padding: 16px;
+						border-radius: 8px;
+						.apply-link {
+							color: $text-color-white;
+							box-shadow: '0 2px 4px rgba(0, 0, 0, 0.2)';
+							border-radius: '4px';
+						}
+					}
+					.pagination {
+						.skip-menu {
+							background-color: $primary-color-dark;
+						}
+						.page-numbers {
+							background-color: #000000;
+						}
+						.active {
+							border: 1px solid red;
+						}
+					}
 				}
 			}
 		}
