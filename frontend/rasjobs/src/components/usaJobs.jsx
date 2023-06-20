@@ -33,6 +33,7 @@ export default function UsaJobs({ className, searchKey }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			const result = await fetchUSAJobs(searchKey);
+
 			setUsaJobs(result);
 		};
 		if (isComponentLoaded) {
@@ -55,7 +56,7 @@ export default function UsaJobs({ className, searchKey }) {
 				<h3>Government Jobs</h3>
 			</div>
 			{currentCards.map((job) => (
-				<GovJobsList job={job} />
+				<GovJobsList key={job.id} job={job} />
 			))}
 			<Pagination
 				handlePrevPage={handlePrevPage}
@@ -75,35 +76,58 @@ function GovJobsList({ job }) {
 	const toggleSummary = () => {
 		setShowFullSummary(!showFullSummary);
 	};
-	const jobItem = job.MatchedObjectDescriptor;
+	//console.log(job.MatchedObjectId);
+	//const jobItem = job.MatchedObjectDescriptor;
 
 	return (
 		<div className='gov-card'>
-			<h4>Position: {jobItem.PositionTitle}</h4>
+			<h4>Position: {job.MatchedObjectDescriptor.PositionTitle}</h4>
 			<p>
 				Posted on:{' '}
-				{new Date(jobItem.PublicationStartDate).toLocaleDateString()}
+				{new Date(
+					job.MatchedObjectDescriptor.PublicationStartDate
+				).toLocaleDateString()}
 			</p>
 			<p>
 				Ends on:{' '}
-				{new Date(jobItem.ApplicationCloseDate).toLocaleDateString()}
+				{new Date(
+					job.MatchedObjectDescriptor.ApplicationCloseDate
+				).toLocaleDateString()}
 			</p>
 			<p>
-				Salary range: {jobItem.PositionRemuneration[0].MinimumRange} to{' '}
-				{jobItem.PositionRemuneration[0].MaximumRange} /
-				{jobItem.PositionRemuneration[0].Description}
+				Salary range:{' '}
+				{
+					job.MatchedObjectDescriptor.PositionRemuneration[0]
+						.MinimumRange
+				}{' '}
+				to{' '}
+				{
+					job.MatchedObjectDescriptor.PositionRemuneration[0]
+						.MaximumRange
+				}{' '}
+				/
+				{
+					job.MatchedObjectDescriptor.PositionRemuneration[0]
+						.Description
+				}
 			</p>
-			<p>Position Location: {jobItem.PositionLocationDisplay}</p>
+			<p>
+				Position Location:{' '}
+				{job.MatchedObjectDescriptor.PositionLocationDisplay}
+			</p>
 			<h5>Application Summary:</h5>
 			<p>
 				{showFullSummary
-					? jobItem.QualificationSummary
-					: jobItem.QualificationSummary.slice(0, 100)}{' '}
+					? job.MatchedObjectDescriptor.QualificationSummary
+					: job.MatchedObjectDescriptor.QualificationSummary.slice(
+							0,
+							100
+					  )}{' '}
 				... <DoubleChevronDownSvg toggle={toggleSummary} />
 			</p>
 			<button className='apply-link'>
 				<a
-					href={jobItem.ApplyURI}
+					href={job.MatchedObjectDescriptor.ApplyURI}
 					target='_blank'
 					rel='noopener noreferrer'
 				>
@@ -113,7 +137,7 @@ function GovJobsList({ job }) {
 			OR
 			<button className='apply-link'>
 				<a
-					href={jobItem.PositionURI}
+					href={job.MatchedObjectDescriptor.PositionURI}
 					target='_blank'
 					rel='noopener noreferrer'
 				>

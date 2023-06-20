@@ -10,101 +10,71 @@ import JobCard from './jobCard';
 import CreateProfile from './createProfile';
 import UsaJobs from './usaJobs';
 import { fetchJobs } from '../data/fetchData';
+import { filterJob } from '../data/filterJobs';
 import Loading from './loading';
+import { filterJobByKeyWord } from '../data/filterJobByKeyword';
 
 export default function Home(props) {
-	const [searchKey, setSerachKey] = useState('');
-
+	const [searchKey, setSearchKey] = useState('');
 	const [formData, setFormData] = useState({
 		job_category: '',
 		work_location: '',
 		org_state: '',
 	});
-
 	const [data, setData] = useState({
 		isLoading: true,
 		data: null,
 		isDataFiltered: false,
 	});
 	const [cacheState, setCacheState] = useState();
-
-	//we need to update the state before the second filter or keep track of original state for each filter and also manage the data passed to the pie chart not to change on each filter or should update accordinglly
-
-	//issue after reaching last page!
+	const [isLogged, setIsLogged] = useState(false);
 
 	useEffect(() => {
-		(async function () {
+		const fetchData = async () => {
 			const jobs = await fetchJobs();
-			setData((prevData) => ({
-				...prevData,
+			setData({
 				isLoading: false,
 				data: jobs,
-			}));
+				isDataFiltered: false,
+			});
 			setCacheState(jobs);
-		})();
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		};
+		fetchData();
 	}, []);
 
 	const filterDataHandler = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
-		filterJob(name, value);
+		filterJob(name, value, setData, data, cacheState);
 	};
 
-	const filterJob = async (formDataName, formDataValue) => {
-		try {
-			if (data.isDataFiltered === true) {
-				const filterdJobs = cacheState.filter(
-					(job) =>
-						job[formDataName].toLowerCase() ===
-						formDataValue.toLowerCase()
-				);
-				setData((prevData) => ({
-					...prevData,
-					isLoading: false,
-					data: filterdJobs,
-					isDataFiltered: true,
-				}));
-			} else {
-				const filterdJobs = data.data.filter(
-					(job) =>
-						job[formDataName].toLowerCase() ===
-						formDataValue.toLowerCase()
-				);
-
-				setData((prevData) => ({
-					...prevData,
-					isLoading: false,
-					data: filterdJobs,
-					isDataFiltered: true,
-				}));
-			}
-		} catch (error) {
-			console.log(error);
-		}
+	const clearOptionHandler = (e) => {
+		setFormData((prevState) => ({
+			...prevState,
+			job_category: '',
+			work_location: '',
+			org_state: '',
+		}));
 	};
+
+	//filterDataHandler;
 
 	const handleSearchKey = (arg) => {
-		setSerachKey(arg);
+		setSearchKey(arg);
+		filterJobByKeyWord(arg, data, cacheState, setData);
 	};
-
-	//const usaJobs = useLoaderData();
-
-	const [isLoged, setIsLgged] = useState(false);
 
 	return (
 		<div className='home'>
-			{isLoged ? (
+			{isLogged ? (
 				<Profile className='profile' />
-			) : data.isLoading ? (
-				<Loading />
 			) : (
-				<CreateProfile
-					className='profile create-profile'
-					data={data.data}
-					isLoading={data.isLoading}
-				/>
+				!data.isLoading && (
+					<CreateProfile
+						className='profile create-profile'
+						data={data}
+					/>
+				)
 			)}
 
 			<div className='main'>
@@ -113,18 +83,18 @@ export default function Home(props) {
 					handleSearchKey={handleSearchKey}
 					filterDataHandler={filterDataHandler}
 					formData={formData}
+					clearOptionHandler={clearOptionHandler}
 				/>
 				<JobList className='job-list'>
-					{data.isLoading ? (
-						<Loading />
-					) : (
+					{!data.isLoading ? (
 						<JobCard
 							className='job-card'
 							data={data.data}
 							cacheState={cacheState}
 						/>
+					) : (
+						<Loading />
 					)}
-
 					<UsaJobs className='gov-jobsCard' searchKey={searchKey} />
 				</JobList>
 			</div>

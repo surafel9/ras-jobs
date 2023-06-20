@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { JOB_CATEGORIES } from '../data/jobCategories';
+import { states } from '../data/allStates';
 
 export default function Search(props) {
 	const [searchTerm, setSearchterm] = useState('');
@@ -13,6 +15,7 @@ export default function Search(props) {
 		setSearchterm('');
 	};
 
+	//should we allow a combined filter ?
 	return (
 		<div className={props.className}>
 			<div className='search-layout-adjust' />
@@ -27,6 +30,7 @@ export default function Search(props) {
 							type='text'
 							placeholder='Search a job'
 							aria-label='search'
+							spellCheck='true'
 							value={searchTerm}
 							onChange={searchTermHandler}
 						/>
@@ -43,13 +47,20 @@ export default function Search(props) {
 				<SearchFilters
 					handleFilterChange={props.filterDataHandler}
 					filters={props.formData}
+					JOB_CATEGORIES={JOB_CATEGORIES}
+					clearOptionHandler={props.clearOptionHandler}
 				/>
 			</div>
 		</div>
 	);
 }
 
-function SearchFilters({ filters, handleFilterChange }) {
+function SearchFilters({
+	filters,
+	handleFilterChange,
+	JOB_CATEGORIES,
+	clearOptionHandler,
+}) {
 	return (
 		<div className='filter-inputs'>
 			<div className='filter-group'>
@@ -59,8 +70,9 @@ function SearchFilters({ filters, handleFilterChange }) {
 						type='checkbox'
 						name='work_location'
 						value='remote'
-						checked={filters.work_location == 'remote'}
+						checked={filters.work_location === 'remote'}
 						onChange={(event) => handleFilterChange(event)}
+						onClick={(e) => clearOptionHandler(e)}
 					/>
 					Remote
 				</label>
@@ -70,8 +82,9 @@ function SearchFilters({ filters, handleFilterChange }) {
 						type='checkbox'
 						name='work_location'
 						value='onsite'
-						checked={filters.work_location == 'onsite'}
+						checked={filters.work_location === 'onsite'}
 						onChange={(event) => handleFilterChange(event)}
+						onClick={(e) => clearOptionHandler(e)}
 					/>
 					On-site
 				</label>
@@ -82,6 +95,7 @@ function SearchFilters({ filters, handleFilterChange }) {
 						value='hybrid'
 						checked={filters.work_location === 'hybrid'}
 						onChange={(event) => handleFilterChange(event)}
+						onClick={(e) => clearOptionHandler(e)}
 					/>
 					Hybrid
 				</label>
@@ -94,10 +108,18 @@ function SearchFilters({ filters, handleFilterChange }) {
 					value={filters.org_state}
 					onChange={(event) => handleFilterChange(event)}
 				>
-					<option value=''>All</option>
-					<option value='NY'>New York</option>
-					<option value='CA'>California</option>
-					<option value='TX'>Texas</option>
+					<option value='' disabled>
+						All
+					</option>
+					{states.map((state, index) => (
+						<option
+							value={state.name}
+							onChange={(event) => handleFilterChange(event)}
+							key={index}
+						>
+							{state.name} ({state.abbreviation})
+						</option>
+					))}
 				</select>
 			</div>
 			<div className='filter-group'>
@@ -107,10 +129,18 @@ function SearchFilters({ filters, handleFilterChange }) {
 					value={filters.job_category}
 					onChange={(event) => handleFilterChange(event)}
 				>
-					<option value=''>All</option>
-					<option value='software'>Software</option>
-					<option value='design'>Design</option>
-					<option value='marketing'>Marketing</option>
+					<option value='' disabled>
+						All
+					</option>
+					{JOB_CATEGORIES.map((category, index) => (
+						<option
+							value={category}
+							onChange={(event) => handleFilterChange(event)}
+							key={index}
+						>
+							{category}
+						</option>
+					))}
 				</select>
 			</div>
 		</div>

@@ -76,7 +76,7 @@ export default function CreateProfile({ className, data }) {
 				<WorkExperienceForm twentyFivePercent={twentyFivePercent} />
 			)}
 
-			{isChartOpen ? null : (
+			{isChartOpen || data.isDataFiltered ? null : (
 				<JobPostDataPieChart
 					data={data}
 					twentyFivePercent={twentyFivePercent}
@@ -168,7 +168,7 @@ function JobPostDataPieChart({ data, twentyFivePercent }) {
 	useEffect(() => {
 		(function () {
 			const updatedCategory = {};
-			for (let i of data) {
+			for (let i of data.data) {
 				if (!updatedCategory[i.job_category]) {
 					updatedCategory[i.job_category] = 1;
 				} else {
@@ -243,7 +243,7 @@ function JobPostDataPieChart({ data, twentyFivePercent }) {
 					label={renderCustomizedLabel}
 					labelLine={false}
 				>
-					{data.map((entry, index) => (
+					{data.data.map((entry, index) => (
 						<Cell
 							key={`cell-${index}`}
 							fill={COLORS[index % COLORS.length]}
