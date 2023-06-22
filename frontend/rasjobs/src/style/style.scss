@@ -1,5 +1,3 @@
-//todos - job-applications table to be updated per each application made. we need stats to show on the stats cards
-// Primary Colors
 $primary-color: #2c6bed; // Main primary color
 $primary-color-light: #7fa8ff; // Lighter shade of primary color
 $primary-color-dark: #0049b7; // Darker shade of primary color
@@ -42,6 +40,9 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 	button,
 	svg {
 		cursor: pointer;
+	}
+	input {
+		outline: none;
 	}
 	button {
 		background-color: $primary-color-dark;
@@ -325,7 +326,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					position: relative;
 
 					.card {
-						border: 1px solid $primary-color-light;
+						border: 1px solid #e0e0e0;
 						border-radius: 8px;
 						box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
 						padding: 16px;
@@ -333,20 +334,17 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						display: flex;
 						flex-flow: row nowrap;
 						opacity: 0;
-						animation: fade-in 0.1s ease-in forwards;
+						animation: fade-in 0.5s ease-in forwards;
 
 						@keyframes fade-in {
 							0% {
 								opacity: 0;
 								background-color: #e0e0e0;
 								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-								border: none;
 							}
 							25% {
 								opacity: 0.25;
 								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-								border-color: $primary-color-dark;
-								border: medium;
 							}
 							50% {
 								opacity: 0.5;
@@ -445,15 +443,131 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 	.login {
 		display: flex;
 		flex-flow: row nowrap;
-		justify-content: space-evenly;
-		gap: 1%;
+		justify-content: space-between;
 		height: 92vh;
 		.welcome-info {
-			flex: 1;
+			flex-basis: 30%;
 			background-color: #e6e6e6;
 		}
-		.sign-in-up {
-			flex: 3;
+		.welcome-info-login {
+			flex-basis: 33%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			.login-sign-signup-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				height: 100%;
+				box-sizing: border-box;
+				height: 60vh;
+				min-width: 66%;
+				background-color: $text-color-white;
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+				.login-signup-header {
+					text-align: center;
+					margin-bottom: 20px;
+				}
+
+				.login-signup-body {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					gap: 10px;
+					flex-grow: 1;
+
+					.login-signup-title {
+						width: 96%;
+						ul {
+							list-style-type: none;
+							display: flex;
+							flex-flow: row nowrap;
+							justify-content: space-around;
+							padding: 0 10px;
+							font-weight: bold;
+							line-height: 1.6rem;
+						}
+					}
+
+					.login-signup-auth0-buttons {
+						width: 96%;
+						transition: background-color 0.3s ease;
+
+						span {
+							position: absolute;
+							display: flex;
+							align-items: center;
+							margin-left: 10px;
+						}
+					}
+
+					.login-signup-form {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						gap: 10px;
+						flex-grow: 1;
+
+						p {
+							text-align: center;
+						}
+
+						form {
+							width: 100%;
+							display: flex;
+							flex-direction: column;
+							justify-content: space-between;
+							gap: 10px;
+							flex-grow: 1;
+
+							.log-in-up-email,
+							.log-in-up-password {
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								width: 100%;
+								input {
+									width: 96% !important;
+									padding: 8px 16px;
+									margin: 0 2%;
+								}
+							}
+						}
+					}
+
+					.reset-log-in-up-link {
+						text-align: center;
+						margin-bottom: 2px;
+						a {
+							text-decoration: underline double $primary-color;
+						}
+					}
+
+					.log-in-up-button {
+						text-align: center;
+						width: 100%;
+						button {
+							width: 100%;
+							margin-left: 0;
+							margin-bottom: 0;
+							border-top-left-radius: 0;
+							border-top-right-radius: 0;
+							border-bottom-left-radius: 8px;
+							border-bottom-right-radius: 8px;
+							padding: 20px 0;
+						}
+					}
+				}
+			}
+		}
+
+		.welcome-info-b {
+			flex-basis: 33%;
+			background-color: #000000;
 		}
 	}
 	.footer {
