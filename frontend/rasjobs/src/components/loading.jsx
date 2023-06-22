@@ -1,9 +1,16 @@
 import React from 'react';
+import '../style/loading.scss';
 
-export default function Loading() {
+const Loading = () => {
 	return (
-		<div className='loader'>
-			<div className='loading-spinner'>Loading</div>
+		<div className='c-loading'>
+			<div className='c-loader'>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 		</div>
 	);
-}
+};
+
+export default Loading;

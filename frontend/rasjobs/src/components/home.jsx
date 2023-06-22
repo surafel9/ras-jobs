@@ -1,5 +1,4 @@
-/* eslint-disable eqeqeq */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import '../style/style.scss';
 import Profile from './profile';
@@ -10,58 +9,78 @@ import JobCard from './jobCard';
 import CreateProfile from './createProfile';
 import UsaJobs from './usaJobs';
 import { fetchJobs } from '../data/fetchData';
-import { filterJob } from '../data/filterJobs';
 import Loading from './loading';
-import { filterJobByKeyWord } from '../data/filterJobByKeyword';
+
+import { initalState } from '../store/initalState';
+import { jobReducer } from '../store/jobsReducer';
+import {
+	SET_FORMDATA,
+	CLEAR_FORMDATA,
+	SET_LOADING,
+	SET_DATA,
+	SET_CACHESTATE,
+	FILTER_DATA,
+	SET_SEARCHKEY,
+	SET_FILTERED_DATA_BY_KEY_WORD,
+} from '../store/types';
 
 export default function Home(props) {
-	const [searchKey, setSearchKey] = useState('');
-	const [formData, setFormData] = useState({
-		job_category: '',
-		work_location: '',
-		org_state: '',
-	});
-	const [data, setData] = useState({
-		isLoading: true,
-		data: null,
-		isDataFiltered: false,
-	});
-	const [cacheState, setCacheState] = useState();
+	const [state, dispatch] = useReducer(jobReducer, initalState);
 	const [isLogged, setIsLogged] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const jobs = await fetchJobs();
-			setData({
-				isLoading: false,
-				data: jobs,
-				isDataFiltered: false,
-			});
-			setCacheState(jobs);
+			try {
+				dispatch({ type: SET_LOADING, payload: true });
+				const jobs = await fetchJobs();
+				dispatch({ type: SET_DATA, payload: jobs });
+				dispatch({ type: SET_CACHESTATE, payload: jobs });
+				dispatch({ type: SET_LOADING, payload: false });
+			} catch (error) {
+				console.log(error);
+			}
 		};
 		fetchData();
 	}, []);
 
 	const filterDataHandler = (event) => {
 		const { name, value } = event.target;
-		setFormData((prevState) => ({ ...prevState, [name]: value }));
-		filterJob(name, value, setData, data, cacheState);
+
+		if (name === 'work_location') {
+			dispatch({
+				type: SET_FORMDATA,
+				payload: { name, value, isWork_locationTwice: true },
+			});
+		} else {
+			dispatch({
+				type: SET_FORMDATA,
+				payload: { name, value, isWork_locationTwice: false },
+			});
+		}
+
+		dispatch({ type: FILTER_DATA });
 	};
 
-	const clearOptionHandler = (e) => {
-		setFormData((prevState) => ({
-			...prevState,
-			job_category: '',
-			work_location: '',
-			org_state: '',
-		}));
+	const clearOptionHandler = () => {
+		dispatch({ type: SET_LOADING, payload: true });
+		dispatch({
+			type: CLEAR_FORMDATA,
+		});
+		dispatch({
+			type: SET_DATA,
+			payload: state.cahcheState,
+		});
+
+		dispatch({ type: SET_LOADING, payload: false });
 	};
-
-	//filterDataHandler;
-
+	console.log(state.data);
 	const handleSearchKey = (arg) => {
-		setSearchKey(arg);
-		filterJobByKeyWord(arg, data, cacheState, setData);
+		dispatch({ type: SET_SEARCHKEY, payload: arg });
+		dispatch({ type: SET_LOADING, payload: true });
+		dispatch({
+			type: SET_FILTERED_DATA_BY_KEY_WORD,
+		});
+		dispatch({ type: SET_LOADING, payload: false });
 	};
 
 	return (
@@ -69,10 +88,10 @@ export default function Home(props) {
 			{isLogged ? (
 				<Profile className='profile' />
 			) : (
-				!data.isLoading && (
+				!state.data.isLoading && (
 					<CreateProfile
 						className='profile create-profile'
-						data={data}
+						data={state.data}
 					/>
 				)
 			)}
@@ -82,20 +101,20 @@ export default function Home(props) {
 					className='search'
 					handleSearchKey={handleSearchKey}
 					filterDataHandler={filterDataHandler}
-					formData={formData}
+					formData={state.formData}
+					isDataFiltered={state.data.isDataFiltered}
 					clearOptionHandler={clearOptionHandler}
 				/>
 				<JobList className='job-list'>
-					{!data.isLoading ? (
-						<JobCard
-							className='job-card'
-							data={data.data}
-							cacheState={cacheState}
-						/>
+					{!state.data.isLoading ? (
+						<JobCard className='job-card' data={state.data.data} />
 					) : (
 						<Loading />
 					)}
-					<UsaJobs className='gov-jobsCard' searchKey={searchKey} />
+					<UsaJobs
+						className='gov-jobsCard'
+						searchKey={state.searchKey}
+					/>
 				</JobList>
 			</div>
 		</div>

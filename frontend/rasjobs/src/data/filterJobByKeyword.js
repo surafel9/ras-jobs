@@ -1,14 +1,14 @@
-export const filterJobByKeyWord = (keyword, data, cacheState, setData) => {
+export const filterJobByKeyWord = (keyword, data, cacheState) => {
 	const processedKeyword = keyword.toLowerCase().trim();
 	const pattern = /^[a-zA-Z,\-\s]+$/;
 	const result = [];
 
 	if (processedKeyword.length === 0 || !pattern.test(processedKeyword)) {
-		return;
+		return [];
 	}
 
 	const whichData = data.isDataFiltered ? cacheState : data.data;
-
+	console.log(whichData);
 	const keywords = processedKeyword.split(' ');
 
 	const filteredData = whichData.filter((item) => {
@@ -41,19 +41,5 @@ export const filterJobByKeyWord = (keyword, data, cacheState, setData) => {
 		}
 	}
 
-	//findMatch(processedKeyword, data);
-
-	if (result.length > 0) {
-		setData((prevState) => ({
-			...prevState,
-			isLoading: false,
-			isDataFiltered: true,
-			data: [...result],
-		}));
-	}
+	return result;
 };
-
-//base is two letters
-//start removing letters from the end and check if the left is a match or the right is a match
-//construct a new data object based on matchs
-//define what is the best match

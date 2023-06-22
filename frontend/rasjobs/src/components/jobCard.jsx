@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { DoubleChevronDownSvg } from '../util/doubleCheveronSVG';
 
 import Pagination from '../util/pagination';
@@ -32,7 +32,6 @@ export default function JobCard({ className, data }) {
 	const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
 	const totalPages = Math.ceil(data.length / cardsPerPage);
 
-	//should we use Cache State to update current cards back to default when reaching to the end? or make it fall back one step to show results from the end?
 	return (
 		<div className={className}>
 			{currentCards.map((item) => (

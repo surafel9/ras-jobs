@@ -253,6 +253,65 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						flex-flow: row nowrap;
 						justify-content: space-between;
 						padding-left: 16px;
+						align-items: center;
+
+						.toggle-switch {
+							position: relative;
+							display: inline-block;
+							width: 57px;
+							height: 21px;
+
+							input {
+								opacity: 0;
+								width: 0;
+								height: 0;
+							}
+
+							.slider {
+								position: absolute;
+								cursor: pointer;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								background-color: #ccc;
+								transition: 0.4s;
+								border-radius: 34px;
+
+								&:before {
+									position: absolute;
+									content: '';
+									height: 13px;
+									width: 13px;
+									left: 4px;
+									bottom: 4px;
+									background-color: white;
+									transition: 0.4s;
+									border-radius: 50%;
+								}
+							}
+
+							input:enabled + .slider {
+								background-color: $primary-color;
+								&:before {
+									transform: translateX(34px);
+								}
+							}
+
+							input:disabled + .slider {
+								background-color: #ccc;
+								&:before {
+									transform: translateX(0);
+								}
+							}
+
+							input:disabled + .slider {
+								background-color: #ccc;
+								&:before {
+									transform: translateX(0);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -273,6 +332,31 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 						margin-bottom: 32px;
 						display: flex;
 						flex-flow: row nowrap;
+						opacity: 0;
+						animation: fade-in 0.1s ease-in forwards;
+
+						@keyframes fade-in {
+							0% {
+								opacity: 0;
+								background-color: #e0e0e0;
+								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								border: none;
+							}
+							25% {
+								opacity: 0.25;
+								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								border-color: $primary-color-dark;
+								border: medium;
+							}
+							50% {
+								opacity: 0.5;
+								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+							}
+							100% {
+								opacity: 1;
+								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+							}
+						}
 						button {
 							border: none;
 

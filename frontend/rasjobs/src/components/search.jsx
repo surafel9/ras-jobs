@@ -47,6 +47,7 @@ export default function Search(props) {
 				<SearchFilters
 					handleFilterChange={props.filterDataHandler}
 					filters={props.formData}
+					isDataFiltered={props.isDataFiltered}
 					JOB_CATEGORIES={JOB_CATEGORIES}
 					clearOptionHandler={props.clearOptionHandler}
 				/>
@@ -60,6 +61,7 @@ function SearchFilters({
 	handleFilterChange,
 	JOB_CATEGORIES,
 	clearOptionHandler,
+	isDataFiltered,
 }) {
 	return (
 		<div className='filter-inputs'>
@@ -72,7 +74,6 @@ function SearchFilters({
 						value='remote'
 						checked={filters.work_location === 'remote'}
 						onChange={(event) => handleFilterChange(event)}
-						onClick={(e) => clearOptionHandler(e)}
 					/>
 					Remote
 				</label>
@@ -84,7 +85,6 @@ function SearchFilters({
 						value='onsite'
 						checked={filters.work_location === 'onsite'}
 						onChange={(event) => handleFilterChange(event)}
-						onClick={(e) => clearOptionHandler(e)}
 					/>
 					On-site
 				</label>
@@ -95,7 +95,6 @@ function SearchFilters({
 						value='hybrid'
 						checked={filters.work_location === 'hybrid'}
 						onChange={(event) => handleFilterChange(event)}
-						onClick={(e) => clearOptionHandler(e)}
 					/>
 					Hybrid
 				</label>
@@ -142,6 +141,17 @@ function SearchFilters({
 						</option>
 					))}
 				</select>
+			</div>
+			<div className='filter-group'>
+				<h3>Clear filters</h3>
+				<label className='toggle-switch'>
+					<input
+						type='checkbox'
+						disabled={isDataFiltered ? false : true}
+						onChange={clearOptionHandler}
+					/>
+					<span className='slider'></span>
+				</label>
 			</div>
 		</div>
 	);
