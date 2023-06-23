@@ -4,13 +4,15 @@ import FacebookSVG from '../../util/facebookSVG';
 
 export default function AuthCard({
 	accessChoice,
-	setAccessChoice,
 	handleAccessChoice,
 	handleAuthorization,
 	handleSignUp,
+	accessFormData,
+	onChangeHandler,
+	onSubmitHandler,
 }) {
 	const title = [{ name: 'Log In' }, { name: 'Sign Up' }];
-
+	console.log(accessFormData);
 	return (
 		<div className='login-sign-signup-container'>
 			<div className='login-signup-header'>
@@ -65,31 +67,37 @@ export default function AuthCard({
 
 				<div className='login-signup-form'>
 					<p>or</p>
-					<form>
+					<form onSubmit={onSubmitHandler}>
 						<div className='log-in-up-email'>
 							<input
 								type='email'
+								name='email'
+								value={accessFormData.email}
 								placeholder='Email'
 								required
 								autoFocus
 								autoComplete='off'
 								aria-label='Email'
 								aria-invalid='false'
+								onChange={(event) => onChangeHandler(event)}
 							/>
 						</div>
 
 						<div className='log-in-up-password'>
 							<input
 								type='password'
+								name='password'
+								value={accessFormData.password}
 								placeholder='Password'
 								required
 								autoComplete='off'
 								aria-label='Password'
 								aria-invalid='false'
+								onChange={(event) => onChangeHandler(event)}
 							/>
 						</div>
 						<div className='reset-log-in-up-link'>
-							<a href='#'>Forgot Password?</a>
+							<a href='/'>Forgot Password?</a>
 						</div>
 
 						<div className='log-in-up-button'>
