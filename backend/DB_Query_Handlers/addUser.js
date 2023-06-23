@@ -8,11 +8,11 @@ const addUser = async (req) => {
 		const salt = await genSalt(saltRounds);
 		const password = await hash(req.body.password, salt);
 
-		const { f_name, l_name, email, phone_number } = req.body;
+		const { email } = req.body;
 
-		const userCreateQuery = `INSERT INTO users (f_name, l_name, email, phone_number, password) VALUES ($1,$2,$3, $4, $5) RETURNING *;`;
+		const userCreateQuery = `INSERT INTO users ( email,  password) VALUES ($1,$2) RETURNING *;`;
 
-		const values = [f_name, l_name, email, phone_number, password];
+		const values = [email, password];
 		const { rows } = await pool.query(userCreateQuery, values);
 		const newUserId = rows[0].id;
 

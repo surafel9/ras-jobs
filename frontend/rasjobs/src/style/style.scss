@@ -493,7 +493,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					}
 
 					.login-signup-auth0-buttons {
-						width: 96%;
+						width: 80%;
 						transition: background-color 0.3s ease;
 
 						span {
@@ -531,7 +531,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 								justify-content: center;
 								width: 100%;
 								input {
-									width: 96% !important;
+									width: 80%;
 									padding: 8px 16px;
 									margin: 0 2%;
 								}
@@ -567,7 +567,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 
 		.welcome-info-b {
 			flex-basis: 33%;
-			background-color: #000000;
 		}
 	}
 	.footer {

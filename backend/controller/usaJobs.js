@@ -10,7 +10,7 @@ var authKey = process.env.USAJOBS_API_KEY;
 const getUSAJOBS = async (req, res, next) => {
 	const Keyword = req.query;
 	///const { Keyword, LocationName } = req.body;
-	console.log(Keyword);
+	//console.log(Keyword);
 	const params = {
 		Keyword,
 	};
@@ -24,7 +24,8 @@ const getUSAJOBS = async (req, res, next) => {
 				'Authorization-Key': authKey,
 			},
 		});
-		console.log(response.data.SearchResult.SearchResultItems);
+		//console.log(response.data.SearchResult.SearchResultItems);
+
 		res.status(200).json(response.data.SearchResult.SearchResultItems);
 
 		//req.usajobsData = response.data.SearchResult.SearchResultItems;

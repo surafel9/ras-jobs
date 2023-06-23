@@ -1,7 +1,7 @@
 const pool = require('../Util/connection');
 const emailQuery = `SELECT * FROM users WHERE email = $1`;
 const cache = {};
-const getUserByEmail = async (email, query = emailQuery) => {
+const getUserByEmail = async (email) => {
 	const values = [email];
 	try {
 		if (
@@ -21,6 +21,7 @@ const getUserByEmail = async (email, query = emailQuery) => {
 
 		return [];
 	} catch (error) {
+		console.log(error);
 		return 'Error while fetching user';
 	}
 };

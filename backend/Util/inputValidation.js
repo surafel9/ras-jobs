@@ -1,8 +1,6 @@
 const { body, validationResult } = require('express-validator');
 
 const validateUserData = [
-	body('f_name').notEmpty().withMessage('First name is required'),
-	body('l_name').notEmpty().withMessage('Last name is required'),
 	body('email').isEmail().withMessage('Invalid email address'),
 	body('password')
 		.notEmpty()
@@ -19,7 +17,6 @@ const validateUserData = [
 		.withMessage(
 			'Password must contain at least one special character (!@#$%^&*)'
 		),
-	body('phone_number').isNumeric().withMessage('Invalid phone number'),
 ];
 const validateLogInData = [
 	body('email').isEmail().withMessage('Please enter a valid email address'),
@@ -53,5 +50,6 @@ module.exports = {
 	validateUserData,
 	validateLogInData,
 	validateJobPostingData,
+
 	validate,
 };

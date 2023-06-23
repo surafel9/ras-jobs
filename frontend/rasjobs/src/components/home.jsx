@@ -73,9 +73,14 @@ export default function Home(props) {
 
 		dispatch({ type: SET_LOADING, payload: false });
 	};
-	console.log(state.data);
+
 	const handleSearchKey = (arg) => {
-		dispatch({ type: SET_SEARCHKEY, payload: arg });
+		const processedKeyword = arg.toLowerCase().trim();
+		const pattern = /^[a-zA-Z,\-\s]+$/;
+		if (processedKeyword.length === 0 || !pattern.test(processedKeyword)) {
+			return;
+		}
+		dispatch({ type: SET_SEARCHKEY, payload: processedKeyword });
 		dispatch({ type: SET_LOADING, payload: true });
 		dispatch({
 			type: SET_FILTERED_DATA_BY_KEY_WORD,

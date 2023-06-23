@@ -4,7 +4,7 @@ const signUp = require('../controller/signUp');
 
 const signUpRouter = express.Router();
 
-signUpRouter.use(
+signUpRouter.post(
 	'',
 	inputValidation.validateUserData,
 	inputValidation.validate,

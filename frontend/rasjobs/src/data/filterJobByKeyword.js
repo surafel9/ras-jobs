@@ -1,14 +1,8 @@
-export const filterJobByKeyWord = (keyword, data, cacheState) => {
-	const processedKeyword = keyword.toLowerCase().trim();
-	const pattern = /^[a-zA-Z,\-\s]+$/;
+export const filterJobByKeyWord = (processedKeyword, data, cacheState) => {
 	const result = [];
 
-	if (processedKeyword.length === 0 || !pattern.test(processedKeyword)) {
-		return [];
-	}
-
 	const whichData = data.isDataFiltered ? cacheState : data.data;
-	console.log(whichData);
+
 	const keywords = processedKeyword.split(' ');
 
 	const filteredData = whichData.filter((item) => {
