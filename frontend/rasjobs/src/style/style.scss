@@ -391,7 +391,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		height: 92vh;
 		.welcome-info {
 			flex-basis: 30%;
-			background-color: #e6e6e6;
 		}
 		.welcome-info-login {
 			flex-basis: 33%;
@@ -402,7 +401,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				height: 100%;
+				height: auto;
 				box-sizing: border-box;
 				max-height: 70vh;
 				min-width: 66%;
@@ -413,6 +412,12 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 				.login-signup-header {
 					text-align: center;
 					margin-bottom: 20px;
+				}
+
+				.sign-out-btn {
+					width: 33%;
+					padding: 10px 20px;
+					margin-bottom: 10px;
 				}
 
 				.login-signup-body {
@@ -526,10 +531,52 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		padding: 16px;
 	}
 	.footer {
-		background-color: inherit;
-		color: inherit;
-		margin: 0 auto;
-		text-align: center;
-		margin-bottom: 10px;
+		height: 400px;
+		padding: 20px;
+
+		&__container {
+			display: flex;
+			justify-content: space-between;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		&__social-media,
+		&__site-map {
+			flex: 1;
+
+			h3 {
+				font-size: 18px;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li {
+					margin-bottom: 5px;
+
+					a {
+						color: #333;
+						text-decoration: none;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+
+		&__bottom {
+			margin: 20px;
+			border-top: 1px solid #e9e4e4;
+			text-align: center;
+			font-size: 14px;
+			color: #777;
+		}
 	}
 }

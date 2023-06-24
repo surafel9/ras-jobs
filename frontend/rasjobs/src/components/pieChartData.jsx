@@ -8,7 +8,6 @@ import {
 	ResponsiveContainer,
 } from 'recharts';
 export default function PieChartData({ data }) {
-	console.log(data);
 	const [category, setCategory] = useState({});
 	const [pieChartValues, setPieChartValues] = useState([]);
 	const viewportWidth =
@@ -37,7 +36,7 @@ export default function PieChartData({ data }) {
 		}
 		setPieChartValues(updatedPieChartValues);
 	}, [category]);
-	console.log(twentyFivePercent - 100);
+
 	const COLORS = [
 		'#e91e63',
 		'#ff8c00',

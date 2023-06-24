@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/style.scss';
+import { useAuth } from './authProvide';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);
-
+	const { state, dispatch } = useAuth();
+	console.log(state);
 	return (
 		<div className='root'>
 			<div className='navigation'>
@@ -26,19 +28,41 @@ export default function Main(props) {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/login'>Sign In</NavLink>
+							<NavLink
+								to={
+									state.userStats.isLoggedIn
+										? '/Signout'
+										: '/Signin'
+								}
+							>
+								{state.userStats.isLoggedIn
+									? 'Sign Out'
+									: 'Sign In'}
+							</NavLink>
 						</li>
 
 						<li>
 							<NavLink
-								to='/createProfile'
+								to={
+									state.userStats.isLoggedIn
+										? '/createProfile'
+										: '/login'
+								}
 								onClick={() => setIsPieChartOpen(true)}
 							>
 								Create Profile
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to='postJob'>Post Jobs</NavLink>
+							<NavLink
+								to={
+									state.userStats.isLoggedIn
+										? '/postJob'
+										: '/login'
+								}
+							>
+								Post Jobs
+							</NavLink>
 						</li>
 					</ul>
 				</div>

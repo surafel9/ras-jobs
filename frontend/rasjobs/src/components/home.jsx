@@ -26,6 +26,7 @@ import PieChartData from './pieChartData';
 import ProfilePromo from './profile/profilePromo';
 
 export default function Home(props) {
+	
 	const [state, dispatch] = useReducer(jobReducer, initalState);
 	const [isLogged, setIsLogged] = useState(false);
 
@@ -115,7 +116,7 @@ export default function Home(props) {
 				/>
 				<JobList className='job-list'>
 					{!state.data.isLoading ? (
-						<JobCard className='job-card' data={state.data.data} />
+						<JobCard className='job-card' data={state.data} />
 					) : (
 						<Loading />
 					)}

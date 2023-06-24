@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
 import { DoubleChevronDownSvg } from '../util/doubleCheveronSVG';
-
 import Pagination from '../util/pagination';
+
+export const getPages = (maxPageNumbers, currentPage, totalPages) => {
+	const middlePage = Math.floor(maxPageNumbers / 2);
+
+	let startPage = currentPage - middlePage;
+	let endPage = currentPage + middlePage;
+
+	if (startPage <= 0) {
+		endPage += Math.abs(startPage) + 1;
+		startPage = 1;
+	}
+
+	if (endPage > totalPages) {
+		startPage -= endPage - totalPages;
+		endPage = totalPages;
+	}
+
+	startPage = Math.max(startPage, 1);
+	endPage = Math.min(endPage, totalPages);
+
+	return Array.from(
+		{ length: endPage - startPage + 1 },
+		(_, index) => startPage + index
+	);
+};
 
 export default function JobCard({ className, data }) {
 	const [activeCard, setActiveCard] = useState(null);
 	const [currentPage, setCurrentPage] = useState(1);
-	const cardsPerPage = 10;
+	const cardsPerPage = 8;
 	const maxPageNumbers = 5;
-	const showPageNumbers = true;
-
+	//console.log(data);
 	const handleCardClick = (id) => {
 		setActiveCard(id);
 	};
@@ -28,10 +51,10 @@ export default function JobCard({ className, data }) {
 
 	const indexOfLastCard = currentPage * cardsPerPage;
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-
-	const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
-	const totalPages = Math.ceil(data.length / cardsPerPage);
-
+	const currentCards = data.data.slice(indexOfFirstCard, indexOfLastCard);
+	const totalPages = Math.ceil(data.data.length / cardsPerPage);
+	const result = getPages(maxPageNumbers, currentPage, totalPages);
+	//console.log(result);
 	return (
 		<div className={className}>
 			{currentCards.map((item) => (
@@ -42,6 +65,7 @@ export default function JobCard({ className, data }) {
 					active={item.id === activeCard}
 				/>
 			))}
+
 			<Pagination
 				handlePrevPage={handlePrevPage}
 				handlePageChange={handlePageChange}
@@ -49,7 +73,7 @@ export default function JobCard({ className, data }) {
 				maxPageNumbers={maxPageNumbers}
 				currentPage={currentPage}
 				totalPages={totalPages}
-				showPageNumbers={showPageNumbers}
+				result={result}
 			/>
 		</div>
 	);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchUSAJobs } from '../data/fetchUSAJobs';
 import { DoubleChevronDownSvg } from '../util/doubleCheveronSVG';
 import Pagination from '../util/pagination';
+import { getPageNumbers } from '../util/redicule';
 
 export default function UsaJobs({ className, searchKey }) {
 	const [usaJobs, setUsaJobs] = useState([]);
@@ -9,9 +10,8 @@ export default function UsaJobs({ className, searchKey }) {
 
 	//const [activeCard, setActiveCard] = useState(null);
 	const [currentPage, setCurrentPage] = useState(1);
-	const cardsPerPage = 6;
+	const cardsPerPage = 5;
 	const maxPageNumbers = 5;
-	const showPageNumbers = false;
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
@@ -55,18 +55,21 @@ export default function UsaJobs({ className, searchKey }) {
 			<div className='gov-jobs'>
 				<h3>Government Jobs</h3>
 			</div>
+
 			{currentCards.map((job) => (
 				<GovJobsList key={job.id} job={job} />
 			))}
-			<Pagination
-				handlePrevPage={handlePrevPage}
-				handlePageChange={handlePageChange}
-				handleNextPage={handleNextPage}
-				maxPageNumbers={maxPageNumbers}
-				currentPage={currentPage}
-				totalPages={totalPages}
-				showPageNumbers={showPageNumbers}
-			/>
+
+			{isComponentLoaded && (
+				<Pagination
+					handlePrevPage={handlePrevPage}
+					handlePageChange={handlePageChange}
+					handleNextPage={handleNextPage}
+					maxPageNumbers={maxPageNumbers}
+					currentPage={currentPage}
+					totalPages={totalPages}
+				/>
+			)}
 		</div>
 	);
 }

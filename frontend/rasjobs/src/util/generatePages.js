@@ -1,5 +1,6 @@
 export const getPageNumbers = (maxPageNumbers, currentPage, totalPages) => {
 	const middlePage = Math.floor(maxPageNumbers / 2);
+
 	let startPage = currentPage - middlePage;
 	let endPage = currentPage + middlePage;
 

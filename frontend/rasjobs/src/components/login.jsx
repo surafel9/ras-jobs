@@ -1,17 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useReducer } from 'react';
-import { initalState } from '../store/authInitalState';
-import { authReducer } from '../store/authReducer';
 import { SIGN_UP, Log_IN, LOG_OUT } from '../store/types';
-import axios from 'axios';
+
 import AuthCard from './auth/authCard';
 import { loginHandler } from '../util/handleLogIn';
 import { signUpHandler } from '../util/handleSignUp';
+import { useAuth } from './authProvide';
 
 export default function Login({ className }) {
 	const [accessChoice, setAccessChoice] = useState('Log In');
 	const [token, setToken] = useState(null);
-	const [state, dispatch] = useReducer(authReducer, initalState);
+	const { state, dispatch } = useAuth();
 	const [error, setError] = useState(false);
 
 	const [accessFormData, setAccessFormData] = useState({
@@ -37,8 +36,13 @@ export default function Login({ className }) {
 		let response;
 		if (e.target.name === 'Log In') {
 			response = await loginHandler(accessFormData);
+			console.log(accessFormData.email);
+			dispatch({ type: Log_IN, payload: accessFormData.email });
+			console.log(accessFormData.email);
 		} else {
 			response = await signUpHandler(accessFormData);
+			console.log(accessFormData.email);
+			dispatch({ type: SIGN_UP, payload: accessFormData.email });
 		}
 
 		console.log(response);
@@ -48,16 +52,13 @@ export default function Login({ className }) {
 
 			sessionStorage.setItem('token', token);
 			setToken(token);
-			dispatch({ type: SIGN_UP, payload: accessFormData.email });
+
 			setError((prevState) => ({ ...prevState, error: [] }));
-			setSignUpSuccess((prevState) => ({
+			setAccessFormData((prevState) => ({
 				...prevState,
-				isSuccess: true,
-				shouldRedirect: true,
+				email: '',
+				password: '',
 			}));
-			if (signupSuccess.shouldRedirect) {
-				navigate('/createProfile');
-			}
 		} else {
 			setError(true);
 		}
@@ -65,10 +66,11 @@ export default function Login({ className }) {
 
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
-		setAccessFormData((prevState) => ({
+
+		setSignUpSuccess((prevState) => ({
 			...prevState,
-			email: '',
-			password: '',
+			isSuccess: true,
+			shouldRedirect: true,
 		}));
 	};
 
@@ -90,6 +92,16 @@ export default function Login({ className }) {
 		}));
 	};
 	//console.log(state);
+
+	useEffect(() => {
+		if (signupSuccess.shouldRedirect) {
+			setSignUpSuccess((prevState) => ({
+				...prevState,
+				isSuccess: false,
+			}));
+			navigate('/createProfile');
+		}
+	}, [navigate, signupSuccess]);
 	return (
 		<div className={className}>
 			<div className='welcome-info'></div>
@@ -105,11 +117,14 @@ export default function Login({ className }) {
 					signupSuccess={signupSuccess}
 					onSubmitHandler={onSubmitHandler}
 					error={error}
+					state={state.userStats}
 				/>
 			</div>
 
 			<div className='welcome-info-b'>
-				{signupSuccess.isSuccess && <p>Logged in as {state.email}</p>}
+				{signupSuccess.isSuccess && (
+					<p>{`Access granted for : ${accessFormData.email}`}</p>
+				)}
 			</div>
 		</div>
 	);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPageNumbers } from './generatePages';
+import { getPageNumbers } from './redicule';
 
 export default function Pagination({
 	maxPageNumbers,
@@ -7,15 +7,13 @@ export default function Pagination({
 	totalPages,
 	handleNextPage,
 	handlePrevPage,
-	showPageNumbers,
 	handlePageChange,
+	result = [],
 }) {
-	const pageNumbers = getPageNumbers({
-		maxPageNumbers,
-		currentPage,
-		totalPages,
-	});
-	console.log(currentPage);
+	const pages =
+		result.length > 0
+			? result
+			: getPageNumbers(maxPageNumbers, currentPage, totalPages);
 	return (
 		<div className='pagination'>
 			<button
@@ -26,18 +24,18 @@ export default function Pagination({
 				&lt;
 			</button>
 
-			{showPageNumbers &&
-				pageNumbers.map((pageNumber) => (
-					<button
-						key={pageNumber}
-						onClick={() => handlePageChange(pageNumber)}
-						style={{
-							backgroundColor: '#0049b7',
-						}}
-					>
-						{pageNumber}
-					</button>
-				))}
+			{pages.map((pageNumber) => (
+				<button
+					key={pageNumber}
+					onClick={() => handlePageChange(pageNumber)}
+					style={{
+						backgroundColor:
+							pageNumber === currentPage ? '#0049b7' : '#797979',
+					}}
+				>
+					{pageNumber}
+				</button>
+			))}
 
 			<button
 				onClick={handleNextPage}

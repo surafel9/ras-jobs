@@ -8,6 +8,7 @@ import CreateProfile from './components/createProfile';
 import PostJob from './components/postJob';
 import Home from './components/home';
 import Main from './components/main';
+import { AuthProvider } from './components/authProvide';
 
 const router = createBrowserRouter([
 	{
@@ -36,6 +37,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<AuthProvider>
+			<RouterProvider router={router} />
+		</AuthProvider>
 	</React.StrictMode>
 );

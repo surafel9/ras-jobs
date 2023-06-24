@@ -5,7 +5,7 @@ export function authReducer(state, action) {
 				...state,
 				userStats: {
 					...state.userStats,
-					email: action.payload.email,
+					email: action.payload,
 					isLoggedIn: true,
 				},
 			};
@@ -15,7 +15,7 @@ export function authReducer(state, action) {
 				...state,
 				userStats: {
 					...state.userStats,
-					email: action.payload.email,
+					email: action.payload,
 					isLoggedIn: true,
 				},
 			};
@@ -25,7 +25,7 @@ export function authReducer(state, action) {
 				...state,
 				userStats: {
 					...state.userStats,
-					email: '',
+					email: null,
 					isLoggedIn: false,
 				},
 			};
