@@ -1,27 +1,36 @@
 import React from 'react';
 import { getPageNumbers } from './generatePages';
 
-export default function Pagination(props) {
-	const pageNumbers = getPageNumbers(
-		props.maxPageNumbers,
-		props.currentPage,
-		props.totalPages
-	);
+export default function Pagination({
+	maxPageNumbers,
+	currentPage,
+	totalPages,
+	handleNextPage,
+	handlePrevPage,
+	showPageNumbers,
+	handlePageChange,
+}) {
+	const pageNumbers = getPageNumbers({
+		maxPageNumbers,
+		currentPage,
+		totalPages,
+	});
+	console.log(currentPage);
 	return (
 		<div className='pagination'>
 			<button
-				onClick={props.handlePrevPage}
-				disabled={props.currentPage === 1}
+				onClick={handlePrevPage}
+				disabled={currentPage === 1}
 				className='skip-menu'
 			>
 				&lt;
 			</button>
 
-			{props.showPageNumbers &&
+			{showPageNumbers &&
 				pageNumbers.map((pageNumber) => (
 					<button
 						key={pageNumber}
-						onClick={() => props.handlePageChange(pageNumber)}
+						onClick={() => handlePageChange(pageNumber)}
 						style={{
 							backgroundColor: '#0049b7',
 						}}
@@ -31,14 +40,12 @@ export default function Pagination(props) {
 				))}
 
 			<button
-				onClick={props.handleNextPage}
-				disabled={props.currentPage === props.totalPages}
+				onClick={handleNextPage}
+				disabled={currentPage === totalPages}
 				className='skip-menu'
 				style={{
 					cursor:
-						props.currentPage === props.totalPages
-							? 'not-allowed'
-							: 'pointer',
+						currentPage === totalPages ? 'not-allowed' : 'pointer',
 				}}
 			>
 				&gt;

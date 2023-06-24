@@ -1,17 +1,16 @@
 import React, { useEffect, useReducer, useState } from 'react';
 
 import '../style/style.scss';
-import Profile from './profile';
+
 import Search from './search';
 import JobList from './jobList';
 import JobCard from './jobCard';
 
-import CreateProfile from './createProfile';
 import UsaJobs from './usaJobs';
 import { fetchJobs } from '../data/fetchData';
 import Loading from './loading';
 
-import { initalState } from '../store/initalState';
+import { initalState } from '../store/jobsInitalState';
 import { jobReducer } from '../store/jobsReducer';
 import {
 	SET_FORMDATA,
@@ -23,6 +22,8 @@ import {
 	SET_SEARCHKEY,
 	SET_FILTERED_DATA_BY_KEY_WORD,
 } from '../store/types';
+import PieChartData from './pieChartData';
+import ProfilePromo from './profile/profilePromo';
 
 export default function Home(props) {
 	const [state, dispatch] = useReducer(jobReducer, initalState);
@@ -90,16 +91,18 @@ export default function Home(props) {
 
 	return (
 		<div className='home'>
-			{isLogged ? (
-				<Profile className='profile' />
-			) : (
-				!state.data.isLoading && (
-					<CreateProfile
-						className='profile create-profile'
-						data={state.data}
-					/>
-				)
-			)}
+			<div className='profile'>
+				<div className='profile-promo-page'>
+					<ProfilePromo className='user-demo' />
+				</div>
+				<div className='pie-chart-jobs-data'>
+					{state.data.isLoading ? (
+						<Loading />
+					) : (
+						<PieChartData data={state.data} />
+					)}
+				</div>
+			</div>
 
 			<div className='main'>
 				<Search

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import ErrorPage from './components/erro';
+import ErrorPage from './components/error';
 import Login from './components/login';
 import CreateProfile from './components/createProfile';
 import PostJob from './components/postJob';
@@ -18,12 +18,12 @@ const router = createBrowserRouter([
 		children: [
 			{ path: '/', element: <Home className='home' /> },
 			{
-				path: '/login',
+				path: '/:login',
 				element: <Login className='login' />,
 			},
 			{
 				path: '/createProfile',
-				element: <CreateProfile />,
+				element: <CreateProfile className='create-profile' />,
 			},
 			{
 				path: '/postJob',

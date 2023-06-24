@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Profile(props) {
+export default function Profile() {
 	return (
-		<div className={props.className}>
+		<div className='user-demo'>
 			<img src={'src'} alt='profile image' className='avatar' />
 			<div className='contact'>
 				<p>Name</p>

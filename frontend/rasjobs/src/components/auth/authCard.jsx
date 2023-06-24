@@ -1,24 +1,28 @@
 import GoogleSVG from '../../util/googleSVG';
 import GithubSVG from '../../util/githubSVG';
 import FacebookSVG from '../../util/facebookSVG';
+import Loading from '../loading';
 
 export default function AuthCard({
 	accessChoice,
 	handleAccessChoice,
-	handleAuthorization,
 	handleSignUp,
 	accessFormData,
 	onChangeHandler,
 	onSubmitHandler,
+	signupSuccess,
+	error,
 }) {
 	const title = [{ name: 'Log In' }, { name: 'Sign Up' }];
-	console.log(accessFormData);
+
 	return (
 		<div className='login-sign-signup-container'>
 			<div className='login-signup-header'>
 				<h2>Ras - Jobs ©</h2>
 			</div>
 			<div className='login-signup-body'>
+				{signupSuccess.isSuccess && <Loading />}
+
 				<div className='login-signup-title'>
 					<ul>
 						{title.map((item) => (
@@ -74,7 +78,6 @@ export default function AuthCard({
 								name='email'
 								value={accessFormData.email}
 								placeholder='Email'
-								required
 								autoFocus
 								autoComplete='off'
 								aria-label='Email'
@@ -89,12 +92,18 @@ export default function AuthCard({
 								name='password'
 								value={accessFormData.password}
 								placeholder='Password'
-								required
 								autoComplete='off'
 								aria-label='Password'
 								aria-invalid='false'
 								onChange={(event) => onChangeHandler(event)}
 							/>
+						</div>
+						<div className='error'>
+							{error && (
+								<p>
+									'Please check your input and \n start over'
+								</p>
+							)}
 						</div>
 						<div className='reset-log-in-up-link'>
 							<a href='/'>Forgot Password?</a>
@@ -103,11 +112,8 @@ export default function AuthCard({
 						<div className='log-in-up-button'>
 							<button
 								type='submit'
-								onClick={
-									accessChoice === 'Log In'
-										? handleAuthorization
-										: handleSignUp
-								}
+								name={accessChoice}
+								onClick={handleSignUp}
 							>
 								{accessChoice}
 							</button>
