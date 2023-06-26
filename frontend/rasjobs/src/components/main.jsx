@@ -31,8 +31,8 @@ export default function Main(props) {
 							<NavLink
 								to={
 									state.userStats.isLoggedIn
-										? '/Signout'
-										: '/Signin'
+										? '/signout'
+										: '/signin'
 								}
 							>
 								{state.userStats.isLoggedIn
@@ -46,7 +46,7 @@ export default function Main(props) {
 								to={
 									state.userStats.isLoggedIn
 										? '/createProfile'
-										: '/login'
+										: '/signin'
 								}
 								onClick={() => setIsPieChartOpen(true)}
 							>
@@ -58,7 +58,7 @@ export default function Main(props) {
 								to={
 									state.userStats.isLoggedIn
 										? '/postJob'
-										: '/login'
+										: '/signin'
 								}
 							>
 								Post Jobs

@@ -26,7 +26,6 @@ import PieChartData from './pieChartData';
 import ProfilePromo from './profile/profilePromo';
 
 export default function Home(props) {
-	
 	const [state, dispatch] = useReducer(jobReducer, initalState);
 	const [isLogged, setIsLogged] = useState(false);
 
