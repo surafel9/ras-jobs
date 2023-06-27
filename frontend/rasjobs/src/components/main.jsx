@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/style.scss';
-import { useAuth } from './authProvide';
+import { useAuth } from './authProvider';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);

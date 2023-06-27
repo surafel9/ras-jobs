@@ -1,6 +1,15 @@
-import { SIGN_UP, LOG_IN, LOG_OUT } from './types';
+import { SIGN_UP, LOG_IN, LOG_OUT, SET_LOADING } from './types';
 export function authReducer(state, action) {
 	switch (action.type) {
+		case SET_LOADING: {
+			return {
+				...state,
+				userStats: {
+					...state.userStats,
+					isLoading: action.payload.isLoading,
+				},
+			};
+		}
 		case SIGN_UP:
 			return {
 				...state,

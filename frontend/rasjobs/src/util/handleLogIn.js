@@ -12,7 +12,6 @@ export const loginHandler = async (accessFormData) => {
 			return response.data;
 		}
 	} catch (error) {
-		console.log(error);
-		return error;
+		return error.response;
 	}
 };

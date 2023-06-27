@@ -15,6 +15,10 @@ export default function AuthCard({
 	signupSuccess,
 	error,
 	state,
+	LOG_OUT,
+	dispatch,
+	onPasteHandler,
+	errorMessage,
 }) {
 	const title = [{ name: 'Log In' }, { name: 'Sign Up' }];
 	const [isVisible, setIsVisible] = useState(false);
@@ -25,17 +29,18 @@ export default function AuthCard({
 	const showNotification = () => {
 		setIsVisible(true);
 	};
-	console.log(state);
+
 	return (
 		<div className='login-sign-signup-container'>
 			<div className='login-signup-header'>
 				<h2>Ras - Jobs ©</h2>
 			</div>
+			{state.isLoading && <Loading />}
 			{state.isLoggedIn ? (
-				<SignOut />
+				<SignOut LOG_OUT={LOG_OUT} dispatch={dispatch} />
 			) : (
 				<div className='login-signup-body'>
-					{signupSuccess.isSuccess && <Loading />}
+					{state.isLoading && <Loading />}
 
 					<div className='login-signup-title'>
 						<ul>
@@ -118,6 +123,7 @@ export default function AuthCard({
 									aria-label='Email'
 									aria-invalid='false'
 									onChange={(event) => onChangeHandler(event)}
+									onPaste={onPasteHandler}
 								/>
 							</div>
 
@@ -132,12 +138,13 @@ export default function AuthCard({
 									aria-label='Password'
 									aria-invalid='false'
 									onChange={(event) => onChangeHandler(event)}
+									onPaste={onPasteHandler}
 								/>
 							</div>
 							<div className='error'>
-								{error && (
+								{errorMessage.isError && (
 									<p>
-										'Please check your input and start over'
+										{errorMessage.errorMessage} <br />
 									</p>
 								)}
 							</div>

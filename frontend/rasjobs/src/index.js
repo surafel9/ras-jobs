@@ -8,7 +8,7 @@ import CreateProfile from './components/createProfile';
 import PostJob from './components/postJob';
 import Home from './components/home';
 import Main from './components/main';
-import { AuthProvider } from './components/authProvide';
+import { AuthProvider } from './components/authProvider';
 
 const router = createBrowserRouter([
 	{

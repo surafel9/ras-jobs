@@ -1,10 +1,6 @@
 import React from 'react';
-import { useAuth } from '../authProvide';
-import { LOG_OUT } from '../../store/types';
 
-export default function SignOut() {
-	const { dispatch } = useAuth();
-
+export default function SignOut({ LOG_OUT, dispatch }) {
 	const signOutHandler = () => {
 		dispatch({ type: LOG_OUT });
 		sessionStorage.removeItem('token');

@@ -1,18 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { SIGN_UP, LOG_IN, LOG_OUT } from '../store/types';
+import { SIGN_UP, LOG_IN, LOG_OUT, SET_LOADING } from '../store/types';
 
 import AuthCard from './auth/authCard';
 import { loginHandler } from '../util/handleLogIn';
 import { signUpHandler } from '../util/handleSignUp';
-import { useAuth } from './authProvide';
-
+import { useAuth } from './authProvider';
+const passwordRegex =
+	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function Login({ className }) {
 	const [accessChoice, setAccessChoice] = useState('Log In');
-	const [token, setToken] = useState(null);
 	const { state, dispatch } = useAuth();
-	const [error, setError] = useState(false);
 
+	const [errorMessage, setErrorMessage] = useState({
+		isError: false,
+		errorMessage: '',
+	});
 	const [accessFormData, setAccessFormData] = useState({
 		email: '',
 		password: '',
@@ -25,28 +29,33 @@ export default function Login({ className }) {
 
 	const handleAccessChoice = (arg) => {
 		setAccessChoice(arg);
+		setErrorMessage((prevErr) => ({
+			...prevErr,
+			isError: false,
+			errorMessage: 'response.data',
+		}));
 	};
-	console.log(state);
-	console.log(accessChoice);
+
 	const auth = async (e) => {
 		//to, subject and text must be passed to the query
 		e.preventDefault();
+
 		let response;
 		try {
-			if (e.target.name === 'Log In') {
+			if (accessChoice === 'Log In') {
 				response = await loginHandler(accessFormData);
-				console.log(response);
 			} else {
 				response = await signUpHandler(accessFormData);
-				console.log(response);
-				console.log(e.target.name);
 			}
 
 			if (response.status === 200 || response.statusText === 'OK') {
 				const { token } = response.data;
-
+				dispatch({
+					type: SET_LOADING,
+					payload: { isLoading: true },
+				});
 				sessionStorage.setItem('token', token);
-				setToken(token);
+				console.log(state);
 				setSignUpSuccess((prevState) => ({
 					...prevState,
 					isSuccess: true,
@@ -55,36 +64,86 @@ export default function Login({ className }) {
 					type: e.target.name === 'Log In' ? LOG_IN : SIGN_UP,
 					payload: accessFormData.email,
 				});
-
-				//setError((prevState) => ({ ...prevState, error: [] }));
-				console.log(accessFormData);
 				console.log(state);
 				setAccessFormData((prevState) => ({
 					...prevState,
 					email: '',
 					password: '',
 				}));
-			} else {
-				console.log(response.data);
+				dispatch({
+					type: SET_LOADING,
+					payload: { isLoading: false },
+				});
+			} else if (response.status === 301) {
 				setAccessFormData((prevState) => ({
 					...prevState,
 					email: '',
 					password: '',
 				}));
+				setErrorMessage((prevErr) => ({
+					...prevErr,
+					isError: true,
+					errorMessage: response.data.errors
+						.map((err) => err.msg)
+						.join(', '),
+				}));
+
+				//console.log(errorMessage);
+			} else if (response.status === 401 || 500) {
+				setAccessFormData((prevState) => ({
+					...prevState,
+					email: '',
+					password: '',
+				}));
+
+				setErrorMessage((prevErr) => ({
+					...prevErr,
+					isError: true,
+					errorMessage: response.data,
+				}));
 			}
 		} catch (err) {
-			console.log(err);
+			//console.log(err);
+			return;
 		}
 	};
 
 	const onChangeHandler = (e) => {
+		setErrorMessage((prevErr) => ({
+			...prevErr,
+			isError: true,
+			errorMessage: '',
+		}));
 		const { name, value } = e.target;
 		setAccessFormData((prevState) => ({
 			...prevState,
 			[name]: value,
 		}));
 	};
-	//console.log(state);
+
+	const onPasteHandler = (e) => {
+		e.preventDefault();
+		setErrorMessage((prevErr) => ({
+			...prevErr,
+			isError: true,
+			errorMessage: '',
+		}));
+		const pastedData =
+			e.target.value + e.clipboardData.getData('text/plain').trim();
+
+		if (
+			(e.target.name === 'email' && emailRegex.test(pastedData)) ||
+			(e.target.name === 'password' && passwordRegex.test(pastedData))
+		) {
+			const name = e.target.name;
+			setAccessFormData((prevState) => ({
+				...prevState,
+				[name]: pastedData,
+			}));
+		} else {
+			alert('Invalid input');
+		}
+	};
 
 	useEffect(() => {
 		if (signupSuccess.isSuccess) {
@@ -107,8 +166,11 @@ export default function Login({ className }) {
 					accessFormData={accessFormData}
 					onChangeHandler={onChangeHandler}
 					signupSuccess={signupSuccess}
-					error={error}
 					state={state.userStats}
+					LOG_OUT={LOG_OUT}
+					dispatch={dispatch}
+					onPasteHandler={onPasteHandler}
+					errorMessage={errorMessage}
 				/>
 			</div>
 
