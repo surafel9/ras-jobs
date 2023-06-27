@@ -10,9 +10,9 @@ class CustomMailer {
 		this.subject = subject;
 		this.text = text;
 	}
-	async sendMail() {
-		console.log('Here');
-		/* try {
+	async sendEmail() {
+		//console.log('Here');
+		try {
 			const transporter = nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
@@ -26,6 +26,11 @@ class CustomMailer {
 				to: this.to,
 				subject: this.subject,
 				text: this.text,
+				html: `
+    <h1>Hello,</h1>
+    <p>This is an example of an HTML email with a logo:</p>
+    <p>You can add more HTML content here.</p>
+  `,
 			};
 
 			const info = await transporter.sendMail(mailOptions);
@@ -33,7 +38,7 @@ class CustomMailer {
 		} catch (error) {
 			console.log(error);
 			throw error;
-		} */
+		}
 	}
 }
 module.exports = CustomMailer;

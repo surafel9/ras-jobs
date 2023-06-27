@@ -16,20 +16,20 @@ const logIn = async (req, res, next) => {
 		bcrypt.compare(req.body.password, hash, function (err, result) {
 			if (err) {
 				// Error comparing passwords
-				res.status(500).send('Internal Server Error');
+				res.status(500).json('Internal Server Error');
 				return;
 			}
 
 			if (result) {
 				// Passwords match, user is authenticated
-				res.status(200).send(user);
+				res.status(200).json(user);
 			} else {
 				// Passwords do not match
-				res.status(401).send('Unauthorized');
+				res.status(401).json('Unauthorized');
 			}
 		});
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send('Internal Server Error');
 	}
 };

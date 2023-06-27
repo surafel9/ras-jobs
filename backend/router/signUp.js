@@ -6,7 +6,7 @@ const signUpRouter = express.Router();
 
 signUpRouter.post(
 	'',
-	inputValidation.validateUserData,
+	inputValidation.validateLogInData,
 	inputValidation.validate,
 	signUp
 );
