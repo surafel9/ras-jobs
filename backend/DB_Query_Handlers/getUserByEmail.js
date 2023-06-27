@@ -19,7 +19,7 @@ const getUserByEmail = async (email) => {
 
 		return [];
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		return 'Error while fetching user';
 	}
 };

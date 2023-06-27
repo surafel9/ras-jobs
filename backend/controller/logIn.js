@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt');
 
 const logIn = async (req, res, next) => {
 	try {
-		const user = await getUserByEmail(req.body.email);
-
+		const user = await getUserByEmail(req.body.accessFormData.email);
+		console.log(user);
 		if (user.length === 0) {
 			// User not found
-			res.status(401).send('Unauthorized');
+			res.status(401).json('Unauthorized');
 			return;
 		}
 
@@ -30,7 +30,7 @@ const logIn = async (req, res, next) => {
 		});
 	} catch (error) {
 		//console.log(error);
-		res.status(500).send('Internal Server Error');
+		res.status(500).json('Internal Server Error');
 	}
 };
 

@@ -4,8 +4,9 @@ const login = require('../controller/logIn');
 
 const logInRouter = express.Router();
 
-logInRouter.use(
+logInRouter.post(
 	'',
+
 	inputValidation.validateLogInData,
 	inputValidation.validate,
 	login

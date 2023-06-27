@@ -6,17 +6,18 @@ const addUser = async (req) => {
 	try {
 		//Generate salt
 		const salt = await genSalt(saltRounds);
-		const password = await hash(req.body.password, salt);
+		const password = await hash(req.body.accessFormData.password, salt);
 
-		const { email } = req.body;
+		const email = req.body.accessFormData.email;
 
 		const userCreateQuery = `INSERT INTO users ( email,  password) VALUES ($1,$2) RETURNING *;`;
 
 		const values = [email, password];
 		const { rows } = await pool.query(userCreateQuery, values);
+
 		const newUserId = rows[0].id;
 
-		const saltInsertQuery = `INSERT INTO salt (user_id, salt) VALUES ($1,$2) RETURNING *;`;
+		const saltInsertQuery = `INSERT INTO salt (user_id, salted) VALUES ($1,$2) RETURNING *;`;
 		const saltVals = [newUserId, salt];
 		await insertSaltedPassword(saltInsertQuery, saltVals);
 
