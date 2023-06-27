@@ -1,6 +1,7 @@
+import { SIGN_UP, LOG_IN, LOG_OUT } from './types';
 export function authReducer(state, action) {
 	switch (action.type) {
-		case 'SIGN_UP':
+		case SIGN_UP:
 			return {
 				...state,
 				userStats: {
@@ -10,7 +11,7 @@ export function authReducer(state, action) {
 				},
 			};
 
-		case 'Log_IN':
+		case LOG_IN:
 			return {
 				...state,
 				userStats: {
@@ -20,12 +21,12 @@ export function authReducer(state, action) {
 				},
 			};
 
-		case 'LOG_OUT':
+		case LOG_OUT:
 			return {
 				...state,
 				userStats: {
 					...state.userStats,
-					email: null,
+					email: '',
 					isLoggedIn: false,
 				},
 			};

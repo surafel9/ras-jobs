@@ -3,11 +3,12 @@ import GithubSVG from '../../util/githubSVG';
 import FacebookSVG from '../../util/facebookSVG';
 import Loading from '../loading';
 import SignOut from './signOut';
+import Notification from '../../util/notification';
+import { useState } from 'react';
 
 export default function AuthCard({
 	accessChoice,
 	handleAccessChoice,
-	handleSignUp,
 	accessFormData,
 	onChangeHandler,
 	onSubmitHandler,
@@ -16,6 +17,14 @@ export default function AuthCard({
 	state,
 }) {
 	const title = [{ name: 'Log In' }, { name: 'Sign Up' }];
+	const [isVisible, setIsVisible] = useState(false);
+
+	const closeNotification = () => {
+		setIsVisible(false);
+	};
+	const showNotification = () => {
+		setIsVisible(true);
+	};
 
 	return (
 		<div className='login-sign-signup-container'>
@@ -59,23 +68,39 @@ export default function AuthCard({
 						</ul>
 					</div>
 
-					<button className='login-signup-auth0-buttons'>
+					{isVisible && (
+						<Notification
+							isVisible={isVisible}
+							closeNotification={closeNotification}
+							message='Coming Soon 🤞'
+						/>
+					)}
+					<button
+						className='login-signup-auth0-buttons'
+						onClick={showNotification}
+					>
 						<span style={{ height: 16, width: 16 }}>
 							<GoogleSVG />
 						</span>{' '}
-						{accessChoice}Using Google
+						{accessChoice} - Using Google
 					</button>
-					<button className='login-signup-auth0-buttons'>
+					<button
+						className='login-signup-auth0-buttons'
+						onClick={showNotification}
+					>
 						<span>
 							<GithubSVG />
 						</span>
-						{accessChoice} Using Github
+						{accessChoice} - Using Github
 					</button>
-					<button className='login-signup-auth0-buttons'>
+					<button
+						className='login-signup-auth0-buttons'
+						onClick={showNotification}
+					>
 						<span>
 							<FacebookSVG />
 						</span>
-						{accessChoice} Using Facebook
+						{accessChoice} - Using Facebook
 					</button>
 
 					<div className='login-signup-form'>
@@ -88,6 +113,7 @@ export default function AuthCard({
 									value={accessFormData.email}
 									placeholder='Email'
 									autoFocus
+									required
 									autoComplete='off'
 									aria-label='Email'
 									aria-invalid='false'
@@ -101,6 +127,7 @@ export default function AuthCard({
 									name='password'
 									value={accessFormData.password}
 									placeholder='Password'
+									required
 									autoComplete='off'
 									aria-label='Password'
 									aria-invalid='false'
@@ -119,11 +146,7 @@ export default function AuthCard({
 							</div>
 
 							<div className='log-in-up-button'>
-								<button
-									type='submit'
-									name={accessChoice}
-									onClick={handleSignUp}
-								>
+								<button type='submit' name={accessChoice}>
 									{accessChoice}
 								</button>
 							</div>

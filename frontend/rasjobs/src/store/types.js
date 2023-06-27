@@ -7,7 +7,7 @@ const FILTER_DATA = 'FILTER_DATA';
 const SET_SEARCHKEY = 'SET_SEARCHKEY';
 const SET_FILTERED_DATA_BY_KEY_WORD = 'SET_FILTERED_DATA_BY_KEY_WORD';
 const SIGN_UP = 'SIGN_UP';
-const Log_IN = 'LOG_IN';
+const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 
 module.exports = {
@@ -20,6 +20,6 @@ module.exports = {
 	SET_SEARCHKEY,
 	SET_FILTERED_DATA_BY_KEY_WORD,
 	SIGN_UP,
-	Log_IN,
+	LOG_IN,
 	LOG_OUT,
 };

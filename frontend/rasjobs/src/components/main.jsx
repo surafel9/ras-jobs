@@ -6,8 +6,8 @@ import { useAuth } from './authProvide';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);
-	const { state, dispatch } = useAuth();
-	console.log(state);
+	const { state } = useAuth();
+
 	return (
 		<div className='root'>
 			<div className='navigation'>
@@ -43,11 +43,7 @@ export default function Main(props) {
 
 						<li>
 							<NavLink
-								to={
-									state.userStats.isLoggedIn
-										? '/createProfile'
-										: '/signin'
-								}
+								to='/createProfile'
 								onClick={() => setIsPieChartOpen(true)}
 							>
 								Create Profile

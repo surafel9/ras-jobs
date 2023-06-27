@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 
-export default function WorkHistory() {
+export default function HistoryGeneric(props) {
 	const [formData, setFormData] = useState({
-		workHistoryTitle: '',
-		companyName: '',
-		checkCurrent: false,
-		startDate: '',
-		endDate: '',
-		workDescription: '',
+		...props.initalState,
 	});
 	const onChangeHandler = (e) => {
 		const { name, value, type, checked } = e.target;
@@ -19,63 +14,60 @@ export default function WorkHistory() {
 	return (
 		<form onSubmit={(e) => e.preventDefault()}>
 			<div className='profile-form-content-wraper'>
-				<label htmlFor='work-experrience-form-title' />
+				<label htmlFor={props.id} />
 				<input
-					name='workHistoryTitle'
-					value={formData.workHistoryTitle}
+					name={props.name}
+					value={formData[props.name]}
 					onChange={onChangeHandler}
 					type='text'
-					placeholder='Position Title'
-					id='work-experrience-form-title'
+					placeholder={props.title}
+					id={props.id}
 				/>
 			</div>
 			<div className='profile-form-content-wraper'>
-				<label htmlFor='work-experrience-form-company' />
+				<label htmlFor={props.id2} />
 				<input
-					name='companyName'
-					value={formData.companyName}
+					name={props.name2}
+					value={formData[props.name2]}
 					onChange={onChangeHandler}
 					type='text'
-					placeholder='Company Name'
-					id='work-experrience-form-company'
+					placeholder={props.title2}
+					id={props.id2}
 				/>
 			</div>
 			<div className='profile-form-content-wraper'>
 				<div className='experiance-dates'>
 					<div className='current-position'>
-						<label htmlFor='durationCheckBox'>
-							Is this your current position?
+						<label htmlFor={props.checkBoxId}>
+							{props.checkBoxLable}
 						</label>
 						<input
 							type='checkbox'
-							name='checkCurrent'
-							value={formData.checkCurrent}
-							checked={formData.checkCurrent}
+							name={props.checkBoxName}
+							value={formData[props.name]}
+							checked={formData[props.checkCurrent]}
 							onChange={onChangeHandler}
-							id='durationCheckBox'
-							placeholder='Start'
+							id={props.checkBoxId}
 						/>
 					</div>
 					<div className='dates-row'>
 						<div className='date-input'>
-							<label htmlFor='start-duration'>Start</label>
+							<label htmlFor={props.startDateId}>Start</label>
 							<input
 								type='date'
-								name='startDate'
-								placeholder='Start Date'
-								id='start-duration'
-								value={formData.startDate}
+								name={props.startDateName}
+								id={props.startDateId}
+								value={formData[props.startDateName]}
 								onChange={onChangeHandler}
 							/>
 						</div>
 						<div className='date-input'>
-							<label htmlFor='end-duration'>End</label>
+							<label htmlFor={props.endDateId}>End</label>
 							<input
 								type='date'
-								placeholder='End Date'
-								name='endDate'
-								id='end-duration'
-								value={formData.endDate}
+								name={props.endDateName}
+								id={props.endDateId}
+								value={formData[props.endDateName]}
 								onChange={onChangeHandler}
 							/>
 						</div>
@@ -84,20 +76,20 @@ export default function WorkHistory() {
 			</div>
 			<div className='profile-form-content-wraper'>
 				<div className='description'>
-					<label htmlFor='work-experrience-form-description'>
-						Describe your role
+					<label htmlFor={props.textAreaId}>
+						{props.textAreaLable}
 					</label>
 					<textarea
 						name='workDescription'
 						type='text'
 						value={formData.workDescription}
 						onChange={onChangeHandler}
-						placeholder='Write a brief description of your role'
-						id='work-experrience-form-description'
+						placeholder={props.textAreaDescription}
+						id={props.textAreaId}
 					/>
 				</div>
 			</div>
-			<button>Add your work history</button>
+			<button>{props.btnName}</button>
 		</form>
 	);
 }

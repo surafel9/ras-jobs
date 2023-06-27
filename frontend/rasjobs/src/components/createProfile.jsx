@@ -1,59 +1,49 @@
 import React, { useState } from 'react';
-import InformationForm from './profile/information';
-import WorkHistory from './profile/workHistory';
-import Skills from './profile/skills';
-const profile = [
-	{
-		id: 1,
-		title: 'Basic Information',
-		details:
-			'Add your basic information to appear on top of search results',
-		moreInfo: '',
-		formComponent: <InformationForm />,
-	},
-	{
-		id: 2,
-		title: 'Work History',
-		details: "Mostly it's expriance recuriters check!",
-		formComponent: <WorkHistory />,
-	},
-	{
-		id: 3,
-		title: 'Skills',
-		details: 'Make your profile complete add your skills',
-		formComponent: <Skills />,
-	},
-	{
-		id: 4,
-		title: 'Education',
-		details: 'Educational background',
-		formComponent: <Education />,
-	},
-	{
-		id: 5,
-		title: 'Web Presence',
-		details: 'Show off what you achived so far, add links here',
-		formComponent: <Web />,
-	},
-	{
-		id: 6,
-		title: 'Certificates',
-		details: 'Any certificates that you have',
-		formComponent: <Certificates />,
-	},
-];
+
+import { PROFILE } from './profile/profile';
+import renderActiveItem from './profile/renderActiveItem';
+
 export default function CreateProfile({ className }) {
-	const [activeCard, setActiveCard] = useState(profile[0]);
+	const [activeCard, setActiveCard] = useState(PROFILE[0]);
+	const [skills, setSkills] = useState([
+		{ inputName: 'certificatesInput', value: [] },
+		{ inputName: 'webInput', value: [] },
+		{ inputName: 'skillsInput', value: [] },
+	]);
 
 	const onClickHandler = (item) => {
 		setActiveCard(item);
 	};
 
+	const addSkills = (skill) => {
+		setSkills((prevState) =>
+			prevState.map((prevSkill) =>
+				prevSkill.inputName === skill.inputName
+					? { ...prevSkill, value: [...prevSkill.value, skill.value] }
+					: prevSkill
+			)
+		);
+	};
+
+	const removeSkill = (id, inputName) => {
+		setSkills((prevSkills) =>
+			prevSkills.map((skill) => {
+				if (skill.inputName === inputName) {
+					return {
+						...skill,
+						value: skill.value.filter((i) => i.id !== id),
+					};
+				}
+				return skill;
+			})
+		);
+	};
+
 	return (
 		<div className={className}>
 			<div className='add-profile-cards'>
-				{profile.slice(0, 3).map((item) => (
-					<div className='add-profile-cards-each'>
+				{PROFILE.slice(0, 3).map((item) => (
+					<div className='add-profile-cards-each' key={item.id}>
 						<ProfileCard
 							item={item}
 							onClickHandler={onClickHandler}
@@ -66,13 +56,19 @@ export default function CreateProfile({ className }) {
 				<div className='profile-add-details-fancy-margin'>
 					<div className='information-wraper'>
 						<h3>{activeCard.title}</h3>
-						{activeCard.formComponent}
+
+						{renderActiveItem(
+							activeCard,
+							skills,
+							addSkills,
+							removeSkill
+						)}
 					</div>
 				</div>
 			</div>
 			<div className='add-profile-cards-2'>
-				{profile.slice(3).map((item) => (
-					<div className='add-profile-cards-each'>
+				{PROFILE.slice(3).map((item) => (
+					<div className='add-profile-cards-each' key={item.id}>
 						<ProfileCard
 							item={item}
 							onClickHandler={onClickHandler}
@@ -87,7 +83,10 @@ export default function CreateProfile({ className }) {
 
 function ProfileCard({ item, onClickHandler, isActive }) {
 	return (
-		<div className='profile-card'>
+		<div
+			className='profile-card'
+			style={{ border: isActive ? '1px dotted blue' : '' }}
+		>
 			<div className='title'>
 				<h3>{item.title}</h3>
 			</div>
@@ -99,14 +98,4 @@ function ProfileCard({ item, onClickHandler, isActive }) {
 			</div>
 		</div>
 	);
-}
-
-function Education() {
-	return <>Hello from education</>;
-}
-function Web() {
-	return <>Hello from web</>;
-}
-function Certificates() {
-	return <>Hello from certificates</>;
 }

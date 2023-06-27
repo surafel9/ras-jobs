@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 import '../style/style.scss';
 
@@ -27,7 +27,6 @@ import ProfilePromo from './profile/profilePromo';
 
 export default function Home(props) {
 	const [state, dispatch] = useReducer(jobReducer, initalState);
-	const [isLogged, setIsLogged] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {

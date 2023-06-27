@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DoubleChevronDownSvg } from '../util/doubleCheveronSVG';
 import Pagination from '../util/pagination';
+import Notification from '../util/notification';
 
 export const getPages = (maxPageNumbers, currentPage, totalPages) => {
 	const middlePage = Math.floor(maxPageNumbers / 2);
@@ -32,7 +33,7 @@ export default function JobCard({ className, data }) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const cardsPerPage = 8;
 	const maxPageNumbers = 5;
-	//console.log(data);
+
 	const handleCardClick = (id) => {
 		setActiveCard(id);
 	};
@@ -54,7 +55,7 @@ export default function JobCard({ className, data }) {
 	const currentCards = data.data.slice(indexOfFirstCard, indexOfLastCard);
 	const totalPages = Math.ceil(data.data.length / cardsPerPage);
 	const result = getPages(maxPageNumbers, currentPage, totalPages);
-	//console.log(result);
+
 	return (
 		<div className={className}>
 			{currentCards.map((item) => (
@@ -83,11 +84,17 @@ function JobItem({ item, handleCardClick }) {
 	const [showFullDescription, setShowFullDescription] = useState(false);
 	const [showFullRequirements, setShowFullRequirements] = useState(false);
 	const [isSaved, setIsSaved] = useState(false);
-	const [savedJob, setSavedJob] = useState(null);
 
+	const [isVisible, setIsVisible] = useState(false);
+
+	const closeNotification = () => {
+		setIsVisible(false);
+	};
+	const showNotification = () => {
+		setIsVisible(true);
+	};
 	const handleHeartFill = (id) => {
 		setIsSaved(!isSaved);
-		setSavedJob(id);
 	};
 	const toggleDescription = () => {
 		setShowFullDescription(!showFullDescription);
@@ -130,7 +137,14 @@ function JobItem({ item, handleCardClick }) {
 				)}
 			</div>
 			<div className='application-action'>
-				<button>Apply</button>
+				{isVisible && (
+					<Notification
+						isVisible={isVisible}
+						closeNotification={closeNotification}
+						message='Coming Soon 🤞'
+					/>
+				)}
+				<button onClick={showNotification}>Apply</button>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					width='26'

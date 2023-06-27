@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect, useReducer } from 'react';
-import { SIGN_UP, Log_IN, LOG_OUT } from '../store/types';
+import React, { useState, useEffect } from 'react';
+import { SIGN_UP, LOG_IN, LOG_OUT } from '../store/types';
 
 import AuthCard from './auth/authCard';
 import { loginHandler } from '../util/handleLogIn';
@@ -27,61 +27,45 @@ export default function Login({ className }) {
 		setAccessChoice(arg);
 	};
 
-	const handleAuthorization = (to, subject, text) => {
-		//handle mailing in the backend!
-	};
-
 	const auth = async (e) => {
 		//to, subject and text must be passed to the query
-		let response;
-		if (e.target.name === 'Log In') {
-			response = await loginHandler(accessFormData);
-			console.log(accessFormData.email);
-			dispatch({ type: Log_IN, payload: accessFormData.email });
-			console.log(accessFormData.email);
-		} else {
-			response = await signUpHandler(accessFormData);
-			console.log(accessFormData.email);
-			dispatch({ type: SIGN_UP, payload: accessFormData.email });
-		}
-
-		console.log(response);
-
-		if (response.status === 200 || response.statusText === 'OK') {
-			const { token } = response.data;
-
-			sessionStorage.setItem('token', token);
-			setToken(token);
-
-			setError((prevState) => ({ ...prevState, error: [] }));
-			setAccessFormData((prevState) => ({
-				...prevState,
-				email: '',
-				password: '',
-			}));
-		} else {
-			setError(true);
-		}
-	};
-
-	const onSubmitHandler = (e) => {
 		e.preventDefault();
+		let response;
+		try {
+			if (e.target.name === 'Log In') {
+				response = await loginHandler(accessFormData);
+			} else {
+				response = await signUpHandler(accessFormData);
+			}
 
-		setSignUpSuccess((prevState) => ({
-			...prevState,
-			isSuccess: true,
-			shouldRedirect: true,
-		}));
-	};
+			if (response.status === 200 || response.statusText === 'OK') {
+				const { token } = response.data;
 
-	const retriveToken = () => {
-		const token = sessionStorage.getItem('token');
-		setToken(token);
-	};
+				sessionStorage.setItem('token', token);
+				setToken(token);
+				setSignUpSuccess((prevState) => ({
+					...prevState,
+					isSuccess: true,
+				}));
+				dispatch({
+					type: e.target.name === 'Log In' ? LOG_IN : SIGN_UP,
+					payload: accessFormData.email,
+				});
 
-	const removeToken = () => {
-		sessionStorage.removeItem('token');
-		setToken('');
+				//setError((prevState) => ({ ...prevState, error: [] }));
+				console.log(accessFormData);
+				console.log(state);
+				setAccessFormData((prevState) => ({
+					...prevState,
+					email: '',
+					password: '',
+				}));
+			} else {
+				setError(true);
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const onChangeHandler = (e) => {
@@ -94,10 +78,10 @@ export default function Login({ className }) {
 	//console.log(state);
 
 	useEffect(() => {
-		if (signupSuccess.shouldRedirect) {
+		if (signupSuccess.isSuccess) {
 			setSignUpSuccess((prevState) => ({
 				...prevState,
-				isSuccess: false,
+				shouldRedirect: true,
 			}));
 			navigate('/createProfile');
 		}
@@ -110,12 +94,10 @@ export default function Login({ className }) {
 				<AuthCard
 					accessChoice={accessChoice}
 					handleAccessChoice={handleAccessChoice}
-					handleAuthorization={handleAuthorization}
-					handleSignUp={auth}
+					onSubmitHandler={auth}
 					accessFormData={accessFormData}
 					onChangeHandler={onChangeHandler}
 					signupSuccess={signupSuccess}
-					onSubmitHandler={onSubmitHandler}
 					error={error}
 					state={state.userStats}
 				/>

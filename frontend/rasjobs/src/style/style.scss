@@ -25,7 +25,7 @@ $button-hover-text-color: #ffffff; // Text color on button hover
 // Border Colors
 $border-color: #cccccc; // Color for borders
 
-// Additional Colors (Optional)
+// Additional Colors
 $accent-color: #e91e63; // Accent color for highlighting certain elements
 
 .root {
@@ -134,8 +134,6 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					.about-me-person-photo {
 						position: relative;
 
-						.about-me-person-circle {
-						}
 						.about-me-addProfile-button {
 							position: absolute;
 							bottom: 10px;
@@ -647,25 +645,33 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 
 						.profile-skills-details-wraper {
 							flex: 3;
-							display: flex;
 							flex-flow: row wrap;
 							list-style-type: none;
 							padding: 0;
-							gap: 8px;
 
 							li {
 								display: inline-block;
-								padding: 4px 8px;
-								background-color: #f0f0f0;
+								padding: 8px 12px;
+								margin: 5px;
+								background-color: rgb(20, 123, 20);
+								color: $text-color-white;
 								border-radius: 4px;
 								height: fit-content;
 							}
 							span {
+								display: inline-flex;
+								align-items: center;
+								justify-content: center;
 								margin-left: 8px;
-								color: #888;
+								color: $text-color-dark;
+								background-color: $text-color-white;
+								height: 15px;
+								width: 15px;
+								border-radius: 50%;
 								cursor: pointer;
 								&:hover {
 									color: $accent-color;
+									background-color: $button-text-color;
 								}
 							}
 						}
