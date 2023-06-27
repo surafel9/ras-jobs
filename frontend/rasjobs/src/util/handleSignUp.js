@@ -10,6 +10,7 @@ export const signUpHandler = async (accessFormData) => {
 				},
 			}
 		);
+		console.log(response);
 		return response;
 	} catch (error) {
 		return error;

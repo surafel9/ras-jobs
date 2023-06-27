@@ -25,7 +25,7 @@ export default function AuthCard({
 	const showNotification = () => {
 		setIsVisible(true);
 	};
-
+	console.log(state);
 	return (
 		<div className='login-sign-signup-container'>
 			<div className='login-signup-header'>

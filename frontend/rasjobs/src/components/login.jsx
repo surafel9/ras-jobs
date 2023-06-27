@@ -26,7 +26,8 @@ export default function Login({ className }) {
 	const handleAccessChoice = (arg) => {
 		setAccessChoice(arg);
 	};
-
+	console.log(state);
+	console.log(accessChoice);
 	const auth = async (e) => {
 		//to, subject and text must be passed to the query
 		e.preventDefault();
@@ -34,8 +35,11 @@ export default function Login({ className }) {
 		try {
 			if (e.target.name === 'Log In') {
 				response = await loginHandler(accessFormData);
+				console.log(response);
 			} else {
 				response = await signUpHandler(accessFormData);
+				console.log(response);
+				console.log(e.target.name);
 			}
 
 			if (response.status === 200 || response.statusText === 'OK') {
@@ -61,7 +65,12 @@ export default function Login({ className }) {
 					password: '',
 				}));
 			} else {
-				setError(true);
+				console.log(response.data);
+				setAccessFormData((prevState) => ({
+					...prevState,
+					email: '',
+					password: '',
+				}));
 			}
 		} catch (err) {
 			console.log(err);
@@ -111,3 +120,5 @@ export default function Login({ className }) {
 		</div>
 	);
 }
+
+//make a log in and log out component! separate the issue.
