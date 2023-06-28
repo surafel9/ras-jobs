@@ -1,0 +1,120 @@
+@import 'colorVariables';
+@import 'mediaScreen';
+.home {
+	@media screen and (max-width: $breakpoint-ipadAir) {
+		background-color: $primary-color;
+	}
+	.profile {
+		display: none;
+
+		@media screen and (min-width: $breakpoint-xlarge) {
+			display: flex;
+		}
+	}
+	.main {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-between;
+		}
+
+		.main-body-wrapers {
+			@media screen and (max-width: $breakpoint-ipadAir) {
+				margin: 30px;
+				padding: 30px;
+				border-radius: 8px;
+				background-color: $body-background-color;
+			}
+
+			.job-list {
+				display: flex;
+				flex-flow: row nowrap;
+				.job-card {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						flex: 1;
+					}
+				}
+				.gov-jobsCard {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						flex: 1;
+					}
+				}
+			}
+
+			.search {
+				@media screen and (max-width: $breakpoint-ipadAir) {
+					width: 100%;
+					height: auto;
+				}
+				@media screen and (min-width: $breakpoint-ipadAir) {
+					height: 170px;
+					margin-bottom: 32px;
+					display: flex;
+					flex-flow: row-reverse nowrap;
+					gap: 2%;
+				}
+
+				.search-layout-adjust {
+					flex-basis: 42%;
+					@media screen and (max-width: $breakpoint-small) {
+						display: none;
+					}
+				}
+				.search-layout {
+					@media screen and (max-width: $breakpoint-small) {
+					}
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						flex-basis: 100%;
+					}
+					flex-basis: 56%;
+					display: flex;
+					flex-flow: column nowrap;
+
+					.main-search {
+						display: flex;
+						flex-flow: row;
+						align-items: center;
+						justify-content: center;
+						@media screen and (max-width: $breakpoint-ipadAir) {
+							min-height: 40%;
+						}
+						.main-search-input {
+							flex-basis: 80%;
+							@media screen and (max-width: $breakpoint-ipadAir) {
+								flex-basis: 60%;
+							}
+
+							input {
+								@media screen and (max-width: $breakpoint-ipadAir) {
+									padding: 13px 20px;
+									font-size: 20px;
+									border: 1px solid #c4c3c3;
+									border-top-left-radius: 8px;
+									border-bottom-left-radius: 8px;
+								}
+								width: 100%;
+								line-height: 1.6rem;
+								padding-left: 16px;
+								font-size: 20px;
+								border: 1px solid $primary-color-light;
+							}
+						}
+						button {
+							@media screen and (max-width: $breakpoint-ipadAir) {
+								padding: 13px;
+								font-size: 24px;
+								margin-left: 18px;
+								border-top-left-radius: 2px;
+								border-bottom-left-radius: 2px;
+							}
+							flex-basis: 20%;
+						}
+					}
+					.filter-inputs {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

@@ -9,7 +9,7 @@ export const loginHandler = async (accessFormData) => {
 		});
 
 		if (response.status === 200 || response.statusText === 'OK') {
-			return response.data;
+			return response;
 		}
 	} catch (error) {
 		return error.response;

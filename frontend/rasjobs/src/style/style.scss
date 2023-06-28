@@ -389,6 +389,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 		height: 92vh;
 		.welcome-info {
 			flex-basis: 30%;
+			background-image: url('../../public/Polygonluminary.svg');
 		}
 		.welcome-info-login {
 			flex-basis: 33%;
@@ -492,8 +493,9 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 					.reset-log-in-up-link {
 						text-align: center;
 						margin-bottom: 2px;
-						a {
+						p {
 							text-decoration: underline double $primary-color;
+							cursor: pointer;
 						}
 					}
 

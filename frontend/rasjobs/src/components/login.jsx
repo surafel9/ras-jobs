@@ -6,6 +6,7 @@ import AuthCard from './auth/authCard';
 import { loginHandler } from '../util/handleLogIn';
 import { signUpHandler } from '../util/handleSignUp';
 import { useAuth } from './authProvider';
+
 const passwordRegex =
 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,7 +65,7 @@ export default function Login({ className }) {
 					type: e.target.name === 'Log In' ? LOG_IN : SIGN_UP,
 					payload: accessFormData.email,
 				});
-				console.log(state);
+
 				setAccessFormData((prevState) => ({
 					...prevState,
 					email: '',

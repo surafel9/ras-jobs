@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
-import '../style/style.scss';
+import '../style/main.scss';
+
 import { useAuth } from './authProvider';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);
-	const { state } = useAuth();
 
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const { state } = useAuth();
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
 	return (
 		<div className='root'>
 			<div className='navigation'>
@@ -17,7 +22,10 @@ export default function Main(props) {
 					</NavLink>
 				</div>
 
-				<div className='nav'>
+				<div
+					className={`nav ${isMenuOpen ? 'active' : ''}`}
+					onClick={toggleMenu}
+				>
 					<ul>
 						<li>
 							<NavLink
@@ -61,6 +69,11 @@ export default function Main(props) {
 							</NavLink>
 						</li>
 					</ul>
+				</div>
+				<div className='hamburger' onClick={toggleMenu}>
+					<span></span>
+					<span></span>
+					<span></span>
 				</div>
 			</div>
 			<Outlet id='details' context={[isPieChartOpen]} />

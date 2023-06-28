@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 
-import '../style/style.scss';
+import '../style/home.scss';
 
 import Search from './search';
 import JobList from './jobList';
@@ -104,25 +104,29 @@ export default function Home(props) {
 			</div>
 
 			<div className='main'>
-				<Search
-					className='search'
-					handleSearchKey={handleSearchKey}
-					filterDataHandler={filterDataHandler}
-					formData={state.formData}
-					isDataFiltered={state.data.isDataFiltered}
-					clearOptionHandler={clearOptionHandler}
-				/>
-				<JobList className='job-list'>
-					{!state.data.isLoading ? (
-						<JobCard className='job-card' data={state.data} />
-					) : (
-						<Loading />
-					)}
-					<UsaJobs
-						className='gov-jobsCard'
-						searchKey={state.searchKey}
+				<div className='main-body-wrapers'>
+					<Search
+						className='search'
+						handleSearchKey={handleSearchKey}
+						filterDataHandler={filterDataHandler}
+						formData={state.formData}
+						isDataFiltered={state.data.isDataFiltered}
+						clearOptionHandler={clearOptionHandler}
 					/>
-				</JobList>
+				</div>
+				<div className='main-body-wrapers'>
+					<JobList className='job-list'>
+						{!state.data.isLoading ? (
+							<JobCard className='job-card' data={state.data} />
+						) : (
+							<Loading />
+						)}
+						<UsaJobs
+							className='gov-jobsCard'
+							searchKey={state.searchKey}
+						/>
+					</JobList>
+				</div>
 			</div>
 		</div>
 	);

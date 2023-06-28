@@ -1,0 +1,121 @@
+//
+@import 'colorVariables';
+@import 'mediaScreen';
+.root {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+	background-color: $body-background-color;
+	font-family: Montserrat, sans-serif, Arial, Helvetica, sans-serif;
+	font-weight: 600 (Regular);
+
+	input,
+	button,
+	svg {
+		cursor: pointer;
+	}
+	input {
+		outline: none;
+	}
+	button {
+		background-color: $primary-color-dark;
+		color: $text-color-white;
+		padding: 8px 16px;
+		margin: 8px;
+		font-size: 14px;
+		font-weight: 500 (Medium);
+		border: none;
+		border-radius: 4px;
+		&:hover {
+			background-color: $primary-color;
+		}
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	.navigation {
+		display: flex;
+		align-items: center;
+		gap: 3%;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		padding: 0 36px;
+		height: 8vh;
+		background-color: $primary-color;
+		color: $text-color-white;
+		font-weight: 600 (Semi-Bold);
+		font-size: 18px;
+
+		.logo {
+			order: 1;
+			flex-basis: 25%;
+			margin-left: 8px;
+		}
+		.nav {
+			order: 2;
+			flex-basis: 29%;
+			padding-left: 16px;
+			margin-right: 55px;
+
+			ul {
+				padding-left: 0;
+				list-style-type: none;
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-between;
+			}
+		}
+
+		@media screen and (max-width: $breakpoint-small),
+			(max-width: $breakpoint-ipadAir) {
+			background-color: $primary-color-dark;
+			padding: 10px;
+
+			.nav {
+				position: fixed;
+				right: 0px;
+				top: 8%;
+				margin-right: 0;
+				width: 45%;
+				background-color: $primary-color-dark;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+				ul {
+					flex-flow: column nowrap;
+
+					li {
+						margin: 3%;
+					}
+				}
+				&.active {
+					opacity: 1;
+				}
+			}
+
+			.logo {
+				flex: 1;
+			}
+			.hamburger {
+				order: 3;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				width: 30px;
+				height: 20px;
+				cursor: pointer;
+
+				span {
+					display: block;
+					width: 100%;
+					height: 2px;
+					background-color: $text-color-white;
+					margin-bottom: 4px;
+					transition: background-color 0.3s ease;
+				}
+			}
+		}
+	}
+}
