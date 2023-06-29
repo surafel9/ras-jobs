@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
 import '../style/main.scss';
@@ -7,6 +7,7 @@ import { useAuth } from './authProvider';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);
+	const myRef = useRef();
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { state } = useAuth();
@@ -22,15 +23,15 @@ export default function Main(props) {
 					</NavLink>
 				</div>
 
-				<div
-					className={`nav ${isMenuOpen ? 'active' : ''}`}
-					onClick={toggleMenu}
-				>
+				<div className={`nav ${isMenuOpen ? 'active' : ''}`}>
 					<ul>
 						<li>
 							<NavLink
 								to='/'
-								onClick={() => setIsPieChartOpen(false)}
+								onClick={() => {
+									setIsPieChartOpen(true);
+									toggleMenu();
+								}}
 							>
 								Jobs
 							</NavLink>
@@ -42,6 +43,10 @@ export default function Main(props) {
 										? '/signout'
 										: '/signin'
 								}
+								onClick={() => {
+									setIsPieChartOpen(true);
+									toggleMenu();
+								}}
 							>
 								{state.userStats.isLoggedIn
 									? 'Sign Out'
@@ -52,7 +57,10 @@ export default function Main(props) {
 						<li>
 							<NavLink
 								to='/createProfile'
-								onClick={() => setIsPieChartOpen(true)}
+								onClick={() => {
+									setIsPieChartOpen(true);
+									toggleMenu();
+								}}
 							>
 								Create Profile
 							</NavLink>
@@ -64,16 +72,17 @@ export default function Main(props) {
 										? '/postJob'
 										: '/signin'
 								}
+								onClick={toggleMenu}
 							>
 								Post Jobs
 							</NavLink>
 						</li>
 					</ul>
 				</div>
-				<div className='hamburger' onClick={toggleMenu}>
-					<span></span>
-					<span></span>
-					<span></span>
+				<div className='hamburger'>
+					<span onClick={toggleMenu}></span>
+					<span onClick={toggleMenu}></span>
+					<span onClick={toggleMenu}></span>
 				</div>
 			</div>
 			<Outlet id='details' context={[isPieChartOpen]} />

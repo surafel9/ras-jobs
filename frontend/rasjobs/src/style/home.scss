@@ -19,8 +19,11 @@
 		}
 
 		.main-body-wrapers {
+			@media screen and (max-width: $breakpoint-small) {
+				padding: 5px !important;
+			}
 			@media screen and (max-width: $breakpoint-ipadAir) {
-				margin: 30px;
+				margin: 30px 30px 0;
 				padding: 30px;
 				border-radius: 8px;
 				background-color: $body-background-color;
@@ -29,12 +32,25 @@
 			.job-list {
 				display: flex;
 				flex-flow: row nowrap;
+				justify-content: space-between;
 				.job-card {
 					@media screen and (max-width: $breakpoint-ipadAir) {
 						flex: 1;
 					}
+					flex-basis: 56%;
+					position: relative;
+					.card {
+						border: 1px solid #e0e0e0;
+						border-radius: 8px;
+						box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+						padding: 16px;
+						margin-bottom: 32px;
+					}
 				}
 				.gov-jobsCard {
+					@media screen and (max-width: $breakpoint-small) {
+						display: none;
+					}
 					@media screen and (max-width: $breakpoint-ipadAir) {
 						flex: 1;
 					}
@@ -42,77 +58,48 @@
 			}
 
 			.search {
-				@media screen and (max-width: $breakpoint-ipadAir) {
-					width: 100%;
-					height: auto;
-				}
-				@media screen and (min-width: $breakpoint-ipadAir) {
-					height: 170px;
-					margin-bottom: 32px;
+				@media screen and (max-width: $breakpoint-small) {
 					display: flex;
-					flex-flow: row-reverse nowrap;
-					gap: 2%;
-				}
-
-				.search-layout-adjust {
-					flex-basis: 42%;
-					@media screen and (max-width: $breakpoint-small) {
-						display: none;
-					}
+					flex-flow: row nowrap;
 				}
 				.search-layout {
-					@media screen and (max-width: $breakpoint-small) {
-					}
-					@media screen and (max-width: $breakpoint-ipadAir) {
-						flex-basis: 100%;
-					}
-					flex-basis: 56%;
-					display: flex;
-					flex-flow: column nowrap;
+					position: relative;
 
 					.main-search {
-						display: flex;
-						flex-flow: row;
-						align-items: center;
-						justify-content: center;
-						@media screen and (max-width: $breakpoint-ipadAir) {
-							min-height: 40%;
-						}
-						.main-search-input {
-							flex-basis: 80%;
-							@media screen and (max-width: $breakpoint-ipadAir) {
-								flex-basis: 60%;
-							}
+						@media screen and (max-width: $breakpoint-small) {
+							width: 100%;
+							display: flex;
+							flex-flow: row nowrap;
+							justify-content: center;
+							align-items: center;
 
-							input {
-								@media screen and (max-width: $breakpoint-ipadAir) {
-									padding: 13px 20px;
-									font-size: 20px;
-									border: 1px solid #c4c3c3;
-									border-top-left-radius: 8px;
-									border-bottom-left-radius: 8px;
+							gap: 0;
+							.main-search-input {
+								flex-basis: 80%;
+
+								input {
+									width: 100%;
+									padding: 9px;
+									border: 1px solid #333;
+									border-radius: 8px;
+									border-top-right-radius: 0;
+									border-bottom-right-radius: 0;
 								}
-								width: 100%;
-								line-height: 1.6rem;
-								padding-left: 16px;
-								font-size: 20px;
-								border: 1px solid $primary-color-light;
+							}
+							.search-btn {
+								flex-basis: 20%;
+								button {
+									width: 90%;
+									padding: 10px 5px;
+									border-top-left-radius: 0;
+									border-bottom-left-radius: 0;
+								}
 							}
 						}
-						button {
-							@media screen and (max-width: $breakpoint-ipadAir) {
-								padding: 13px;
-								font-size: 24px;
-								margin-left: 18px;
-								border-top-left-radius: 2px;
-								border-bottom-left-radius: 2px;
-							}
-							flex-basis: 20%;
-						}
 					}
-					.filter-inputs {
-						display: none;
-					}
+				}
+				.filter-inputs {
+					display: none;
 				}
 			}
 		}

@@ -25,7 +25,8 @@ export default function Search(props) {
 					className='main-search'
 					onSubmit={(e) => getSearchKey(e)}
 				>
-					<label htmlFor='search' className='main-search-input'>
+					<div className='main-search-input'>
+						<label htmlFor='search' />
 						<input
 							type='text'
 							placeholder='Search a job'
@@ -34,14 +35,12 @@ export default function Search(props) {
 							value={searchTerm}
 							onChange={searchTermHandler}
 						/>
-					</label>
-					<button
-						type='submit'
-						aria-label='search'
-						className='main-search-button'
-					>
-						Search
-					</button>
+					</div>
+					<div className='search-btn'>
+						<button type='submit' aria-label='search'>
+							Search
+						</button>
+					</div>
 				</form>
 
 				<SearchFilters

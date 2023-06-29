@@ -114,7 +114,7 @@ export default function Home(props) {
 						clearOptionHandler={clearOptionHandler}
 					/>
 				</div>
-				<div className='main-body-wrapers'>
+				<div className='main-body-wrapers jobs-wraper'>
 					<JobList className='job-list'>
 						{!state.data.isLoading ? (
 							<JobCard className='job-card' data={state.data} />
