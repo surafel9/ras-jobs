@@ -7,6 +7,7 @@ import { loginHandler } from '../util/handleLogIn';
 import { signUpHandler } from '../util/handleSignUp';
 import { useAuth } from './authProvider';
 
+import '../style/login.scss';
 const passwordRegex =
 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

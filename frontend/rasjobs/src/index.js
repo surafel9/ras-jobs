@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/createProfile',
-				element: <CreateProfile className='create-profile' />,
+				element: <CreateProfile />,
 			},
 			{
 				path: '/postJob',

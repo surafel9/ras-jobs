@@ -1,6 +1,8 @@
 import React from 'react';
 import { getPageNumbers } from './redicule';
 
+import '../style/pagination.scss';
+
 export default function Pagination({
 	maxPageNumbers,
 	currentPage,
@@ -28,10 +30,7 @@ export default function Pagination({
 				<button
 					key={pageNumber}
 					onClick={() => handlePageChange(pageNumber)}
-					style={{
-						backgroundColor:
-							pageNumber === currentPage ? '#fff' : '#0049b7',
-					}}
+					className={`${pageNumber === currentPage ? 'active' : ''}`}
 				>
 					{pageNumber}
 				</button>

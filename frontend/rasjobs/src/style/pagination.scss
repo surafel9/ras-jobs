@@ -1,0 +1,23 @@
+@import 'mediaScreen';
+@import 'colorVariables';
+
+.pagination {
+	display: flex;
+	flex-flow: row wrap;
+	.skip-menu {
+		background-color: $primary-color-dark;
+	}
+	button {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			background-color: $text-color-white;
+			color: $text-color-dark;
+
+			&.active {
+				background-color: $text-color-white;
+				color: $text-color-dark;
+			}
+		}
+		color: $text-color-white;
+		background-color: #a3a3a3;
+	}
+}

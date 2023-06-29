@@ -31,6 +31,9 @@
 			&.jobs-wraper {
 			}
 			.job-list {
+				@media screen and (max-width: $breakpoint-ipadAir) {
+					gap: 2%;
+				}
 				display: flex;
 				flex-flow: row nowrap;
 				justify-content: space-between;
@@ -106,25 +109,13 @@
 							align-items: center;
 						}
 					}
-					.pagination {
-						button {
-							@media screen and (max-width: $breakpoint-small) {
-								color: $text-color-dark;
-								background-color: $text-color-white;
-							}
-							color: $text-color-white;
-							background-color: #a3a3a3;
-						}
-					}
 				}
 			}
 			.gov-jobsCard {
-				@media screen and (max-width: $breakpoint-small) {
+				@media screen and (max-width: $breakpoint-ipadAir) {
 					display: none;
 				}
-				@media screen and (max-width: $breakpoint-ipadAir) {
-					flex: 1;
-				}
+
 				flex-basis: 42%;
 
 				margin: 0;
@@ -133,18 +124,30 @@
 					flex-flow: column;
 					align-items: center;
 					h3 {
+						@media screen and (max-width: $breakpoint-ipadAir) {
+							color: $text-color-white;
+						}
 						padding: 0;
 						margin: 0;
 						color: $accent-color;
 					}
 					p {
+						@media screen and (max-width: $breakpoint-ipadAir) {
+							color: $text-color-white;
+						}
 						font-style: italic;
 					}
 				}
 				.gov-jobs {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						color: $text-color-white;
+					}
 					text-align: center;
 				}
 				.gov-card {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						background-color: $body-background-color;
+					}
 					border: 1px dotted $primary-color-light;
 					margin-bottom: 32px;
 					padding: 16px;
@@ -155,33 +158,66 @@
 						border-radius: '4px';
 					}
 				}
-				.pagination {
-					display: flex;
-					flex-flow: row nowrap;
-					.skip-menu {
-						background-color: $primary-color-dark;
-					}
-					button {
-						color: $text-color-white;
-						background-color: #a3a3a3;
-						&.active {
-							background-color: $primary-color-dark;
-						}
-					}
-				}
 			}
 		}
 
 		.search {
-			@media screen and (max-width: $breakpoint-small) {
+			@media screen and (max-width: $breakpoint-ipadAir) {
 				display: flex;
 				flex-flow: row nowrap;
 			}
-			.search-layout {
-				position: relative;
 
+			.search-layout-adjust {
+				@media screen and (max-width: $breakpoint-ipadAir) {
+					border: 1px solid red;
+					display: none;
+				}
+			}
+			.search-layout {
+				@media screen and (max-width: $breakpoint-ipadAir) {
+					flex: 1;
+				}
 				.main-search {
-					@media screen and (max-width: $breakpoint-small) {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						flex: 1;
+						display: flex;
+						flex-flow: row nowrap;
+						justify-content: center;
+						align-items: center;
+					}
+					.main-search-input {
+						flex-basis: 80%;
+
+						input {
+							@media screen and (max-width: $breakpoint-ipadAir) {
+								padding: 15px;
+							}
+							@media screen and (max-width: $breakpoint-small) {
+								padding: 14px;
+							}
+							width: 100%;
+							padding: 9px;
+							border: 1px solid #333;
+							border-radius: 8px;
+							border-top-right-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+					}
+					.search-btn {
+						flex-basis: 20%;
+						button {
+							@media screen and (max-width: $breakpoint-ipadAir) {
+								padding: 15px 5px;
+							}
+							width: 90%;
+							padding: 10px 5px;
+							border-top-left-radius: 0;
+							border-bottom-left-radius: 0;
+						}
+					}
+				}
+				/* .main-search {
+					@media screen and (max-width: $breakpoint-ipadAir) {
 						width: 100%;
 						display: flex;
 						flex-flow: row nowrap;
@@ -211,7 +247,7 @@
 							}
 						}
 					}
-				}
+				} */
 			}
 			.filter-inputs {
 				display: none;

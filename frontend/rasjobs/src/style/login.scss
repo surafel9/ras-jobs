@@ -1,0 +1,193 @@
+@import 'mediaScreen';
+@import 'colorVariables';
+
+.login {
+	@media screen and (max-width: $breakpoint-ipadAir) {
+		min-height: 100vh;
+	}
+	@media screen and (min-width: $breakpoint-ipadAir) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: url('../../public/Polygonluminary.svg');
+	}
+	@media screen and (min-width: $breakpoint-surfacePro) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: url('../../public/Polygonluminary.svg');
+	}
+	@media screen and (min-width: $breakpoint-xlarge) {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+	}
+	height: 92vh;
+
+	.welcome-info {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			display: none;
+		}
+		flex-basis: 30%;
+	}
+	.welcome-info-login {
+		@media screen and (min-width: $breakpoint-ipadAir) {
+			flex-basis: 60%;
+		}
+
+		@media screen and (min-width: $breakpoint-xlarge) {
+			flex-basis: 33%;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.login-sign-signup-container {
+			@media screen and (max-width: $breakpoint-ipadAir) {
+				height: auto;
+			}
+			@media screen and (min-width: $breakpoint-xlarge) {
+				max-height: 70vh;
+				min-width: 66%;
+			}
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: auto;
+			box-sizing: border-box;
+
+			background-color: $text-color-white;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+			.login-signup-header {
+				text-align: center;
+				margin-bottom: 20px;
+			}
+
+			.sign-out-btn {
+				width: 33%;
+				padding: 10px 20px;
+				margin-bottom: 10px;
+			}
+
+			.login-signup-body {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+				flex-grow: 1;
+
+				.login-signup-title {
+					width: 96%;
+					ul {
+						list-style-type: none;
+						display: flex;
+						flex-flow: row nowrap;
+						justify-content: space-around;
+						padding: 0 10px;
+						font-weight: bold;
+						line-height: 1.6rem;
+					}
+				}
+
+				.login-signup-auth0-buttons {
+					@media screen and (max-width: $breakpoint-surfacePro) {
+						padding: 20px;
+						font-size: 18px;
+					}
+
+					width: 80%;
+					transition: background-color 0.3s ease;
+
+					span {
+						@media screen and (max-width: $breakpoint-surfacePro) {
+							margin-left: 0px;
+						}
+						position: absolute;
+						display: flex;
+						align-items: center;
+						margin-left: 10px;
+					}
+				}
+
+				.login-signup-form {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					gap: 10px;
+					flex-grow: 1;
+
+					p {
+						text-align: center;
+					}
+
+					form {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-between;
+						gap: 10px;
+						flex-grow: 1;
+
+						.log-in-up-email,
+						.log-in-up-password {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							width: 100%;
+							input {
+								@media screen and (max-width: $breakpoint-surfacePro) {
+									margin-bottom: 2%;
+									font-size: 18px;
+									border: 1px solid #777;
+									padding: 16px;
+								}
+								width: 80%;
+								padding: 8px 16px;
+								margin: 0 2%;
+							}
+						}
+					}
+				}
+				.error {
+					color: $accent-color;
+					font-size: 12px;
+				}
+				.reset-log-in-up-link {
+					text-align: center;
+					margin-bottom: 2px;
+					p {
+						text-decoration: underline double $primary-color;
+						cursor: pointer;
+					}
+				}
+
+				.log-in-up-button {
+					text-align: center;
+					width: 100%;
+					button {
+						width: 100%;
+						margin-left: 0;
+						margin-bottom: 0;
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+						border-bottom-left-radius: 8px;
+						border-bottom-right-radius: 8px;
+						padding: 20px 0;
+					}
+				}
+			}
+		}
+	}
+
+	.welcome-info-b {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			display: none;
+		}
+		flex-basis: 33%;
+		display: flex;
+		align-items: center;
+	}
+}

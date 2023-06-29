@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { PROFILE } from './profile/profile';
 import renderActiveItem from './profile/renderActiveItem';
 
-export default function CreateProfile({ className }) {
+import '../style/createProfile.scss';
+export default function CreateProfile() {
 	const [activeCard, setActiveCard] = useState(PROFILE[0]);
 	const [skills, setSkills] = useState([
 		{ inputName: 'certificatesInput', value: [] },
@@ -40,7 +41,7 @@ export default function CreateProfile({ className }) {
 	};
 
 	return (
-		<div className={className}>
+		<div className='create-profile'>
 			<div className='add-profile-cards'>
 				{PROFILE.slice(0, 3).map((item) => (
 					<div className='add-profile-cards-each' key={item.id}>
