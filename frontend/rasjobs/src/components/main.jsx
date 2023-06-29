@@ -7,7 +7,6 @@ import { useAuth } from './authProvider';
 
 export default function Main(props) {
 	const [isPieChartOpen, setIsPieChartOpen] = useState(false);
-	const myRef = useRef();
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { state } = useAuth();
@@ -86,7 +85,7 @@ export default function Main(props) {
 				</div>
 			</div>
 			<Outlet id='details' context={[isPieChartOpen]} />
-			<Footer className='footer' />
+			<Footer />
 		</div>
 	);
 }

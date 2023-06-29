@@ -1,0 +1,66 @@
+@import 'colorVariables';
+@import 'mediaScreen';
+.footer {
+	@media screen and (max-width: $breakpoint-ipadAir) {
+		background-color: $primary-color-dark;
+		color: $text-color-white;
+		height: auto;
+	}
+	height: 400px;
+	padding: 20px;
+
+	&__container {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			justify-content: space-evenly;
+		}
+		display: flex;
+		justify-content: space-between;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	&__social-media,
+	&__site-map {
+		flex: 1;
+
+		h3 {
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			li {
+				margin-bottom: 5px;
+
+				a {
+					@media screen and (max-width: $breakpoint-ipadAir) {
+						color: $text-color-white;
+					}
+					color: #333;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+
+	&__bottom {
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			color: $text-color-white;
+			margin: 20px;
+		}
+		margin: 20px;
+		border-top: 1px solid #e9e4e4;
+		text-align: center;
+		font-size: 14px;
+		color: #777;
+	}
+}

@@ -1,8 +1,8 @@
 import React from 'react';
-
+import '../style/footer.scss';
 export default function Footer() {
 	return (
-		<footer>
+		<footer className='footer'>
 			<div className='footer__container'>
 				<div className='footer__social-media'>
 					<h3>Follow Us</h3>

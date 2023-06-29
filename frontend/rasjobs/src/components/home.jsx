@@ -104,7 +104,7 @@ export default function Home(props) {
 			</div>
 
 			<div className='main'>
-				<div className='main-body-wrapers'>
+				<div className='main-body-wrapers search-wraper'>
 					<Search
 						className='search'
 						handleSearchKey={handleSearchKey}

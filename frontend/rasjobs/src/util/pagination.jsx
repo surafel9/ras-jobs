@@ -30,7 +30,7 @@ export default function Pagination({
 					onClick={() => handlePageChange(pageNumber)}
 					style={{
 						backgroundColor:
-							pageNumber === currentPage ? '#0049b7' : '#797979',
+							pageNumber === currentPage ? '#fff' : '#0049b7',
 					}}
 				>
 					{pageNumber}
