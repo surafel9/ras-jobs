@@ -1,0 +1,42 @@
+@import 'mediaScreen';
+@import 'colorVariables.scss';
+form {
+	.information-form-content-sm-wraper {
+		border: 1px solid red;
+		@media screen and (max-width: $breakpoint-surfacePro) {
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-between;
+			align-items: center;
+			margin: 10px;
+			padding: 10px;
+		}
+		.profile-form-content-wraper {
+			@media screen and (max-width: $breakpoint-small) {
+				width: 100%;
+				margin: 8px 0;
+			}
+			@media screen and (max-width: $breakpoint-surfacePro) {
+				width: 80%;
+				margin: 8px 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			input {
+				@media screen and (max-width: $breakpoint-small) {
+					width: 100%;
+					line-height: 1.6rem;
+				}
+				@media screen and (max-width: $breakpoint-surfacePro) {
+					width: 50%;
+					line-height: 1.6rem;
+				}
+			}
+			select {
+			}
+			button {
+			}
+		}
+	}
+}

@@ -1,7 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
 
-import '../style/home.scss';
-
 import Search from './search';
 import JobList from './jobList';
 import JobCard from './jobCard';

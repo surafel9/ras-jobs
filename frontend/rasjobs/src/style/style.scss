@@ -1,33 +1,5 @@
-$primary-color: #2c6bed; // Main primary color
-$primary-color-light: #7fa8ff; // Lighter shade of primary color
-$primary-color-dark: #0049b7; // Darker shade of primary color
-
-// Secondary Colors
-$secondary-color: #ff8c00; // Main secondary color
-$secondary-color-light: #ffb74d; // Lighter shade of secondary color
-$secondary-color-dark: #c75c00; // Darker shade of secondary color
-
-// Background Colors
-$body-background-color: #f5f5f5; // Background color for the body
-
-// Text Colors
-$text-color: #333333; // Main text color
-$text-color-light: #666666; // Lighter shade of text color
-$text-color-dark: #000000; // Darker shade of text color
-$text-color-white: #fff;
-
-// Button Colors
-$button-background-color: $primary-color; // Background color for buttons
-$button-text-color: #ffffff; // Text color for buttons
-$button-hover-background-color: $primary-color-dark; // Background color on button hover
-$button-hover-text-color: #ffffff; // Text color on button hover
-
-// Border Colors
-$border-color: #cccccc; // Color for borders
-
-// Additional Colors
-$accent-color: #e91e63; // Accent color for highlighting certain elements
-
+@import 'colorVariables';
+@import 'mediaScreen';
 .root {
 	min-height: 100vh;
 	display: flex;
@@ -80,301 +52,512 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			flex-basis: 25%;
 			margin-left: 8px;
 		}
-		.nav {
-			order: 2;
-			flex-basis: 29%;
-			padding-left: 16px;
-			margin-right: 55px;
+		@media screen and (max-width: $breakpoint-small),
+			(max-width: $breakpoint-ipadAir) {
+			background-color: $primary-color-dark;
+			padding: 10px;
 
-			ul {
-				padding-left: 0;
-				list-style-type: none;
+			.nav {
+				position: fixed;
+				right: 0px;
+				top: 8%;
+				margin-right: 0;
+				width: 45%;
+				background-color: $primary-color-dark;
+				display: none;
+				transition: opacity 0.3s ease;
+				ul {
+					flex-flow: column nowrap;
+
+					li {
+						margin: 3%;
+					}
+				}
+				&.active {
+					display: block;
+				}
+			}
+
+			.logo {
+				flex: 1;
+			}
+			.hamburger {
+				order: 3;
 				display: flex;
-				flex-flow: row nowrap;
-				justify-content: space-between;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				width: 30px;
+				height: 20px;
+				cursor: pointer;
+
+				span {
+					display: block;
+					width: 100%;
+					height: 2px;
+					background-color: $text-color-white;
+					margin-bottom: 4px;
+					transition: background-color 0.3s ease;
+				}
+			}
+		}
+		@media screen and (min-width: $breakpoint-surfacePro) {
+			.nav {
+				order: 2;
+				flex-basis: 29%;
+				padding-left: 16px;
+				margin-right: 55px;
+
+				ul {
+					padding-left: 0;
+					list-style-type: none;
+					display: flex;
+					flex-flow: row nowrap;
+					justify-content: space-between;
+				}
 			}
 		}
 	}
 
 	.home {
-		display: flex;
-		justify-content: space-between;
-		margin: 4.8vh 20px;
+		@media screen and (max-width: $breakpoint-ipadAir) {
+			background-color: $primary-color;
 
-		.profile {
-			flex-basis: 25%;
-			display: flex;
-			flex-flow: column nowrap;
-			max-height: 80vh;
-			position: sticky;
-			top: 12.8vh;
-			border: none;
-			position: sticky;
-			border-radius: 8px;
-			margin-left: 8px;
-			box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
+			.profile {
+				display: none;
+			}
 
-			.profile-promo-page {
-				flex-basis: 50%;
-				padding: 0 16px;
-				.user-demo {
-					display: flex;
-					flex-flow: column;
-					padding: 0 16px;
-					border: 1px dotted $primary-color-light;
+			.main {
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-between;
+
+				.main-body-wrapers {
+					margin: 30px 30px 0;
 					border-radius: 8px;
-					height: 100%;
 
-					.profile-header {
-						h2 {
-							line-height: 1.6rem;
-							font-size: 18px;
+					&.search-wraper {
+						background-color: $body-background-color;
+						padding: 30px;
+					}
+
+					&.jobs-wraper {
+						/* Additional styles for jobs-wraper at breakpoint-ipadAir */
+					}
+
+					.job-list {
+						gap: 2%;
+
+						.job-card {
+							flex: 1;
+
+							.card {
+								display: flex;
+								flex-flow: row;
+
+								border: 1px solid #e0e0e0;
+								border-radius: 8px;
+								box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+								padding: 16px;
+								margin-bottom: 32px;
+								background-color: $body-background-color;
+								display: flex;
+								flex-flow: row nowrap;
+								opacity: 0;
+								animation: fade-in 0.5s ease-in forwards;
+
+								@keyframes fade-in {
+									0% {
+										opacity: 0;
+										background-color: #e0e0e0;
+										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+									}
+									25% {
+										opacity: 0.25;
+										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+									}
+									50% {
+										opacity: 0.5;
+										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+									}
+									100% {
+										opacity: 1;
+										box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+									}
+								}
+							}
 						}
 					}
-					.about-me-person-photo {
-						position: relative;
 
-						.about-me-addProfile-button {
-							position: absolute;
-							bottom: 10px;
-							left: 70px;
+					.gov-jobsCard {
+						display: none;
+
+						.decimilar {
+							h3 {
+								/* Styles for h3 within decimilar at breakpoint-ipadAir */
+							}
+
+							p {
+								/* Styles for p within decimilar at breakpoint-ipadAir */
+							}
+						}
+
+						.gov-jobs {
+							/* Styles for gov-jobs at breakpoint-ipadAir */
+						}
+
+						.gov-card {
+							/* Styles for gov-card at breakpoint-ipadAir */
 						}
 					}
 				}
-			}
-			.pie-chart-jobs-data {
-				flex-basis: 50%;
-				padding: 0 16px;
+
+				.search {
+					display: flex;
+					flex-flow: row nowrap;
+
+					.search-layout {
+						flex: 1;
+
+						.main-search {
+							flex: 1;
+							display: flex;
+							flex-flow: row nowrap;
+							justify-content: center;
+							align-items: center;
+
+							.main-search-input {
+								flex-basis: 80%;
+
+								input {
+									padding: 15px;
+								}
+							}
+
+							.search-btn {
+								flex-basis: 20%;
+
+								button {
+									padding: 15px 5px;
+								}
+							}
+						}
+					}
+
+					.filter-inputs {
+						display: none;
+					}
+				}
 			}
 		}
 
-		.main {
-			flex-basis: 71%;
-			display: flex;
-			flex-flow: column nowrap;
-			justify-content: space-between;
-			margin-left: 16px;
+		/* Styles for max-width: $breakpoint-small */
+		@media screen and (max-width: $breakpoint-small) {
+			.main-body-wrapers {
+				padding: 5px;
 
-			.search {
-				height: 170px;
-				margin-bottom: 32px;
-				display: flex;
-				flex-flow: row-reverse nowrap;
-				gap: 2%;
-
-				.search-layout-adjust {
-					flex-basis: 42%;
-				}
-				.search-layout {
-					flex-basis: 56%;
-					display: flex;
-					flex-flow: column nowrap;
-
-					.main-search {
-						display: flex;
-						flex-flow: row;
-						justify-content: space-between;
-						align-items: center;
-
-						.main-search-input {
-							flex-basis: 80%;
-
-							input {
-								width: 100%;
-								line-height: 1.6rem;
-								padding-left: 16px;
-								font-size: 20px;
-								border: 1px solid $primary-color-light;
-							}
-						}
-						button {
-							flex-basis: 20%;
-						}
-					}
-					.filter-inputs {
-						display: flex;
-						flex-flow: row nowrap;
-						justify-content: space-between;
-						padding-left: 16px;
-						align-items: center;
-
-						.toggle-switch {
-							position: relative;
-							display: inline-block;
-							width: 57px;
-							height: 21px;
-
-							input {
-								opacity: 0;
-								width: 0;
-								height: 0;
-							}
-
-							.slider {
-								position: absolute;
-								cursor: pointer;
-								top: 0;
-								left: 0;
-								right: 0;
-								bottom: 0;
-								background-color: #ccc;
-								transition: 0.4s;
-								border-radius: 34px;
-
-								&:before {
-									position: absolute;
-									content: '';
-									height: 13px;
-									width: 13px;
-									left: 4px;
-									bottom: 4px;
-									background-color: white;
-									transition: 0.4s;
-									border-radius: 50%;
-								}
-							}
-
-							input:enabled + .slider {
-								background-color: $primary-color;
-								&:before {
-									transform: translateX(34px);
-								}
-							}
-
-							input:disabled + .slider {
-								background-color: #ccc;
-								&:before {
-									transform: translateX(0);
-								}
-							}
-
-							input:disabled + .slider {
-								background-color: #ccc;
-								&:before {
-									transform: translateX(0);
-								}
-							}
-						}
-					}
+				&.search-wraper {
+					/* Additional styles for search-wraper at breakpoint-small */
 				}
 			}
 
-			.job-list {
+			.search-layout-adjust {
+				border: 1px solid red;
+				display: none;
+			}
+
+			.main-search-input {
+				input {
+					padding: 14px;
+				}
+			}
+
+			.search-btn {
+				button {
+					padding: 15px 5px;
+				}
+			}
+		}
+		@media screen and (min-width: $breakpoint-xlarge) {
+			display: flex;
+			justify-content: space-between;
+			margin: 4.8vh 20px;
+
+			.profile {
+				flex-basis: 25%;
 				display: flex;
-				justify-content: space-between;
+				flex-flow: column nowrap;
+				max-height: 80vh;
+				position: sticky;
+				top: 12.8vh;
+				border: none;
+				position: sticky;
+				border-radius: 8px;
+				margin-left: 8px;
+				box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
 
-				.job-card {
-					flex-basis: 56%;
-					position: relative;
-
-					.card {
-						border: 1px solid #e0e0e0;
-						border-radius: 8px;
-						box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
-						padding: 16px;
-						margin-bottom: 32px;
+				.profile-promo-page {
+					flex-basis: 50%;
+					padding: 0 16px;
+					.user-demo {
 						display: flex;
-						flex-flow: row nowrap;
-						opacity: 0;
-						animation: fade-in 0.5s ease-in forwards;
+						flex-flow: column;
+						padding: 0 16px;
+						border: 1px dotted $primary-color-light;
+						border-radius: 8px;
+						height: 100%;
 
-						@keyframes fade-in {
-							0% {
-								opacity: 0;
-								background-color: #e0e0e0;
-								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-							}
-							25% {
-								opacity: 0.25;
-								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-							}
-							50% {
-								opacity: 0.5;
-								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-							}
-							100% {
-								opacity: 1;
-								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+						.profile-header {
+							h2 {
+								line-height: 1.6rem;
+								font-size: 18px;
 							}
 						}
-						button {
-							border: none;
+						.about-me-person-photo {
+							position: relative;
 
-							margin: 8px;
-
-							transition: background-color 0.3s ease;
-							&:hover {
-								background-color: $primary-color-dark;
+							.about-me-addProfile-button {
+								position: absolute;
+								bottom: 10px;
+								left: 70px;
 							}
-						}
-
-						.job-details {
-							margin: 0;
-							padding: 0;
-							h3 {
-								padding: 0;
-								margin: 0;
-							}
-							p {
-								margin-bottom: 8px;
-							}
-						}
-						.application-action {
-							height: 30px;
-							display: flex;
-							flex-flow: row nowrap;
-							gap: 20px;
-							align-items: center;
-						}
-					}
-					.pagination {
-						button {
-							color: $text-color-white;
-							background-color: #a3a3a3;
 						}
 					}
 				}
-				.gov-jobsCard {
-					flex-basis: 42%;
+				.pie-chart-jobs-data {
+					flex-basis: 50%;
+					padding: 0 16px;
+				}
+			}
 
-					margin: 0;
+			.main {
+				flex-basis: 71%;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-between;
+				margin-left: 16px;
 
-					.decimilar {
+				.search {
+					height: 170px;
+					margin-bottom: 32px;
+					display: flex;
+					flex-flow: row-reverse nowrap;
+					gap: 2%;
+
+					.search-layout-adjust {
+						flex-basis: 42%;
+					}
+					.search-layout {
+						flex-basis: 56%;
 						display: flex;
-						flex-flow: column;
-						align-items: center;
-						h3 {
-							padding: 0;
-							margin: 0;
-							color: $accent-color;
+						flex-flow: column nowrap;
+
+						.main-search {
+							display: flex;
+							flex-flow: row;
+							justify-content: space-between;
+							align-items: center;
+
+							.main-search-input {
+								flex-basis: 80%;
+
+								input {
+									width: 100%;
+									line-height: 1.6rem;
+									padding-left: 16px;
+									font-size: 20px;
+									border: 1px solid $primary-color-light;
+								}
+							}
+							button {
+								flex-basis: 20%;
+							}
 						}
-						p {
-							font-style: italic;
+						.filter-inputs {
+							display: flex;
+							flex-flow: row nowrap;
+							justify-content: space-between;
+							padding-left: 16px;
+							align-items: center;
+
+							.toggle-switch {
+								position: relative;
+								display: inline-block;
+								width: 57px;
+								height: 21px;
+
+								input {
+									opacity: 0;
+									width: 0;
+									height: 0;
+								}
+
+								.slider {
+									position: absolute;
+									cursor: pointer;
+									top: 0;
+									left: 0;
+									right: 0;
+									bottom: 0;
+									background-color: #ccc;
+									transition: 0.4s;
+									border-radius: 34px;
+
+									&:before {
+										position: absolute;
+										content: '';
+										height: 13px;
+										width: 13px;
+										left: 4px;
+										bottom: 4px;
+										background-color: white;
+										transition: 0.4s;
+										border-radius: 50%;
+									}
+								}
+
+								input:enabled + .slider {
+									background-color: $primary-color;
+									&:before {
+										transform: translateX(34px);
+									}
+								}
+
+								input:disabled + .slider {
+									background-color: #ccc;
+									&:before {
+										transform: translateX(0);
+									}
+								}
+
+								input:disabled + .slider {
+									background-color: #ccc;
+									&:before {
+										transform: translateX(0);
+									}
+								}
+							}
 						}
 					}
-					.gov-jobs {
-						text-align: center;
-					}
-					.gov-card {
-						border: 1px dotted $primary-color-light;
-						margin-bottom: 32px;
-						padding: 16px;
-						border-radius: 8px;
-						.apply-link {
-							color: $text-color-white;
-							box-shadow: '0 2px 4px rgba(0, 0, 0, 0.2)';
-							border-radius: '4px';
+				}
+
+				.job-list {
+					display: flex;
+					justify-content: space-between;
+
+					.job-card {
+						flex-basis: 56%;
+						position: relative;
+
+						.card {
+							border: 1px solid #e0e0e0;
+							border-radius: 8px;
+							box-shadow: 0px 2px 6px rgbs(0, 0, 0, 0.15);
+							padding: 16px;
+							margin-bottom: 32px;
+							display: flex;
+							flex-flow: row nowrap;
+							opacity: 0;
+							animation: fade-in 0.5s ease-in forwards;
+
+							@keyframes fade-in {
+								0% {
+									opacity: 0;
+									background-color: #e0e0e0;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+								25% {
+									opacity: 0.25;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+								50% {
+									opacity: 0.5;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+								100% {
+									opacity: 1;
+									box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+								}
+							}
+							button {
+								border: none;
+
+								margin: 8px;
+
+								transition: background-color 0.3s ease;
+								&:hover {
+									background-color: $primary-color-dark;
+								}
+							}
+
+							.job-details {
+								margin: 0;
+								padding: 0;
+								h3 {
+									padding: 0;
+									margin: 0;
+								}
+								p {
+									margin-bottom: 8px;
+								}
+							}
+							.application-action {
+								height: 30px;
+								display: flex;
+								flex-flow: row nowrap;
+								gap: 20px;
+								align-items: center;
+							}
+						}
+						.pagination {
+							button {
+								color: $text-color-white;
+								background-color: #a3a3a3;
+							}
 						}
 					}
-					.pagination {
-						.skip-menu {
-							background-color: $primary-color-dark;
+					.gov-jobsCard {
+						flex-basis: 42%;
+
+						margin: 0;
+
+						.decimilar {
+							display: flex;
+							flex-flow: column;
+							align-items: center;
+							h3 {
+								padding: 0;
+								margin: 0;
+								color: $accent-color;
+							}
+							p {
+								font-style: italic;
+							}
 						}
-						button {
-							color: $text-color-white;
-							background-color: #a3a3a3;
-							&.active {
+						.gov-jobs {
+							text-align: center;
+						}
+						.gov-card {
+							border: 1px dotted $primary-color-light;
+							margin-bottom: 32px;
+							padding: 16px;
+							border-radius: 8px;
+							.apply-link {
+								color: $text-color-white;
+								box-shadow: '0 2px 4px rgba(0, 0, 0, 0.2)';
+								border-radius: '4px';
+							}
+						}
+						.pagination {
+							.skip-menu {
 								background-color: $primary-color-dark;
+							}
+							button {
+								color: $text-color-white;
+								background-color: #a3a3a3;
+								&.active {
+									background-color: $primary-color-dark;
+								}
 							}
 						}
 					}
@@ -382,6 +565,7 @@ $accent-color: #e91e63; // Accent color for highlighting certain elements
 			}
 		}
 	}
+
 	.login {
 		display: flex;
 		flex-flow: row nowrap;

@@ -1,15 +1,11 @@
 @import 'colorVariables';
 @import 'mediaScreen';
-.home {
+/* .home {
 	@media screen and (max-width: $breakpoint-ipadAir) {
 		background-color: $primary-color;
 	}
 	.profile {
 		display: none;
-
-		@media screen and (min-width: $breakpoint-xlarge) {
-			display: flex;
-		}
 	}
 	.main {
 		@media screen and (max-width: $breakpoint-ipadAir) {
@@ -247,11 +243,11 @@
 							}
 						}
 					}
-				} */
+				} 
 			}
-			.filter-inputs {
-				display: none;
-			}
+			
 		}
 	}
-}
+} */
+
+/* Styles for max-width: $breakpoint-ipadAir */

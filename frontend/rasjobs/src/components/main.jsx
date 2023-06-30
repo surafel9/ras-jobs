@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from './footer';
-import '../style/main.scss';
+import '../style/style.scss';
 
 import { useAuth } from './authProvider';
 

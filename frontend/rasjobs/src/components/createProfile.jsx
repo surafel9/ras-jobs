@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { PROFILE } from './profile/profile';
 import renderActiveItem from './profile/renderActiveItem';
 
-import '../style/createProfile.scss';
 export default function CreateProfile() {
 	const [activeCard, setActiveCard] = useState(PROFILE[0]);
 	const [skills, setSkills] = useState([
@@ -41,44 +40,52 @@ export default function CreateProfile() {
 	};
 
 	return (
-		<div className='create-profile'>
-			<div className='add-profile-cards'>
-				{PROFILE.slice(0, 3).map((item) => (
-					<div className='add-profile-cards-each' key={item.id}>
-						<ProfileCard
-							item={item}
-							onClickHandler={onClickHandler}
-							isActive={item === activeCard}
-						/>
-					</div>
-				))}
+		<>
+			<div className='create-profile-sm-notification'>
+				<h3>
+					Responsive page is coming soon. Please see desktop version
+					which currently is working!
+				</h3>
 			</div>
-			<div className='profile-add-details'>
-				<div className='profile-add-details-fancy-margin'>
-					<div className='information-wraper'>
-						<h3>{activeCard.title}</h3>
+			<div className='create-profile'>
+				<div className='add-profile-cards'>
+					{PROFILE.slice(0, 3).map((item) => (
+						<div className='add-profile-cards-each' key={item.id}>
+							<ProfileCard
+								item={item}
+								onClickHandler={onClickHandler}
+								isActive={item === activeCard}
+							/>
+						</div>
+					))}
+				</div>
+				<div className='profile-add-details'>
+					<div className='profile-add-details-fancy-margin'>
+						<div className='information-wraper'>
+							<h3>{activeCard.title}</h3>
 
-						{renderActiveItem(
-							activeCard,
-							skills,
-							addSkills,
-							removeSkill
-						)}
+							{renderActiveItem(
+								activeCard,
+								skills,
+								addSkills,
+								removeSkill
+							)}
+						</div>
 					</div>
 				</div>
+				<div className='add-profile-cards-2'>
+					{PROFILE.slice(3).map((item) => (
+						<div className='add-profile-cards-each' key={item.id}>
+							<ProfileCard
+								item={item}
+								onClickHandler={onClickHandler}
+								isActive={item === activeCard}
+							/>
+						</div>
+					))}
+				</div>
 			</div>
-			<div className='add-profile-cards-2'>
-				{PROFILE.slice(3).map((item) => (
-					<div className='add-profile-cards-each' key={item.id}>
-						<ProfileCard
-							item={item}
-							onClickHandler={onClickHandler}
-							isActive={item === activeCard}
-						/>
-					</div>
-				))}
-			</div>
-		</div>
+		</>
 	);
 }
 
