@@ -39,7 +39,9 @@ export default function Pagination({
 			<button
 				onClick={handleNextPage}
 				disabled={currentPage === totalPages}
-				className='skip-menu'
+				className={`skip-menu ${
+					currentPage === totalPages ? 'notactive' : ''
+				}`}
 				style={{
 					cursor:
 						currentPage === totalPages ? 'not-allowed' : 'pointer',

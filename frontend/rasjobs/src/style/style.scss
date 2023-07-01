@@ -6,7 +6,7 @@
 	flex-flow: column nowrap;
 	background-color: $body-background-color;
 	font-family: Montserrat, sans-serif, Arial, Helvetica, sans-serif;
-	font-weight: 400 (Regular);
+	font-weight: 600 (Regular);
 
 	input,
 	button,
@@ -52,6 +52,21 @@
 			flex-basis: 25%;
 			margin-left: 8px;
 		}
+		.nav {
+			order: 2;
+			flex-basis: 29%;
+			padding-left: 16px;
+			margin-right: 55px;
+
+			ul {
+				padding-left: 0;
+				list-style-type: none;
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-between;
+			}
+		}
+
 		@media screen and (max-width: $breakpoint-small),
 			(max-width: $breakpoint-ipadAir) {
 			background-color: $primary-color-dark;
@@ -68,6 +83,7 @@
 				transition: opacity 0.3s ease;
 				ul {
 					flex-flow: column nowrap;
+					list-style-type: none;
 
 					li {
 						margin: 3%;
@@ -101,22 +117,6 @@
 				}
 			}
 		}
-		@media screen and (min-width: $breakpoint-surfacePro) {
-			.nav {
-				order: 2;
-				flex-basis: 29%;
-				padding-left: 16px;
-				margin-right: 55px;
-
-				ul {
-					padding-left: 0;
-					list-style-type: none;
-					display: flex;
-					flex-flow: row nowrap;
-					justify-content: space-between;
-				}
-			}
-		}
 	}
 
 	.home {
@@ -139,10 +139,6 @@
 					&.search-wraper {
 						background-color: $body-background-color;
 						padding: 30px;
-					}
-
-					&.jobs-wraper {
-						/* Additional styles for jobs-wraper at breakpoint-ipadAir */
 					}
 
 					.job-list {
@@ -191,24 +187,6 @@
 
 					.gov-jobsCard {
 						display: none;
-
-						.decimilar {
-							h3 {
-								/* Styles for h3 within decimilar at breakpoint-ipadAir */
-							}
-
-							p {
-								/* Styles for p within decimilar at breakpoint-ipadAir */
-							}
-						}
-
-						.gov-jobs {
-							/* Styles for gov-jobs at breakpoint-ipadAir */
-						}
-
-						.gov-card {
-							/* Styles for gov-card at breakpoint-ipadAir */
-						}
 					}
 				}
 
@@ -251,18 +229,12 @@
 			}
 		}
 
-		/* Styles for max-width: $breakpoint-small */
 		@media screen and (max-width: $breakpoint-small) {
 			.main-body-wrapers {
 				padding: 5px;
-
-				&.search-wraper {
-					/* Additional styles for search-wraper at breakpoint-small */
-				}
 			}
 
 			.search-layout-adjust {
-				border: 1px solid red;
 				display: none;
 			}
 
@@ -282,16 +254,15 @@
 			display: flex;
 			justify-content: space-between;
 			margin: 4.8vh 20px;
+			padding-bottom: 200px;
 
 			.profile {
 				flex-basis: 25%;
 				display: flex;
 				flex-flow: column nowrap;
-				max-height: 80vh;
-				position: sticky;
-				top: 12.8vh;
+				justify-content: space-between;
+				max-height: 100vh;
 				border: none;
-				position: sticky;
 				border-radius: 8px;
 				margin-left: 8px;
 				box-shadow: 0px 4px 6px rgbs(0, 0, 0, 0.45);
@@ -338,7 +309,7 @@
 				margin-left: 16px;
 
 				.search {
-					height: 170px;
+					height: auto;
 					margin-bottom: 32px;
 					display: flex;
 					flex-flow: row-reverse nowrap;
@@ -375,10 +346,11 @@
 						}
 						.filter-inputs {
 							display: flex;
-							flex-flow: row nowrap;
+							flex-flow: row wrap;
 							justify-content: space-between;
 							padding-left: 16px;
 							align-items: center;
+							margin-bottom: 20px;
 
 							.toggle-switch {
 								position: relative;
@@ -509,12 +481,6 @@
 								align-items: center;
 							}
 						}
-						.pagination {
-							button {
-								color: $text-color-white;
-								background-color: #a3a3a3;
-							}
-						}
 					}
 					.gov-jobsCard {
 						flex-basis: 42%;
@@ -548,406 +514,9 @@
 								border-radius: '4px';
 							}
 						}
-						.pagination {
-							.skip-menu {
-								background-color: $primary-color-dark;
-							}
-							button {
-								color: $text-color-white;
-								background-color: #a3a3a3;
-								&.active {
-									background-color: $primary-color-dark;
-								}
-							}
-						}
 					}
 				}
 			}
-		}
-	}
-
-	.login {
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		height: 92vh;
-		.welcome-info {
-			flex-basis: 30%;
-			background-image: url('../../public/Polygonluminary.svg');
-		}
-		.welcome-info-login {
-			flex-basis: 33%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			.login-sign-signup-container {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				height: auto;
-				box-sizing: border-box;
-				max-height: 70vh;
-				min-width: 66%;
-				background-color: $text-color-white;
-				border-radius: 8px;
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-				.login-signup-header {
-					text-align: center;
-					margin-bottom: 20px;
-				}
-
-				.sign-out-btn {
-					width: 33%;
-					padding: 10px 20px;
-					margin-bottom: 10px;
-				}
-
-				.login-signup-body {
-					width: 100%;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					gap: 10px;
-					flex-grow: 1;
-
-					.login-signup-title {
-						width: 96%;
-						ul {
-							list-style-type: none;
-							display: flex;
-							flex-flow: row nowrap;
-							justify-content: space-around;
-							padding: 0 10px;
-							font-weight: bold;
-							line-height: 1.6rem;
-						}
-					}
-
-					.login-signup-auth0-buttons {
-						width: 80%;
-						transition: background-color 0.3s ease;
-
-						span {
-							position: absolute;
-							display: flex;
-							align-items: center;
-							margin-left: 10px;
-						}
-					}
-
-					.login-signup-form {
-						width: 100%;
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						gap: 10px;
-						flex-grow: 1;
-
-						p {
-							text-align: center;
-						}
-
-						form {
-							width: 100%;
-							display: flex;
-							flex-direction: column;
-							justify-content: space-between;
-							gap: 10px;
-							flex-grow: 1;
-
-							.log-in-up-email,
-							.log-in-up-password {
-								display: flex;
-								align-items: center;
-								justify-content: center;
-								width: 100%;
-								input {
-									width: 80%;
-									padding: 8px 16px;
-									margin: 0 2%;
-								}
-							}
-						}
-					}
-					.error {
-						color: $accent-color;
-						font-size: 12px;
-					}
-					.reset-log-in-up-link {
-						text-align: center;
-						margin-bottom: 2px;
-						p {
-							text-decoration: underline double $primary-color;
-							cursor: pointer;
-						}
-					}
-
-					.log-in-up-button {
-						text-align: center;
-						width: 100%;
-						button {
-							width: 100%;
-							margin-left: 0;
-							margin-bottom: 0;
-							border-top-left-radius: 0;
-							border-top-right-radius: 0;
-							border-bottom-left-radius: 8px;
-							border-bottom-right-radius: 8px;
-							padding: 20px 0;
-						}
-					}
-				}
-			}
-		}
-
-		.welcome-info-b {
-			flex-basis: 33%;
-			display: flex;
-			align-items: center;
-		}
-	}
-	.create-profile {
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		gap: 1%;
-		margin: 4.8vh 20px;
-		padding: 16px;
-		min-height: 80vh;
-		.add-profile-cards {
-			flex: 1;
-		}
-		.profile-add-details {
-			flex: 2;
-			.profile-add-details-fancy-margin {
-				margin: 1px 2px;
-				background-color: $body-background-color;
-				height: 100%;
-				border-radius: 8px;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: space-around;
-				padding: 0 16px;
-
-				.information-wraper {
-					border-radius: 8px;
-					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-					width: 66%;
-					height: 66%;
-					display: flex;
-					flex-direction: column;
-					padding: 0 16px;
-
-					h3 {
-						text-align: center;
-					}
-
-					form {
-						width: 100%;
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-
-						.profile-form-content-wraper {
-							width: 80%;
-
-							.experiance-dates {
-								display: flex;
-								flex-direction: column;
-								margin: 5% 2%;
-
-								.current-position {
-									display: flex;
-									flex-flow: row nowrap;
-									align-items: center;
-
-									label {
-										flex-basis: 60%;
-									}
-
-									input {
-										flex-basis: 40%;
-									}
-								}
-
-								.dates-row {
-									display: flex;
-									flex-flow: row nowrap;
-
-									input {
-										width: 55%;
-									}
-								}
-							}
-
-							input {
-								width: 80%;
-								padding: 8px 16px;
-								margin: 5px;
-								border: 1px solid #777;
-								border-radius: 8px;
-							}
-							.description {
-								display: flex;
-								flex-direction: column;
-								width: 100%;
-								margin: 5% 2%;
-								textarea {
-									width: 100%;
-									overflow-y: auto;
-									overflow-x: hidden;
-									resize: none;
-									min-height: 100px;
-								}
-							}
-						}
-
-						button {
-							width: 40%;
-						}
-					}
-					.profile-skills {
-						height: 100%;
-
-						display: flex;
-						flex-flow: column nowrap;
-						max-width: 90%;
-						.profile-skills-input-wraper {
-							display: flex;
-							flex-flow: row nowrap;
-							align-items: center;
-							flex: 1;
-							input {
-								flex: 1;
-								padding: 6px 12px;
-								line-height: 1rem;
-							}
-							button {
-								flex-basis: auto;
-							}
-						}
-
-						.profile-skills-details-wraper {
-							flex: 3;
-							flex-flow: row wrap;
-							list-style-type: none;
-							padding: 0;
-
-							li {
-								display: inline-block;
-								padding: 8px 12px;
-								margin: 5px;
-								background-color: rgb(20, 123, 20);
-								color: $text-color-white;
-								border-radius: 4px;
-								height: fit-content;
-							}
-							span {
-								display: inline-flex;
-								align-items: center;
-								justify-content: center;
-								margin-left: 8px;
-								color: $text-color-dark;
-								background-color: $text-color-white;
-								height: 15px;
-								width: 15px;
-								border-radius: 50%;
-								cursor: pointer;
-								&:hover {
-									color: $accent-color;
-									background-color: $button-text-color;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		.add-profile-cards-2 {
-			flex: 1;
-		}
-		.add-profile-cards,
-		.profile-add-details,
-		.add-profile-cards-2 {
-			background-color: $text-color-white;
-			border-radius: 8px;
-			padding: 16px;
-		}
-		.add-profile-cards,
-		.add-profile-cards-2 {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			align-items: center;
-
-			.add-profile-cards-each {
-				width: 100%;
-				border-radius: 8px;
-
-				.profile-card {
-					padding: 5px 8px;
-					background-color: #f5f5f5;
-					box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-					transition: transform 0.2s ease-in-out;
-
-					&:hover {
-						background-color: $text-color-white;
-						width: 98%;
-						border-radius: 0;
-					}
-				}
-			}
-		}
-	}
-	.footer {
-		height: 400px;
-		padding: 20px;
-
-		&__container {
-			display: flex;
-			justify-content: space-between;
-			max-width: 1200px;
-			margin: 0 auto;
-		}
-
-		&__social-media,
-		&__site-map {
-			flex: 1;
-
-			h3 {
-				font-size: 18px;
-				font-weight: bold;
-				margin-bottom: 10px;
-			}
-
-			ul {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-
-				li {
-					margin-bottom: 5px;
-
-					a {
-						color: #333;
-						text-decoration: none;
-
-						&:hover {
-							text-decoration: underline;
-						}
-					}
-				}
-			}
-		}
-
-		&__bottom {
-			margin: 20px;
-			border-top: 1px solid #e9e4e4;
-			text-align: center;
-			font-size: 14px;
-			color: #777;
 		}
 	}
 }

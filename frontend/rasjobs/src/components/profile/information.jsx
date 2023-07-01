@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import '../../style/information.scss';
 export default function InformationForm() {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -13,9 +13,6 @@ export default function InformationForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Handle form submission logic here
-		// You can access the collected information from the component state
-		// and perform any necessary actions, such as sending data to a server
 	};
 
 	return (

@@ -41,6 +41,7 @@ export default function renderActiveItem(item, skills, addSkills, removeSkill) {
 		case 3:
 			return (
 				<AddListGeneric
+					inputType='text'
 					inputId='skillsInput'
 					inputName='skillsInput'
 					placeHolder='Add skills to Stand Out'
@@ -94,6 +95,7 @@ export default function renderActiveItem(item, skills, addSkills, removeSkill) {
 					skills={skills}
 					addSkills={addSkills}
 					removeSkill={removeSkill}
+					inputType = 'url'
 				/>
 			);
 		case 6:
@@ -107,6 +109,7 @@ export default function renderActiveItem(item, skills, addSkills, removeSkill) {
 					skills={skills}
 					addSkills={addSkills}
 					removeSkill={removeSkill}
+					inputType='text'
 				/>
 			);
 		default:

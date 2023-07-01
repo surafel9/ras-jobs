@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { PROFILE } from './profile/profile';
 import renderActiveItem from './profile/renderActiveItem';
-
+import '../style/createProfile.scss';
 export default function CreateProfile() {
 	const [activeCard, setActiveCard] = useState(PROFILE[0]);
 	const [skills, setSkills] = useState([
@@ -60,17 +60,15 @@ export default function CreateProfile() {
 					))}
 				</div>
 				<div className='profile-add-details'>
-					<div className='profile-add-details-fancy-margin'>
-						<div className='information-wraper'>
-							<h3>{activeCard.title}</h3>
+					<div className='information-wraper'>
+						<h3>{activeCard.title}</h3>
 
-							{renderActiveItem(
-								activeCard,
-								skills,
-								addSkills,
-								removeSkill
-							)}
-						</div>
+						{renderActiveItem(
+							activeCard,
+							skills,
+							addSkills,
+							removeSkill
+						)}
 					</div>
 				</div>
 				<div className='add-profile-cards-2'>

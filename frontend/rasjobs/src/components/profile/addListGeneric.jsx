@@ -49,7 +49,7 @@ export default function AddListGeneric(props) {
 			<form className='profile-skills-input-wraper' onSubmit={addHandler}>
 				<label htmlFor={props.inputId} />
 				<input
-					type='text'
+					type={props.inputType}
 					id={props.inputId}
 					name={inputName}
 					required

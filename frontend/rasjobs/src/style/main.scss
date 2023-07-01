@@ -1,4 +1,4 @@
-//
+/* //
 @import 'colorVariables';
 @import 'mediaScreen';
 .root {
@@ -84,6 +84,7 @@
 				transition: opacity 0.3s ease;
 				ul {
 					flex-flow: column nowrap;
+					list-style-type: none;
 
 					li {
 						margin: 3%;
@@ -118,7 +119,7 @@
 			}
 		}
 	}
-}
+} */
 /* 
 
 	order: 2;
