@@ -8,7 +8,7 @@ const CustomMailer = require('../Util/nodeMailer');
 
 const signUp = async (req, res, next) => {
 	const userByEmail = await getUserByEmail(req.body.accessFormData.email);
-
+	console.log(userByEmail);
 	try {
 		if (userByEmail.length > 0) {
 			res.status(303).send(
@@ -16,6 +16,7 @@ const signUp = async (req, res, next) => {
 			);
 			return;
 		}
+		console.log('here');
 
 		//const { to, subject, text } = req.body;
 		const userName = process.env.USER_NAME;
@@ -23,8 +24,8 @@ const signUp = async (req, res, next) => {
 		const newMailer = new CustomMailer(
 			userName,
 			password,
-			'picolo.sur@gmail.com',
-			'Test: From Ras - Jobs',
+			req.body.accessFormData.email,
+			'Sign UP Confirmation: From Ras - Jobs',
 			'Thank you for signing up with Ras Jobs!'
 		);
 

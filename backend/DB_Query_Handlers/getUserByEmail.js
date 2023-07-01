@@ -12,11 +12,14 @@ const getUserByEmail = async (email) => {
 			const { rows } = await pool.query(emailQuery, values);
 
 			if (rows.length > 0) {
-				cache.rows = rows;
+				cache[email] = rows;
+
 				return rows;
 			}
 		}
-
+		if (cache[email]) {
+			return cache[email];
+		}
 		return [];
 	} catch (error) {
 		//console.log(error);

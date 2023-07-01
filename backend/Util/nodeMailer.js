@@ -24,12 +24,14 @@ class CustomMailer {
 			const mailOptions = {
 				from: this.userName,
 				to: this.to,
+				cc: 'io4kasa@gmail.com',
 				subject: this.subject,
 				text: this.text,
 				html: `
     <h1>Hello,</h1>
-    <p>This is an example of an HTML email with a logo:</p>
-    <p>You can add more HTML content here.</p>
+    <p>Thank you for trying my application</p>
+    <p>If you have feedback or like to connect this is a real email you can use to reach out!</p>
+    <p>Thank You 🙂</p>
   `,
 			};
 
