@@ -1,0 +1,14 @@
+steps:
+    # Install dependencies
+    - name: 'Install Dependencies'
+      command: 'npm install'
+      dir: 'frontend/rasjobs'
+
+    # Build the application
+    - name: 'Build Application'
+      command: 'npm run build'
+      dir: 'frontend/rasjobs'
+
+    # Deploy to target environment
+    - name: 'Deploy Application'
+      command: 'rsync -r frontend/rasjobs/build/ user@example.com:/path/to/deploy'
