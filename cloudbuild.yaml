@@ -18,11 +18,12 @@ steps:
           - 'auth'
           - 'activate-service-account'
           - '--key-file=/workspace/keyfile.json' # Replace with the path to your service account key file
-    - name: 'gcr.io/cloud-builders/gcloud'
+
+    - name: 'gcr.io/cloud-builders/gsutil'
       entrypoint: 'gsutil'
       args:
           - '-m'
           - 'rsync'
           - '-r'
           - 'frontend/rasjobs/build/'
-          - 'gs://example-bucket' # Replace with the target Google Cloud Storage bucket
+          - 'gs://rasjobs' # Replace with the target Google Cloud Storage bucket
