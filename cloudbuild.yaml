@@ -15,7 +15,7 @@ steps:
     - name: 'gcr.io/cloud-builders/gcloud'
       entrypoint: 'gcloud'
       args:
-          - 'rsync'
+          - 'gcloud storage rsync'
           - '-r'
           - 'frontend/rasjobs/build/'
           - 'user@example.com:/path/to/deploy'
