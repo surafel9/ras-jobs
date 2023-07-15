@@ -19,4 +19,4 @@ steps:
           - 'rsync'
           - '-r'
           - 'frontend/rasjobs/build/'
-          - 'gs://example-bucket' # Replace with the target Google Cloud Storage bucket
+          - 'gs://rasjobs'
