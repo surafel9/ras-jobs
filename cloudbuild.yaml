@@ -1,14 +1,21 @@
 steps:
     # Install dependencies
-    - name: 'Install Dependencies'
-      command: 'npm install'
+    - name: 'gcr.io/cloud-builders/npm'
+      entrypoint: 'npm'
+      args: ['install']
       dir: 'frontend/rasjobs'
 
     # Build the application
-    - name: 'Build Application'
-      command: 'npm run build'
+    - name: 'gcr.io/cloud-builders/npm'
+      entrypoint: 'npm'
+      args: ['run', 'build']
       dir: 'frontend/rasjobs'
 
     # Deploy to target environment
-    - name: 'Deploy Application'
-      command: 'rsync -r frontend/rasjobs/build/ user@example.com:/path/to/deploy'
+    - name: 'gcr.io/cloud-builders/gcloud'
+      entrypoint: 'gcloud'
+      args:
+          - 'rsync'
+          - '-r'
+          - 'frontend/rasjobs/build/'
+          - 'user@example.com:/path/to/deploy'
